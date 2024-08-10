@@ -2,8 +2,8 @@ import express, { Application } from "express";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import { routes } from "@/infrastructure/routes";
-import { dependancies } from "@/_boot/dependancies";
+import { routes } from "../infrastructure/routes";
+import { dependancies } from "../_boot/dependancies";
 config();
 
 const app: Application = express();
