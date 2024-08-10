@@ -21,6 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors(corsOption));
 
+app.get("/test", (req,res) => {
+  res.status(200).json({success:true,message:'Get Ready Api'})
+  console.log("api is working");
+});
 const routes = [
   {
     context: "/api/auth",
