@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    emial: {
+    email: {
       type: String,
       unique: true,
       required: true,
@@ -19,7 +19,7 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: ["interviewee", "interviewer", "admin"],
-      default: "pending",
+      default: "interviewer",
     },
     profile: {
       avatar: {
