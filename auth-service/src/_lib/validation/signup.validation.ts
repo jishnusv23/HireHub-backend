@@ -1,6 +1,6 @@
 import validator from "validator";
 
-import { AuthenticationEntities,UserEntities } from "@/domain/entities";
+import { AuthenticationEntities,UserEntities } from "../../domain/entities";
 
 const validateUser = async (user: AuthenticationEntities) => {
   if (user.username?.trim() === "" || user.email.trim() === "") {

@@ -2,7 +2,7 @@ import { hashpassword } from "../../_lib/http/bcrypt";
 import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
 import validateUser from "../../_lib/validation/signup.validation";
 import { IDependancies } from "../../application/interface/IDependancies";
-import { Request, Response, NextFunction, json } from "express";
+import { Request, Response, NextFunction } from "express";
 export const sigupController = (dependancies: IDependancies) => {
   const {
     useCases: { createUserUseCases, findUserByEmailUseCases },
@@ -18,10 +18,7 @@ export const sigupController = (dependancies: IDependancies) => {
       const existingUser = await findUserByEmailUseCases(dependancies).execute(
         afterValidUser.email
       );
-      console.log(
-        "🚀 ~ file: signup.ts:23 ~ return ~ existingUser:",
-        existingUser
-      );
+     
       if (existingUser) {
         return res.status(200).json({
           success: false,
