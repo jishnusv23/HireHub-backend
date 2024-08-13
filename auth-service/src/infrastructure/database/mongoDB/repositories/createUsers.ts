@@ -9,6 +9,7 @@ export const createUser = async (data:UserEntities): Promise<UserEntities | null
         }
         return newUser
     }catch(error:any){
+        
         throw new Error(error?.message)
     }
 };

@@ -18,8 +18,8 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["interviewee", "interviewer", "admin"],
-      default: "interviewer",
+      enum: ["interviewee", "interviewer", "admin","pending"],
+      default: "pending",
     },
     profile: {
       avatar: {

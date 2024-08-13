@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 
-enum Role {
+ export enum Role {
+  pending='pending',
   interviewee = "interviewee",
   interviewer = "interviewer",
   admin = "admin",
@@ -12,7 +13,7 @@ interface Profile {
 
 export  interface UserEntities {
   _id?: Types.ObjectId;
-  username?: string;
+  username: string;
   email: string;
   password: string;
   role: Role;

@@ -5,8 +5,8 @@ config();
 
 export default async () => {
   try {
-    // const mongoUrl = process.env.MONGODB_URI;
-    const mongoUrl = process.env.MONGODB_LOCAL_URI;
+    const mongoUrl = process.env.MONGODB_URI;
+    // const mongoUrl = process.env.MONGODB_LOCAL_URI;
 
 
     if (!mongoUrl) {
