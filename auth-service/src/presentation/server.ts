@@ -18,7 +18,7 @@ app.use("/", routes(dependancies));
 
 const start = () => {
   app.listen(PORT, () => {
-    console.log(`The auth-service is listening on port ${PORT}`)
+    console.log(`The auth-service is listening on port ${PORT}`);
   });
 };
-export default {start}
+export default { start };
