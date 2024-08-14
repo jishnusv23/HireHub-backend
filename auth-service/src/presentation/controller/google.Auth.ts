@@ -19,7 +19,7 @@ export const googleAuthController = (dependancies: IDependancies) => {
       });
       const payload = ticket.getPayload();
       if (!payload || !payload.email) {
-        return res.status(40).json({
+        return res.status(404).json({
           success: false,
           message:
             "Google token is invalid or does not contain an email address.",

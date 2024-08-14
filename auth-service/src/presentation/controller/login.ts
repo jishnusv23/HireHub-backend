@@ -50,8 +50,10 @@ export const LoginController = (dependancies: IDependancies) => {
         email: result?.email,
         role: result?.role,
       });
-      res.cookie("accesstoken", accesstoken, { httpOnly: true });
-      res.cookie("refreshtoken", refreshtoken, { httpOnly: true });
+
+      // access_token, refresh_token;
+      res.cookie("access_token", accesstoken, { httpOnly: true });
+      res.cookie("refresh_token", refreshtoken, { httpOnly: true });
 
       //   //successfully
       return res.status(201).json({

@@ -10,7 +10,7 @@ export const generateAccessToken = (payload: UserPayload) => {
   const { _id, email, role } = payload;
   const newPayload = { _id, email, role };
 
-    return jwt.sign(newPayload, String(process.env.ACESS_TOKEN_SECRET), {
-      expiresIn: "30s",
+    return jwt.sign(newPayload, String(process.env.ACCESS_TOKEN_SECRET), {
+      expiresIn: "1h",
     });
 };
