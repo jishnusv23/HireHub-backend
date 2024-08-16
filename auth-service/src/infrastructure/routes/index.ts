@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { IDependancies } from "@/application/interface/IDependancies";
 import { controllers } from "../../presentation/controller";
-import {jwtMiddleware} from 'jwt-middleware-learnup'
+// import {jwtMiddleware} from 'jwt-middleware-learnup'
+import {jwtMiddleware} from 'hirehub-middleware-version'
+
 
 export const routes = (dependancies: IDependancies) => {
   const { signup, findByEmail,googleAuth,login,getUser,logout } = controllers(dependancies);

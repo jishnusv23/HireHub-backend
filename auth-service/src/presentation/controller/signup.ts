@@ -1,3 +1,4 @@
+import RabbitMQClient from "../../infrastructure/rabbitmq/client";
 import { hashpassword } from "../../_lib/http/bcrypt";
 import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
 import validateUser from "../../_lib/validation/signup.validation";
@@ -19,6 +20,7 @@ export const sigupController = (dependancies: IDependancies) => {
         afterValidUser.email
       );
      
+      console.log("🚀 ~ file: signup.ts:25 ~ return ~ existingUser:", existingUser)
       if (existingUser) {
         return res.status(200).json({
           success: false,
@@ -26,6 +28,13 @@ export const sigupController = (dependancies: IDependancies) => {
           data: null,
         });
       } else {
+        const data={
+          email:"jishnu@vshnu",
+          otp:'9090'
+        }
+        const client=await RabbitMQClient.getInstance()
+        const result = await client.produce(data, "createUser", "toUser");
+        console.log("🚀 ~ file: signup.ts:46 ~ return ~ result:", result)
         const created = await createUserUseCases(dependancies).execute(
           afterValidUser
         );
