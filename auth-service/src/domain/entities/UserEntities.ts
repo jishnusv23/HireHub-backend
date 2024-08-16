@@ -19,6 +19,7 @@ export  interface UserEntities {
   role: Role;
   profile?: Profile;
   isBlocked: boolean;
+  isVefified?:boolean,
   isGAuth?:boolean,
   createdAt?:Date
 }

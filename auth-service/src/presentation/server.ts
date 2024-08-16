@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import { routes } from "../infrastructure/routes";
 import { dependancies } from "../_boot/dependancies";
+import RabbitMQClient from "../infrastructure/rabbitmq/client";
 config();
 
 const app: Application = express();
@@ -17,8 +18,9 @@ app.use(morgan("dev"));
 app.use("/", routes(dependancies));
 
 const start = () => {
-  app.listen(PORT, () => {
+  app.listen(PORT,async () => {
     console.log(`The auth-service is listening on port ${PORT}`);
+    await RabbitMQClient.getInstance()
   });
 };
 export default { start };
