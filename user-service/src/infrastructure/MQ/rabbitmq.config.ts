@@ -7,6 +7,8 @@ export default {
   queues: {
     authQueue: "authQueue",
     userQueue: "userQueue",
+    notifQueue: "notifQueue",
   },
 };
 console.log(process.env.RABBITMQ_URL);
+// laoq qdbu epkk mkhq

@@ -9,7 +9,7 @@ export default async()=>{
         throw new Error("Mongodb connection path is not geting in eviornment");
       }
       await mongoose.connect(mongoURI.trim());
-      console.log("👽Mongodb connected successfully---->auth-services");
+      console.log("👽Mongodb connected successfully---->user-services");
     } catch (error: any) {
       console.error(`🥅Database Connection Failed 🥅 `);
       console.error("sfsf", error?.message);
