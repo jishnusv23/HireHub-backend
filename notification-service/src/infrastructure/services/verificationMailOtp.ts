@@ -1,4 +1,4 @@
-import { SendVerificationMail } from "@/util/nodeMailer"
+import { SendVerificationMail } from "../../util/nodeMailer"
 
 export const verificationOtp=async(data:{email:string,otp:string}):Promise<string>=>{
     const {email,otp}=data
