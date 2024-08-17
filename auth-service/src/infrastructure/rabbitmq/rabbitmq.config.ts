@@ -6,5 +6,6 @@ export default {
   queues: {
     authQueue: "authQueue",
     userQueue: "userQueue",
+    notifQueue:"notifQueue"
   },
 };

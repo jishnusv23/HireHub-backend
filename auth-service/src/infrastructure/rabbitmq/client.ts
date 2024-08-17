@@ -60,12 +60,16 @@
         }
       }
       userQueue = config.queues.authQueue
+      notifQueue=config.queues.notifQueue
+
       public async produce(data: any, operation: string, to: string) {
         let toQueue: string = "";
         switch (to) {
           case "toUser":
             toQueue = this.userQueue;
             break;
+          case 'toNotif':
+            toQueue = this.notifQueue;
           default:
             console.log("Unknown operation", operation);
             break;
