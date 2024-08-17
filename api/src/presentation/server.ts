@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import cors from "cors";
 import proxy from "express-http-proxy";
-import { METHODS } from "http";
+
 
 config();
 const app: Application = express();
@@ -21,10 +21,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors(corsOption));
 
+app.get("/test", (req,res) => {
+  res.status(200).json({success:true,message:'Get Ready Api'})
+  console.log("api is working");
+});
 const routes = [
   {
     context: "/api/auth",
     target: String(process.env.AUTH_SERVICE),
+    changeOrigin: true,
+  },
+  {
+    context: "/api/user",
+    target: String(process.env.USER_SERVICE),
+    changeOrigin: true,
+  },
+  {
+    context: "/api/notify",
+    target: String(process.env.NOTIFY_SERVICE),
     changeOrigin: true,
   },
 ];
