@@ -10,6 +10,7 @@ export const confirmOtpNotification=async(email:string)=>{
         otp: otp,
       };
       const result = await updateOTP(otpDetails);
+      console.log("🚀 ~ file: sendMaile.ts:13 ~ confirmOtpNotification ~ result:", result)
       let data={
           email:result?.email,
           otp:result?.otp
