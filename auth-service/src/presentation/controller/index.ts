@@ -5,6 +5,7 @@ import { googleAuthController } from "./google.Auth";
 import { LoginController } from "./login";
 import { getUserController } from "./getUser";
 import { logoutController } from "./logout";
+import { OtpVerificationController } from "./otp-verificatio";
 
 export const controllers = (dependancies: IDependancies) => {
     return {
@@ -13,6 +14,7 @@ export const controllers = (dependancies: IDependancies) => {
         googleAuth:googleAuthController(dependancies),
         login:LoginController(dependancies),
         getUser:getUserController(dependancies),
-        logout:logoutController(dependancies)
+        logout:logoutController(dependancies),
+        otpVerify:OtpVerificationController(dependancies)
     }
 };
