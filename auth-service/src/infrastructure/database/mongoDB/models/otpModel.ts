@@ -1,7 +1,7 @@
 import { IOtp } from "@/domain/entities";
 import mongoose, { Schema, model } from "mongoose";
 
-const otpSchema = new Schema(
+const otpSchema: Schema = new Schema(
   {
     email: {
       type: String,
@@ -15,15 +15,17 @@ const otpSchema = new Schema(
     createdOn: {
       type: Date,
       expires: "5m",
-      default: Date.now(),
+      default: Date.now,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 export const Otp = model<IOtp>("otp", otpSchema);
 
 export interface IOtpDocument extends IOtp {
   createdAt: Date;
-  updatedAt:Date
+  updatedAt: Date;
 }
