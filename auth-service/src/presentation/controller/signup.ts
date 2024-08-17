@@ -5,6 +5,7 @@ import validateUser from "../../_lib/validation/signup.validation";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 import { generateOTP } from "../../_lib/utils/otp/genarateOtp";
+import { confirmOtpNotification } from "@/infrastructure/services/sendMaile";
 export const sigupController = (dependancies: IDependancies) => {
   const {
     useCases: { createUserUseCases, findUserByEmailUseCases },
@@ -32,15 +33,20 @@ export const sigupController = (dependancies: IDependancies) => {
           data: null,
         });
       } else {
-       const otp =await generateOTP()
-        console.log("🚀 ~ file: signup.ts:36 ~ return ~ otp:", otp)
-        const data={
-          email:afterValidUser.email,
-          otp:otp
-        }
-        const client=await RabbitMQClient.getInstance()
-        const result = await client.produce(data, "verifyOtp", "toNotif");
-        console.log("🚀 ~ file: signup.ts:46 ~ return ~ result:", result)
+      //  const otp =await generateOTP()
+        // console.log("🚀 ~ file: signup.ts:36 ~ return ~ otp:", otp)
+
+        // const data={
+        //   email:afterValidUser.email,
+        //   otp:otp
+        // }
+        // const client=await RabbitMQClient.getInstance()
+        // const result = await client.produce(data, "verifyOtp", "toNotif");
+        const otpNOtify=await confirmOtpNotification(afterValidUser.email)
+        console.log("🚀 ~ file: signup.ts:46 ~ return ~ otpNOtify:", otpNOtify)
+
+        // console.log("🚀 ~ file: signup.ts:46 ~ return ~ result:", result)
+
         const created = await createUserUseCases(dependancies).execute(
           afterValidUser
         );
