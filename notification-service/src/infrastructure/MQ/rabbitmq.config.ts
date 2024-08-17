@@ -1,5 +1,3 @@
-
-
 export default {
   rabbitMQ: {
     url: process.env.RABBITMQ_URL || "amqp://guest:guest@localhost:5672",
@@ -11,4 +9,3 @@ export default {
   },
 };
 console.log(process.env.RABBITMQ_URL);
-// laoq qdbu epkk mkhq

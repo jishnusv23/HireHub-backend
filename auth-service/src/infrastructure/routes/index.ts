@@ -13,7 +13,7 @@ export const routes = (dependancies: IDependancies) => {
   router.route("/findByEmail/:email").post(findByEmail);
   router.route("/googleAuth").post(googleAuth)
   router.route('/login').post(login)
-  router.route("/getUser").get(jwtMiddleware,getUser);
+  // router.route("/getUser").get(jwtMiddleware,getUser);
   router.route('/logout').delete(jwtMiddleware,logout)
 
   return router;

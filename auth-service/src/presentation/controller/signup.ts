@@ -4,6 +4,7 @@ import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
 import validateUser from "../../_lib/validation/signup.validation";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
+import { generateOTP } from "../../_lib/utils/otp/genarateOtp";
 export const sigupController = (dependancies: IDependancies) => {
   const {
     useCases: { createUserUseCases, findUserByEmailUseCases },
@@ -19,8 +20,11 @@ export const sigupController = (dependancies: IDependancies) => {
       const existingUser = await findUserByEmailUseCases(dependancies).execute(
         afterValidUser.email
       );
-     
-      console.log("🚀 ~ file: signup.ts:25 ~ return ~ existingUser:", existingUser)
+
+      // console.log(
+      //   "🚀 ~ file: signup.ts:25 ~ return ~ existingUser:",
+      //   existingUser
+      // );
       if (existingUser) {
         return res.status(200).json({
           success: false,
@@ -28,16 +32,19 @@ export const sigupController = (dependancies: IDependancies) => {
           data: null,
         });
       } else {
+       const otp =await generateOTP()
+        console.log("🚀 ~ file: signup.ts:36 ~ return ~ otp:", otp)
         const data={
-          email:"jishnu@vshnu",
-          otp:'9090'
+          email:afterValidUser.email,
+          otp:otp
         }
         const client=await RabbitMQClient.getInstance()
-        const result = await client.produce(data, "createUser", "toUser");
+        const result = await client.produce(data, "verifyOtp", "toNotif");
         console.log("🚀 ~ file: signup.ts:46 ~ return ~ result:", result)
         const created = await createUserUseCases(dependancies).execute(
           afterValidUser
         );
+        console.log(created,'lpppppppppppppppppppppppppppppppp')
         if (!created) {
           res
             .status(500)
@@ -47,6 +54,7 @@ export const sigupController = (dependancies: IDependancies) => {
           const userId = created?._id?.toString() as string;
 
           const accesstoken = generateAccessToken({
+          
             _id: String(created?._id),
             email: created.email,
             role: created.role,
@@ -70,6 +78,7 @@ export const sigupController = (dependancies: IDependancies) => {
             });
         }
       }
+
     } catch (error: any) {
       next(error);
     }

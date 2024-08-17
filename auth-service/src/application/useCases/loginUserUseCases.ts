@@ -13,7 +13,8 @@ export const loginUserUseCases = (dependancies: IDependancies) => {
       password: string
     ): Promise<UserEntities | null> => {
       try {
-        const user = await findUserByEmail(email);
+       const user=  await findUserByEmail(email);
+        console.log("🚀 ~ file: loginUserUseCases.ts:17 ~ loginUserUseCases ~ user:", user)
         if (!user) {
           throw new Error("user not found");
         }

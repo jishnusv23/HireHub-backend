@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import cors from "cors";
 import proxy from "express-http-proxy";
-import { METHODS } from "http";
+
 
 config();
 const app: Application = express();
@@ -34,6 +34,11 @@ const routes = [
   {
     context: "/api/user",
     target: String(process.env.USER_SERVICE),
+    changeOrigin: true,
+  },
+  {
+    context: "/api/notify",
+    target: String(process.env.NOTIFY_SERVICE),
     changeOrigin: true,
   },
 ];

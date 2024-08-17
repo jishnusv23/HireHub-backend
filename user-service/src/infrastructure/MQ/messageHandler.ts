@@ -1,5 +1,5 @@
 import RabbitMQClient from './client';
-import { createUser } from '../database/monogoDB/repositories'
+import { createUser,findByEmail } from '../database/monogoDB/repositories'
 
 export default class MessageHandler{
     static async handle(operation:string,data:any,correlationId:string,replyTo:string){
@@ -8,8 +8,11 @@ export default class MessageHandler{
         switch (operation) {
           case "createUser":
             console.log(data);
-            response=data
+            response = await createUser(data);
 
+            break;
+          case "checkMail":
+            response = await findByEmail(data);
             break;
 
           default:
