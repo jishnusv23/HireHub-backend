@@ -1,3 +1,4 @@
+import { verificationOtp } from "../services";
 import RabbitMQClient from "./client";
 
 
@@ -13,7 +14,10 @@ export default class MessageHandler {
     switch (operation) {
       case "verifyOtp":
         console.log(data);
-        response = true;
+        const resutl=await verificationOtp(data)
+        response={success:true,message:resutl}
+     
+       
         // response = await createUser(data);
 
         break;
