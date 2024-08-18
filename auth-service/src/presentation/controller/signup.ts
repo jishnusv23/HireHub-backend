@@ -5,7 +5,7 @@ import validateUser from "../../_lib/validation/signup.validation";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 import { generateOTP } from "../../_lib/utils/otp/genarateOtp";
-import { confirmOtpNotification } from "@/infrastructure/services/sendMaile";
+import { confirmOtpNotification } from "../../infrastructure/services/sendMaile";
 export const sigupController = (dependancies: IDependancies) => {
   const {
     useCases: { createUserUseCases, findUserByEmailUseCases },
