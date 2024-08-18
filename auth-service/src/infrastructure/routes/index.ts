@@ -7,7 +7,7 @@ import { otpLimitter } from "../../_lib/rateLimitter/otpLimitter";
 
 
 export const routes = (dependancies: IDependancies) => {
-  const { signup, findByEmail,googleAuth,login,getUser,logout,otpVerify } = controllers(dependancies);
+  const { signup, findByEmail,googleAuth,login,getUser,logout,otpVerify,OtpOneTimepass } = controllers(dependancies);
   const router = Router();
 
   router.route("/signup").post(signup);
@@ -16,6 +16,7 @@ export const routes = (dependancies: IDependancies) => {
   router.route('/login').post(login)
   // router.route("/getUser").get(jwtMiddleware,getUser);
   router.route('/logout').delete(jwtMiddleware,logout)
+  router.route("/oneTime-pass").post(OtpOneTimepass);
   router.route("/optverification").post(otpLimitter, otpVerify);
 
   return router;

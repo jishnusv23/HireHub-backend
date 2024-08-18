@@ -42,8 +42,8 @@ export const sigupController = (dependancies: IDependancies) => {
         // }
         // const client=await RabbitMQClient.getInstance()
         // const result = await client.produce(data, "verifyOtp", "toNotif");
-        const otpNOtify=await confirmOtpNotification(afterValidUser.email)
-        console.log("🚀 ~ file: signup.ts:46 ~ return ~ otpNOtify:", otpNOtify)
+        // const otpNOtify=await confirmOtpNotification(afterValidUser.email)
+        // console.log("🚀 ~ file: signup.ts:46 ~ return ~ otpNOtify:", otpNOtify)
 
         // console.log("🚀 ~ file: signup.ts:46 ~ return ~ result:", result)
 
