@@ -71,8 +71,8 @@ export const sigupController = (dependancies: IDependancies) => {
             role: created.role,
           });
           
-          res.cookie("accesstoken", accesstoken, { httpOnly: true });
-          res.cookie("refreshtoken", refreshtoken, { httpOnly: true });
+          res.cookie("access_token", accesstoken, { httpOnly: true });
+          res.cookie("refresh_token ", refreshtoken, { httpOnly: true });
           
           console.log(req.cookies,'kookokokokokoko')
          return  res .status(200).json({
