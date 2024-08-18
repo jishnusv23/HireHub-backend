@@ -1,18 +1,22 @@
 import { Otp } from "../models/otpModel";
 import { UserEntities } from "../../../../domain/entities";
-import { User } from "../models";
+
+import RabbitMQClient from "../.../../../../rabbitmq/client";
 
 export const verifyOtp = async (
   email: string,
   otp: string
-): Promise<UserEntities | null> => {
+): Promise<UserEntities | any> => {
   try {
+    let result=null
     const verifyed = await Otp.findOne({ email: email, otp: otp });
     if (verifyed) {
-      const user = await User.findOne({ email: email });
-      return user;
+       const client=RabbitMQClient.getInstance()
+        result=(await client).produce(email,'verifyAcc','otUser')
+       return result
+
     }
-    return null
+    return result
   } catch (error: any) {
     console.error("Something wrong in verifyotp", error);
 
