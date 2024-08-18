@@ -70,6 +70,7 @@ export const sigupController = (dependancies: IDependancies) => {
             email: created.email,
             role: created.role,
           });
+          console.log(req.cookies,'kookokokokokoko')
 
           res.cookie("accesstoken", accesstoken, { httpOnly: true });
           res.cookie("refreshtoken", refreshtoken, { httpOnly: true });
