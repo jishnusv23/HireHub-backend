@@ -10,6 +10,7 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
     try {
       console.log(req.body);
       const { email, otp } = req.body;
+      console.log("🚀 ~ file: otp-verificatio.ts:13 ~ return ~ email:", email)
 
       const result = await verifyOtpUseCases(dependancies).execute(email, otp);
       console.log(

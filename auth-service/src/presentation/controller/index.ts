@@ -6,6 +6,7 @@ import { LoginController } from "./login";
 import { getUserController } from "./getUser";
 import { logoutController } from "./logout";
 import { OtpVerificationController } from "./otp-verificatio";
+import { GenerateOneTimePasss } from "./oneTime-pass";
 
 export const controllers = (dependancies: IDependancies) => {
     return {
@@ -15,6 +16,7 @@ export const controllers = (dependancies: IDependancies) => {
         login:LoginController(dependancies),
         getUser:getUserController(dependancies),
         logout:logoutController(dependancies),
-        otpVerify:OtpVerificationController(dependancies)
+        otpVerify:OtpVerificationController(dependancies),
+        OtpOneTimepass:GenerateOneTimePasss(dependancies)
     }
 };
