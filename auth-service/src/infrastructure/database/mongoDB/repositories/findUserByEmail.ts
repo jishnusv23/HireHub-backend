@@ -7,8 +7,8 @@ export const findUserByEmail = async (
 ): Promise<UserEntities|any> => {
     try{
         let result=null
-        const client=RabbitMQClient.getInstance()
-        result=(await client).produce(email,'checkMail','toUser')
+        const client= await RabbitMQClient.getInstance()
+        result=await client.produce(email,'checkMail','toUser')
         // const existigUsers=await User.findOne({email})
         // return existigUsers
         return result
