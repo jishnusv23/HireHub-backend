@@ -14,10 +14,11 @@ export default class MessageHandler{
           case "checkMail":
             response = await findByEmail(data);
             break;
-          case 'verifyAcc':
-            const {email}=data
-            response=await verifyAccount(email)
-            break
+          case "verifyAcc":
+           console.log("Data received for verifyAcc:", data);
+            const { email } = data;
+            response = await verifyAccount(email);
+            break;
 
           default:
             response = { success: false, error: "Unknow operation" };
