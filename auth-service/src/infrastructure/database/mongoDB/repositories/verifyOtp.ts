@@ -12,7 +12,7 @@ export const verifyOtp = async (
     const verifyed = await Otp.findOne({ email: email, otp: otp });
     if (verifyed) {
        const client=RabbitMQClient.getInstance()
-        result=(await client).produce(email,'verifyAcc','otUser')
+        result = (await client).produce(email, "verifyAcc", "toUser");
        return result
 
     }
