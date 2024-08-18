@@ -5,6 +5,7 @@ import { Request,Response,NextFunction } from "express";
 export const GenerateOneTimePasss=(dependancies:IDependancies)=>{
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{
+            console.log(req.body)
             const { email } = req.body;
             const resutl=await confirmOtpNotification(email)
             console.log("🚀 ~ file: oneTime-pass.ts:10 ~ returnasync ~ resutl:", resutl)
