@@ -7,7 +7,9 @@ export const verifyOtpUseCases = (dependancies: IDependancies) => {
   } = dependancies;
   return {
     execute: async (email: string, otp: string): Promise<UserEntities | null> => {
+      console.log("🚀 ~ file: verifyOtpUseCases.ts:10 ~ execute: ~ email: string, otp: string:", email, otp)
       try {
+        
         const result = await verifyOtp(email, otp);
         if (result) {
           return result;
