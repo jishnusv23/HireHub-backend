@@ -8,15 +8,16 @@ export const verifyOtp = async (
   otp: string
 ): Promise<UserEntities | any> => {
   try {
-    let result=null
+    
     const verifyed = await Otp.findOne({ email: email, otp: otp });
+    console.log("🚀 ~ file: verifyOtp.ts:13 ~ verifyed:", verifyed)
     if (verifyed) {
        const client= await RabbitMQClient.getInstance()
-        result = await client.produce({email}, "verifyAcc", "toUser");
-       return result
+       const  result = await client.produce({email}, "verifyAcc", "toUser");
+       return result as UserEntities
 
     }
-    return result
+   return null
   } catch (error: any) {
     console.error("Something wrong in verifyotp", error);
 
