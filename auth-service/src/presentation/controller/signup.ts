@@ -70,19 +70,16 @@ export const sigupController = (dependancies: IDependancies) => {
             email: created.email,
             role: created.role,
           });
-          console.log(req.cookies,'kookokokokokoko')
-
+          
           res.cookie("accesstoken", accesstoken, { httpOnly: true });
           res.cookie("refreshtoken", refreshtoken, { httpOnly: true });
-
-          res
-            .status(200)
-
-            .json({
-              success: true,
-              message: "User created successfully",
-              data: created,
-            });
+          
+          console.log(req.cookies,'kookokokokokoko')
+         return  res .status(200).json({
+            success: true,
+            message: "User created successfully",
+            data: created,
+          });
         }
       }
 
