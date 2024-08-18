@@ -26,7 +26,7 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
           .status(202)
           .json({
             success: true,
-            data: {},
+            data: result,
             message: "OTP verified successfully",
           });
       }
