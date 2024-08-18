@@ -1,5 +1,5 @@
 import RabbitMQClient from './client';
-import { createUser,findByEmail } from '../database/monogoDB/repositories'
+import { createUser,findByEmail,verifyAccount } from '../database/monogoDB/repositories'
 
 export default class MessageHandler{
     static async handle(operation:string,data:any,correlationId:string,replyTo:string){
@@ -14,6 +14,10 @@ export default class MessageHandler{
           case "checkMail":
             response = await findByEmail(data);
             break;
+          case 'verifyAcc':
+            const {email}=data
+            response=await verifyAccount(email)
+            break
 
           default:
             response = { success: false, error: "Unknow operation" };
