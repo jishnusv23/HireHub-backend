@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { IDependancies } from "@/application/interface/IDependancies";
+import { IDependancies } from "../../application/interface/IDependancies";
 import { controllers } from "../../presentation/controller";
 // import {jwtMiddleware} from 'jwt-middleware-learnup'
 import {jwtMiddleware} from 'hirehub-middleware-version'
-import { otpLimitter } from "@/_lib/rateLimitter/otpLimitter";
+import { otpLimitter } from "../../_lib/rateLimitter/otpLimitter";
 
 
 export const routes = (dependancies: IDependancies) => {
