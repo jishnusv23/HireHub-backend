@@ -1,9 +1,9 @@
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 
-export const blockunblockController = (dependancies: IDependancies) => {
+export const statusUpdateContoller = (dependancies: IDependancies) => {
   const {
-    useCases: { blockUnblockUserUseCase },
+    useCases: {statusUpdateUseCases  },
   } = dependancies;
 
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -21,10 +21,7 @@ export const blockunblockController = (dependancies: IDependancies) => {
           .json({ success: false, message: "Invalid data" });
       }
 
-      const response = await blockUnblockUserUseCase(dependancies).execute(
-        id,
-        isBlocked
-      );
+    const response=await statusUpdateUseCases(dependancies).execute(id,isBlocked)
       console.log(
         "🚀 ~ file: blockunblockContorller.ts:19 ~ return ~ response:",
         response

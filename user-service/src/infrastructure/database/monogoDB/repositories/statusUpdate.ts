@@ -1,7 +1,7 @@
 import { UserEntities } from "../../../../domain/entities";
 import { User } from "../models";
 
-export const blockunblockUser = async (
+export const statusUpdate=async (
   _id: string,
   isBlocked: boolean
 ): Promise<UserEntities | null> => {
@@ -21,3 +21,4 @@ export const blockunblockUser = async (
     throw new Error(error?.message);
   }
 };
+

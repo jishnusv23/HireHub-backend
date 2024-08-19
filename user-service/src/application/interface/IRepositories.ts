@@ -12,5 +12,8 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
-  blockunblockUser:(id:string,isBlocked:boolean)=>Promise<UserEntities|null>
+  statusUpdate: (
+    id: string,
+    isBlocked: boolean
+  ) => Promise<UserEntities | null>;
 }
