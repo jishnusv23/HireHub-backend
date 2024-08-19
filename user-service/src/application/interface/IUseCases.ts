@@ -3,5 +3,5 @@ import { IFindUserByIdUseCases, IGetAllVieweeUseCases,IBlockUnblockUseCases } fr
 export interface IUseCases {
   findUserByIdUseCases: (dependancies: any) => IFindUserByIdUseCases;
   getAllIntervieweesUseCases: (dependancies: any) => IGetAllVieweeUseCases;
-  blockunblockUseCases:(dependancies:any)=>IBlockUnblockUseCases
+  blockunblockUseCases: (dependancies: any) => IBlockUnblockUseCases;
 }
