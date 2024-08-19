@@ -1,4 +1,3 @@
-import { dependancies } from "@/_boot/dependencies";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 
@@ -11,11 +10,15 @@ export const blockunblockController = (dependancies: IDependancies) => {
     try {
       console.log(req.body, "this user id and status");
       const { _id, isBlocked } = req.body;
-      console.log("🚀 ~ file: blockunblockContorller.ts:14 ~ return ~ id:", req.body.id)
+      console.log(
+        "🚀 ~ file: blockunblockContorller.ts:14 ~ return ~ _id:",
+        _id
+      );
+
       if (!_id || typeof isBlocked !== "boolean") {
         return res
-          .status(404)
-          .json({ success: false, msessage: "Invalid data " });
+          .status(400)
+          .json({ success: false, message: "Invalid data" });
       }
 
       const response = await blockunblockUseCases(dependancies).execute(
@@ -27,7 +30,15 @@ export const blockunblockController = (dependancies: IDependancies) => {
         response
       );
       if (response) {
-        return res.status(201).json({ success: true ,data:response,msesage:'Update the status successfully'});
+        return res.status(200).json({
+          success: true,
+          data: response,
+          message: "Status updated successfully",
+        });
+      } else {
+        return res
+          .status(404)
+          .json({ success: false, message: "User not found" });
       }
     } catch (error: any) {
       next(error);
