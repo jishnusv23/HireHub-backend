@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 
 export const blockunblockController = (dependancies: IDependancies) => {
   const {
-    useCases: { blockunblockUseCases },
+    useCases: { blockUnblockUserUseCase },
   } = dependancies;
 
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -21,7 +21,7 @@ export const blockunblockController = (dependancies: IDependancies) => {
           .json({ success: false, message: "Invalid data" });
       }
 
-      const response = await blockunblockUseCases(dependancies).execute(
+      const response = await blockUnblockUserUseCase(dependancies).execute(
         id,
         isBlocked
       );
