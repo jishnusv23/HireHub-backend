@@ -10,15 +10,16 @@ export const blockunblockController = (dependancies: IDependancies) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log(req.body, "this user id and status");
-      const { id, isBlocked } = req.body;
-      if (!id || typeof isBlocked !== "boolean") {
+      const { _id, isBlocked } = req.body;
+      console.log("🚀 ~ file: blockunblockContorller.ts:14 ~ return ~ id:", req.body.id)
+      if (!_id || typeof isBlocked !== "boolean") {
         return res
           .status(404)
           .json({ success: false, msessage: "Invalid data " });
       }
 
       const response = await blockunblockUseCases(dependancies).execute(
-        id,
+        _id,
         isBlocked
       );
       console.log(
