@@ -11,7 +11,7 @@ export const routes = (dependancies: IDependancies) => {
 
   router.route("/getUser").get(jwtMiddleware, getUser);
   router.route("/get-all-interviewee").get(jwtMiddleware,requireAdmin,getAllInterviewee)
-  router.route("/profile-status-update").put(jwtMiddleware,requireAdmin,blockunblockUser)
+  router.route("/profile-status-update").put(blockunblockUser)
 
   return router;
 };
