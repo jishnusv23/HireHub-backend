@@ -2,7 +2,7 @@ import { Router } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller/";
 import {jwtMiddleware} from 'hirehub-middleware-version'
-import { requireAdmin } from "@/_lib/common/middleWare/requireAdmin";
+import { requireAdmin } from "../../_lib/common/middleWare/requireAdmin";
 // import { jwtMiddleware } from "jwt-middleware-learnup";
 
 export const routes = (dependancies: IDependancies) => {
