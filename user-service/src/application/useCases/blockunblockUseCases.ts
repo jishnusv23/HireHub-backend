@@ -1,9 +1,7 @@
 import { IDependancies } from "../interface/IDependancies";
 
 
-export const blockunblockUseCases = (
-  dependancies: IDependancies
-)=> {
+export const blockunblockUseCases = (dependancies: IDependancies) => {
   const {
     repositories: { blockunblockUser },
   } = dependancies;

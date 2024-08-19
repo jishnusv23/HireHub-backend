@@ -6,6 +6,7 @@ export const blockunblockUser = async (
   isBlocked: boolean
 ): Promise<UserEntities | null> => {
   try {
+    console.log('repo',_id,isBlocked,'gotit')
     const updateUser = await User.findByIdAndUpdate(
       _id,
       { isBlocked },
