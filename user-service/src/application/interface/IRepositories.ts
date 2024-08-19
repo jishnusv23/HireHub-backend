@@ -7,5 +7,10 @@ export interface IRepositories {
     page?: number,
     limit?: number,
     search?: string
-  ) => Promise<{ data: UserEntities[]; totalPages: number; currentPage: number }>;
+  ) => Promise<{
+    data: UserEntities[];
+    totalPages: number;
+    currentPage: number;
+  }>;
+  blockunblockUser:(id:string,isBlocked:boolean)=>Promise<UserEntities|null>
 }
