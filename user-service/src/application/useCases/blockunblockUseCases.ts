@@ -4,9 +4,9 @@ export  const blockunblockUseCases=(dependancies:IDependancies)=>{
     const {repositories:{blockunblockUser}}=dependancies
 
     return {
-      execute: async (_id: string, isBlocked: boolean) => {
-        return await blockunblockUser(_id, isBlocked);
-      },
-    };
+        execute:async(id:string,isBlocked:boolean)=>{
+            return await blockunblockUser(id,isBlocked)
+        }
+    }
 
 }
