@@ -6,7 +6,7 @@ export const verifyAccount=async(email:string):Promise<UserEntities|null>=>{
         let user =null
         console.log(email)
         if(email){
-            user=await User.findOneAndUpdate({email:email},{isVefified:true},{new:true})
+            user=await User.findOneAndUpdate({email:email},{isVerified:true},{new:true})
             return user
         }
         return user
