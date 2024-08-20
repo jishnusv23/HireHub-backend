@@ -4,7 +4,8 @@ import {
   ILoginUserCases,
   IGoogleUserUseCase,
   IFindUserByIdUseCases,
-  IVerifyOtpUseCases
+  IVerifyOtpUseCases,
+  IUpdatePasswordUseCases
   
 
   
@@ -16,5 +17,6 @@ export interface IUseCases {
   loginUserUseCases: (dependancies: any) => ILoginUserCases;
   googleLoginUseCases: (dependancies: any) => IGoogleUserUseCase;
   findUserByIdUseCases: (dependacies: any) => IFindUserByIdUseCases;
-  verifyOtpUseCases:(dependancies:any)=>IVerifyOtpUseCases
+  verifyOtpUseCases: (dependancies: any) => IVerifyOtpUseCases;
+  updatePasswordUseCases:(dependancies:any)=>IUpdatePasswordUseCases
 }

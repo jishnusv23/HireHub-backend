@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { controllers } from "../../presentation/controller";
-// import {jwtMiddleware} from 'jwt-middleware-learnup'
+
 import {jwtMiddleware} from 'hirehub-middleware-version'
 import { otpLimitter } from "../../_lib/rateLimitter/otpLimitter";
 
 
 export const routes = (dependancies: IDependancies) => {
-  const { signup, findByEmail,googleAuth,login,getUser,logout,otpVerify,OtpOneTimepass,forgotPasswordMail } = controllers(dependancies);
+  const { signup, findByEmail,googleAuth,login,getUser,logout,otpVerify,OtpOneTimepass,forgotPasswordMail,updatePassword } = controllers(dependancies);
   const router = Router();
 
   router.route("/signup").post(signup);
@@ -19,8 +19,10 @@ export const routes = (dependancies: IDependancies) => {
   router.route("/oneTime-pass").post(OtpOneTimepass);
   router.route("/optverification").post(otpLimitter, otpVerify);
   
-  //*make this send frogot pass
+  
   router.route("/forgot-password-email").post(forgotPasswordMail);
+  router.route("/updatePassword").post(updatePassword)
+
 
   return router;
 };
