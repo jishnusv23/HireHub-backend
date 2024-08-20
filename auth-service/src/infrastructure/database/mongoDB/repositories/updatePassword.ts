@@ -11,7 +11,7 @@ export const updatePassword=async(email:string,password:string):Promise<UserEnti
         }
         console.log("🚀 ~ file: updatePassword.ts:12 ~ updatePassword ~ data:", data)
         const client=await RabbitMQClient.getInstance()
-         response=client.produce(data,'updatePass','toUser')
+         response = client.produce(data, "updatePass", "toUser");
          if(!response){
             throw new Error('updatePassword Failed')
          }
