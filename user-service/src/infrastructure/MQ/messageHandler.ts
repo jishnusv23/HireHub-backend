@@ -19,6 +19,10 @@ export default class MessageHandler{
             const { email } = data;
             response = await verifyAccount(email);
             break;
+          case 'updatePass':
+            console.log(data)
+            response='ok'
+            break
 
           default:
             response = { success: false, error: "Unknow operation" };
