@@ -12,10 +12,10 @@ export const findByEmailcontroller = (dependancies: IDependancies) => {
       const response = await findUserByEmailUseCases(dependancies).execute(
         email
       );
-      console.log(
-        "🚀 ~ file: findByEmail.ts:13 ~ return ~ response:",
-        response
-      );
+      // console.log(
+      //   "🚀 ~ file: findByEmail.ts:13 ~ return ~ response:",
+      //   response
+      // );
       if (response) {
         res
           .status(409)
