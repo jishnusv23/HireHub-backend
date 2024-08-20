@@ -57,8 +57,8 @@ export const googleAuthController = (dependancies: IDependancies) => {
           email: user?.email,
           role: user?.role,
         });
-        res.cookie("accesstoken", accesstoken, { httpOnly: true });
-        res.cookie("refreshtoken", refreshtoken, { httpOnly: true });
+        res.cookie("access_token", accesstoken, { httpOnly: true });
+        res.cookie("refresh_token", refreshtoken, { httpOnly: true });
         return res
           .status(201)
           .json({ success: true, data: user, message: "User Login Google" });
