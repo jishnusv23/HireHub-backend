@@ -42,17 +42,17 @@ export const googleAuthController = (dependancies: IDependancies) => {
           res.cookie("access_token", accesstoken, { httpOnly: true });
           res.cookie("refresh_token", refreshtoken, { httpOnly: true });
         return res
-          .status(404)
+          .status(201)
           .json({
-            success: false,
-            message: "Google Auth user",
+            success: true,
+            message: "Google Login !",
             data: UserExists,
           });
       } else if (UserExists&&UserExists.isBlocked) {
         return res.status(404).json({
-          success: true,
-          existingUser: true,
-          data: UserExists,
+          success: false,
+          
+          data: null,
           message: "User is been blocked my HireHub team..!",
         });
       }
