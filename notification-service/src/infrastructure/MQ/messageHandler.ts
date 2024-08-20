@@ -1,4 +1,5 @@
-import { verificationOtp } from "../services";
+import { verificationOtp,forgoPassMailHandler } from "../services";
+
 import RabbitMQClient from "./client";
 
 
@@ -13,14 +14,15 @@ export default class MessageHandler {
 
     switch (operation) {
       case "verifyOtp":
-        console.log(data);
+        // console.log(data);
         const resutl=await verificationOtp(data)
         response={success:true,message:resutl}    
 
        break;
     case 'forgotPassNotify':
-      console.log(data)
-      response='ok'
+      // console.log(data)
+      const result=await forgoPassMailHandler(data)
+      response={success:true,message:result}
       break
 
 
