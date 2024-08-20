@@ -20,7 +20,7 @@ export const routes = (dependancies: IDependancies) => {
   router.route("/optverification").post(otpLimitter, otpVerify);
   
   //*make this send frogot pass
-  router.route("/forgot-password-emai").post()
+  router.route("/forgot-password-email").post(forgotPasswordMail);
 
   return router;
 };
