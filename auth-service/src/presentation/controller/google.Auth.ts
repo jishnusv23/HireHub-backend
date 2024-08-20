@@ -25,27 +25,51 @@ export const googleAuthController = (dependancies: IDependancies) => {
             "Google token is invalid or does not contain an email address.",
         });
       }
-      const UserExists=await findUserByEmailUseCases(dependancies).execute(payload.email)
-      if(UserExists){
+      const UserExists = await findUserByEmailUseCases(dependancies).execute(
+        payload.email
+      );
+      if (UserExists && !UserExists.isBlocked) {
+          const accesstoken = generateAccessToken({
+            _id: String(UserExists?._id),
+            email: String(UserExists?.email),
+            role: UserExists?.role,
+          });
+          const refreshtoken = generateRefreshToken({
+            _id: String(UserExists?._id),
+            email: UserExists?.email,
+            role: UserExists?.role,
+          });
+          res.cookie("access_token", accesstoken, { httpOnly: true });
+          res.cookie("refresh_token", refreshtoken, { httpOnly: true });
         return res
           .status(404)
-          .json({ success: false, message: "User already exists", data: null });
+          .json({
+            success: false,
+            message: "Google Auth user",
+            data: UserExists,
+          });
+      } else if (UserExists&&UserExists.isBlocked) {
+        return res.status(404).json({
+          success: true,
+          existingUser: true,
+          data: UserExists,
+          message: "User is been blocked my HireHub team..!",
+        });
       }
+
+      
       let userData: any = {
         email: payload.email,
         username: payload.given_name,
         password: "@ItsSecure@",
         isGAuth: true,
-        isVerified:true,
+        isVerified: true,
         role: "pending",
       };
- 
 
       const { email, name, given_name } = payload;
-     
 
-      
-      const user=await createUserUseCases(dependancies).execute(userData)
+      const user = await createUserUseCases(dependancies).execute(userData);
       if (user) {
         const accesstoken = generateAccessToken({
           _id: String(user?._id),
