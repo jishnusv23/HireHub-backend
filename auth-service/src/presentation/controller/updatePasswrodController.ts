@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { verifyforgotPassword } from "../../_lib/http/jwt";
-import { hashpassword } from "@/_lib/http/bcrypt";
+import { hashpassword } from "../../_lib/http/bcrypt/hashpassword";
 
 export const updatePasswordController = (dependancies: IDependancies) => {
   const {
