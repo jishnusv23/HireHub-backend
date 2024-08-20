@@ -36,6 +36,7 @@ export const googleAuthController = (dependancies: IDependancies) => {
         username: payload.given_name,
         password: "@ItsSecure@",
         isGAuth: true,
+        isVerified:true,
         role: "pending",
       };
  
