@@ -7,7 +7,7 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const googleAuthController = (dependancies: IDependancies) => {
   const {
-    useCases: { googleLoginUseCases, findUserByEmailUseCases },
+    useCases: { createUserUseCases, findUserByEmailUseCases },
   } = dependancies;
 
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -25,16 +25,20 @@ export const googleAuthController = (dependancies: IDependancies) => {
             "Google token is invalid or does not contain an email address.",
         });
       }
+      let userData: any = {
+        email: payload.email,
+        username: payload.given_name,
+        password: "@ItsSecure@",
+        isGAuth: true,
+        role: "pending",
+      };
  
 
       const { email, name, given_name } = payload;
      
 
-      const user = await googleLoginUseCases(dependancies).execute({
-        email,
-        given_name,
-      });
       
+      const user=await createUserUseCases(dependancies).execute(userData)
       if (user) {
         const accesstoken = generateAccessToken({
           _id: String(user?._id),

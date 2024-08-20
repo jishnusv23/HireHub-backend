@@ -15,14 +15,14 @@ export const googleLoginUseCases = (dependancies: IDependancies) => {
         const user=await User.findOne({email})
         if(user) return user
         console.log(data,'google usecase');
-        const newUser=new User({
+        const newUser={
             email:email?? '',
             username:given_name,
             password:'thankYou....',
             isGAuth:true,
             role:'pending'
-        })
-        return await newUser.save()
+        }
+        // return await newUser.save()
       } catch (error: any) {
         console.error("showing googleusecases", error);
       }
