@@ -11,7 +11,7 @@ export const forgotPasswordMailsend = (dependancies: IDependancies) => {
 
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(req.body);
+      console.log(req.body,'forgot email');
       const { email } = req.body;
       const response = await findUserByEmailUseCases(dependancies).execute(
         email
