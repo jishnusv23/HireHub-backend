@@ -25,6 +25,12 @@ export const googleAuthController = (dependancies: IDependancies) => {
             "Google token is invalid or does not contain an email address.",
         });
       }
+      const UserExists=await findUserByEmailUseCases(dependancies).execute(payload.email)
+      if(UserExists){
+        return res
+          .status(404)
+          .json({ success: false, message: "User already exists", data: null });
+      }
       let userData: any = {
         email: payload.email,
         username: payload.given_name,
