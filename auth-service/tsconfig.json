@@ -11,7 +11,7 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]
-    },
+    }
   },
   "exclude": ["./dist", "./node_modules"]
 }
