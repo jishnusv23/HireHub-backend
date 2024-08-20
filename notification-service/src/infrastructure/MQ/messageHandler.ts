@@ -16,17 +16,16 @@ export default class MessageHandler {
         console.log(data);
         const resutl=await verificationOtp(data)
         response={success:true,message:resutl}
-     
-       
-        // response = await createUser(data);
+       break;
+    case 'forgotPassNotify':
+      console.log(data)
+      response='ok'
+      break
 
-        break;
-
-      default:
-        response = { success: false, error: "Unknow operation" };
-        console.log("unknown operation:", operation);
-
-        break;
+   default:
+       response = { success: false, error: "Unknow operation" };
+      console.log("unknown operation:", operation);
+      break;
     }
     const rabbitMQClient = RabbitMQClient.getInstance();
 
