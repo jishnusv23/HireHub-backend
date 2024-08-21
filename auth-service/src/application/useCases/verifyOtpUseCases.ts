@@ -11,6 +11,7 @@ export const verifyOtpUseCases = (dependancies: IDependancies) => {
       try {
         
         const result = await verifyOtp(email, otp);
+        console.log("🚀 ~ file: verifyOtpUseCases.ts:14 ~ execute: ~ result:", result)
         if (result) {
           return result;
         }

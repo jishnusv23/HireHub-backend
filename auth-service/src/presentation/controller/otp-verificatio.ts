@@ -19,11 +19,11 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
       );
 
       if (!result) {
-        res
+     return    res
           .status(200)
           .json({ success: false, data: {}, message: "OTP doesnt match" });
       } else {
-        res
+        return res
           .status(202)
           .json({
             success: true,
