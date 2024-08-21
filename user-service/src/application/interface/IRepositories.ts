@@ -16,4 +16,5 @@ export interface IRepositories {
     id: string,
     isBlocked: boolean
   ) => Promise<UserEntities | null>;
+  updaetProfileImage:(email:string,url:string)=>Promise<UserEntities|null>
 }
