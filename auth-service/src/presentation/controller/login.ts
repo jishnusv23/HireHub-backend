@@ -38,7 +38,11 @@ export const LoginController = (dependancies: IDependancies) => {
       if (result.isBlocked) {
         return res
           .status(401)
-          .json({ success: false, msessage: "blocked your account " });
+          .json({
+            success: false,
+            message: "User is been blocked my HireHub team..!",
+            data:null
+          });
       }
       const accesstoken = generateAccessToken({
         _id: String(result?._id),
