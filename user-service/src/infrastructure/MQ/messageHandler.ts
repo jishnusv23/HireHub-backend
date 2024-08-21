@@ -1,5 +1,5 @@
 import RabbitMQClient from './client';
-import { createUser,findByEmail,verifyAccount } from '../database/monogoDB/repositories'
+import { createUser,findByEmail,verifyAccount,updatePassword } from '../database/monogoDB/repositories'
 
 export default class MessageHandler{
     static async handle(operation:string,data:any,correlationId:string,replyTo:string){
@@ -20,8 +20,9 @@ export default class MessageHandler{
             response = await verifyAccount(email);
             break;
           case 'updatePass':
-            console.log(data)
-            response='ok'
+            console.log(data,'kokoko')
+            
+            response=await updatePassword(data.email,data.password)
             break
 
           default:
