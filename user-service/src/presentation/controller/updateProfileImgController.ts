@@ -14,6 +14,11 @@ export const updateProfileImgController=(dependancies:IDependancies)=>{
               req.body.email,
               req.body.url
             );
+            if(response){
+                return res.status(201).json({success:true,data:response,message:"Imge successfully updated"})
+            }else{
+                return res.status(404).json({success:true,data:null,message:'Something wrong'})
+            }
 
         }catch(error:any){
 
