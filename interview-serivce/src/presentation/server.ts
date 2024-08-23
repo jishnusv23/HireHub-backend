@@ -2,6 +2,8 @@ import express, { Request, Response, NextFunction, Application } from "express";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
+import { routes } from "../infrastructure/routes";
+import { dependacies } from "../_boot/dependencies";
 
 const PORT: number = Number(process.env.PORT) || 4002;
 const app: Application = express();
@@ -22,6 +24,14 @@ app.use("/api/interview/test", (req: Request, res: Response) => {
     .status(201)
     .json({ success: true, message: "interview service working " });
 })
+
+
+app.use('/',routes(dependacies))
+
+
+
+
+
 
 const start = () => {
   app.listen(PORT, () => {
