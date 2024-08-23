@@ -9,12 +9,15 @@ export default async()=>{
             throw new Error('Database url is not getting in env')
         }
 
-        await mongoose.connect(mongo_URI)
+        await mongoose.connect(mongo_URI.trim())
         console.log('Database connected succesfully in Interview-services---->💡')
 
     }catch(error:any){
-        console.error('👽Something wrong in database connection',error);
-        throw new Error(error?.message)
+        console.error('👽Something wrong in database connection');
+        console.error(error.message);
+        
+        // throw new Error(error?.message)
+        process.exit(1)
         
     }
 }
