@@ -41,6 +41,11 @@ const routes = [
     target: String(process.env.NOTIFY_SERVICE),
     changeOrigin: true,
   },
+  {
+    context: "/api/interview",
+    target: String(process.env.INTERVIEW_SERVICE),
+    changeOrigin: true,
+  },
 ];
 
 routes.forEach((route) => {
