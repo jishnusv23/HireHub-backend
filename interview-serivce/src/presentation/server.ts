@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(cors(corsOption));
 
-app.use("/api/interview/test", (req: Request, res: Response) => {
+app.get("/api/interview/test", (req: Request, res: Response) => {
   res
     .status(201)
     .json({ success: true, message: "interview service working " });
