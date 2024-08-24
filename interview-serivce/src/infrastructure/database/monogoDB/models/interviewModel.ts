@@ -32,7 +32,10 @@ const interviewSchema = new Schema(
       type: String,
       required: true,
     },
-   
+    participants: {
+      type: [String], 
+      required: true,
+    },
   },
   {
     timestamps: true,
