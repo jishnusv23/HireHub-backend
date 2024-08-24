@@ -13,11 +13,11 @@ export interface InterviewEntity {
   jobPosition: string;
   interviewerId: Types.ObjectId | string;
   scheduledDateTime: Date;
-  intervieweeEmail: string;
+  participants: string[];
   interviewStatus: interviewStatus;
   meetingLink?: string;
   interviewDuration?: number;
-  interviewType: string; 
+  interviewType: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
