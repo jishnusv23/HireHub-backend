@@ -8,11 +8,19 @@ const interviewSchema = new Schema(
       ref: "users",
       required: true,
     },
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
     jobPosition: {
       type: String,
       required: true,
     },
-    scheduledDateTime: {
+    date: {
       type: Date,
       required: true,
     },
@@ -25,15 +33,15 @@ const interviewSchema = new Schema(
       type: String,
       required: true,
     },
-    interviewDuration: {
-      type: Number,
+    startTime: {
+      type: String,
     },
     interviewType: {
       type: String,
       required: true,
     },
     participants: {
-      type: [String], 
+      type: [String],
       required: true,
     },
   },

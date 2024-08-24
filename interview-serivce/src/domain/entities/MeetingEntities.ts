@@ -10,13 +10,14 @@ enum interviewStatus {
 export interface InterviewEntity {
   _id?: string;
   title: string;
+  description: string;
   jobPosition: string;
   interviewerId: Types.ObjectId | string;
-  scheduledDateTime: Date;
+  date: Date;
   participants: string[];
   interviewStatus: interviewStatus;
   meetingLink?: string;
-  interviewDuration?: number;
+  startTime?: string;
   interviewType: string;
   createdAt?: Date;
   updatedAt?: Date;
