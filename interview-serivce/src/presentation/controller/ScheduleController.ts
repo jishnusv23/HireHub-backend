@@ -7,6 +7,9 @@ export const SchedulInterviewController=(dependancies:IDependancies)=>{
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{
             console.log(req.body)
+
+            const response=await IScheduleUseCases(dependancies).execute(req.body)
+            console.log("🚀 ~ file: ScheduleController.ts:12 ~ returnasync ~ response:", response)
         }catch(error:any){
             next(error)
         }
