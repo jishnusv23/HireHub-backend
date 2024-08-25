@@ -9,14 +9,14 @@ export const createInterview = async (
       "🚀 ~ file: createInterview.ts:5 ~ createInterview ~ data:",
       data
     );
-    // const interviewData = new interview({
-    //   title: data.title,
-    //   description: data.description,
-    //   interviewType: data.interviewType,
-    //   jobPosition:data.jobPosition,
-    //   scheduledDateTime:new Date(data.scheduledDateTime),
-    //   participants:data.participants
-    // });
+    const interviewData = new interview({
+      title: data.title,
+      description: data.description,
+      interviewType: data.interviewType,
+      jobPosition:data.jobPosition,
+      date:new Date(data.date),
+      participants:data.participants
+    });
   } catch (error: any) {
     throw new Error(error?.message);
   }
