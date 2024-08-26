@@ -17,6 +17,8 @@ export const createInterview = async (
       date:new Date(data.date),
       participants:data.participants
     });
+    const saveData=await interviewData.save()
+    return saveData
   } catch (error: any) {
     throw new Error(error?.message);
   }

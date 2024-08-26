@@ -11,7 +11,7 @@ export default class MessageHandler {
     let response: any = "success";
 
     switch (operation) {
-      case "createUser":
+      case "fetchUser":
         console.log(data);
        
 
