@@ -1,5 +1,5 @@
 import RabbitMQClient from './client';
-import { createUser,findByEmail,verifyAccount,updatePassword } from '../database/monogoDB/repositories'
+import { createUser,findByEmail,verifyAccount,updatePassword,updateRole } from '../database/monogoDB/repositories'
 
 export default class MessageHandler{
     static async handle(operation:string,data:any,correlationId:string,replyTo:string){
@@ -26,7 +26,8 @@ export default class MessageHandler{
             break;
           case "updateRoleInterviewer":
             console.log(data, "user id for update the role into interviewer");
-            response = 'true';
+            response = await updateRole(data);
+            console.log("🚀 ~ file: messageHandler.ts:30 ~ MessageHandler ~ handle ~ response:", response)
             break;
 
           default:
