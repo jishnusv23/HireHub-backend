@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { routes } from "../infrastructure/routes";
 import { dependacies } from "../_boot/dependencies";
+import RabbitMQClient from "../infrastructure/MQ/client";
 
 const PORT: number = Number(process.env.PORT) || 4002;
 const app: Application = express();
@@ -23,19 +24,15 @@ app.get("/api/interview/test", (req: Request, res: Response) => {
   res
     .status(201)
     .json({ success: true, message: "interview service working " });
-})
+});
 
-
-app.use('/',routes(dependacies))
-
-
-
-
-
+app.use("/", routes(dependacies));
 
 const start = () => {
   app.listen(PORT, () => {
     console.log(`💡The Interview service running successfully ${PORT}`);
+    const rabbitMQClient = RabbitMQClient.getInstance();
+    rabbitMQClient.initialise();
   });
 };
-export default {start}
+export default { start };
