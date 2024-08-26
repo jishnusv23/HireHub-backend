@@ -17,8 +17,9 @@ export const createInterview = async (
       jobPosition: data.jobPosition,
       interviewStatus: "Scheduled",
       date: new Date(data.date),
-      meetingLink:data.meetingLink,
-      uniqueId:data.uniqueId,
+      meetingLink: data.meetingLink,
+      uniqueId: data.uniqueId,
+      startTime: data.startTime,
       participants: data.participants,
     });
     const saveData=await interviewData.save()

@@ -11,7 +11,7 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log(req.body);
-      const {meetingLink,uniqueId}=generateMeetLink(req.body)
+      const { meetingLink, uniqueId } = generateMeetLink(req.body);
       console.log("🚀 ~ file: ScheduleController.ts:15 ~ return ~ uniqueId:", uniqueId)
       console.log("🚀 ~ file: ScheduleController.ts:15 ~ return ~ meetingLink:", meetingLink)
       const interviewData={
