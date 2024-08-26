@@ -29,10 +29,10 @@ app.get("/api/interview/test", (req: Request, res: Response) => {
 app.use("/", routes(dependacies));
 
 const start = () => {
-  app.listen(PORT, () => {
+  app.listen(PORT, async() => {
     console.log(`💡The Interview service running successfully ${PORT}`);
-    const rabbitMQClient = RabbitMQClient.getInstance();
-    rabbitMQClient.initialise();
+    await RabbitMQClient.getInstance();
+    
   });
 };
 export default { start };
