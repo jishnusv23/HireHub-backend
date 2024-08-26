@@ -6,18 +6,18 @@ export const createInterview = async (
   data: InterviewEntity
 ): Promise<InterviewEntity | any> => {
   try {
-    if (!data._id) {
-      throw new Error("data._id is undefined");
-    }
+    // if (!data._id) {
+    //   throw new Error("data._id is undefined");
+    // }
+    const saveData = await interview.create(data);
 
     const client = await RabbitMQClient.getInstance();
     const updateRole = await client.produce(
-      data._id,
+      saveData.interviewerId,
       "updateRoleInterviewer",
       "toUser"
     );
     if (updateRole) {
-      const saveData = await interview.create(data);
       console.log("🚀 ~ file: createInterview.ts:21 ~ saveData:", saveData);
       return saveData;
     } else {
