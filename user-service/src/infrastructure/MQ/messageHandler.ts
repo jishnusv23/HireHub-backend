@@ -15,18 +15,18 @@ export default class MessageHandler{
             response = await findByEmail(data);
             break;
           case "verifyAcc":
-           console.log("Data received for verifyAcc:", data);
+            console.log("Data received for verifyAcc:", data);
             const { email } = data;
             response = await verifyAccount(email);
             break;
-          case 'updatePass':
-            console.log(data,'kokoko')
-            
-            response=await updatePassword(data.email,data.password)
-            break
-          case 'updateRoleInterviewer':
-            console.log(data,'user id for update the role into interviewer')
-            response=true
+          case "updatePass":
+            console.log(data, "kokoko");
+
+            response = await updatePassword(data.email, data.password);
+            break;
+          case "updateRoleInterviewer":
+            console.log(data, "user id for update the role into interviewer");
+            response = 'true';
             break;
 
           default:
