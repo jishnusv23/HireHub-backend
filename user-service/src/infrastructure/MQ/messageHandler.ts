@@ -24,6 +24,10 @@ export default class MessageHandler{
             
             response=await updatePassword(data.email,data.password)
             break
+          case 'updateRoleInterviewer':
+            console.log(data,'user id for update the role into interviewer')
+            response=true
+            break;
 
           default:
             response = { success: false, error: "Unknow operation" };
