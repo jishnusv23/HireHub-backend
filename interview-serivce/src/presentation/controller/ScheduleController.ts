@@ -14,9 +14,13 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
       const {meetingLink,uniqueId}=generateMeetLink(req.body)
       console.log("🚀 ~ file: ScheduleController.ts:15 ~ return ~ uniqueId:", uniqueId)
       console.log("🚀 ~ file: ScheduleController.ts:15 ~ return ~ meetingLink:", meetingLink)
-
-      // const response=await IScheduleUseCases(dependancies).execute(req.body)
-      // console.log("🚀 ~ file: ScheduleController.ts:12 ~ returnasync ~ response:", response)
+      const interviewData={
+        ...req.body,
+        meetingLink,
+        uniqueId
+      }
+      const response=await IScheduleUseCases(dependancies).execute(interviewData)
+      console.log("🚀 ~ file: ScheduleController.ts:12 ~ returnasync ~ response:", response)
     } catch (error: any) {
       next(error);
     }
