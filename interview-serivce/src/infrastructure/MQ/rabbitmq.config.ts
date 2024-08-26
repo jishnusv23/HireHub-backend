@@ -6,7 +6,6 @@ export default {
     authQueue: "authQueue",
     userQueue: "userQueue",
     notifQueue: "notifQueue",
-    interviewQueue:'interviewQueue'
   },
 };
 console.log(process.env.RABBITMQ_URL);
