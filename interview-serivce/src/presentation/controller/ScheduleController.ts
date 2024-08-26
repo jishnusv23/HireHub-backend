@@ -1,4 +1,5 @@
 
+import { sendInterviewNotify } from "@/infrastructure/services/sendNotify";
 import { generateMeetLink } from "../../_lib/LinkCreator/generateMeetLink";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
@@ -12,8 +13,8 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
     try {
       console.log(req.body);
       const { meetingLink, uniqueId } = generateMeetLink(req.body);
-      console.log("🚀 ~ file: ScheduleController.ts:15 ~ return ~ uniqueId:", uniqueId)
-      console.log("🚀 ~ file: ScheduleController.ts:15 ~ return ~ meetingLink:", meetingLink)
+      const information=sendInterviewNotify(req.body)
+      console.log("🚀 ~ file: ScheduleController.ts:17 ~ return ~ information:", information)
       const interviewData={
         ...req.body,
         meetingLink,
