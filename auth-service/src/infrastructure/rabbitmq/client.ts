@@ -59,7 +59,7 @@
           throw new Error("Failed to initialize Rabbitmq client");
         }
       }
-      userQueue = config.queues.authQueue
+      userQueue = config.queues.userQueue
       notifQueue=config.queues.notifQueue
 
       public async produce(data: any, operation: string, to: string) {
