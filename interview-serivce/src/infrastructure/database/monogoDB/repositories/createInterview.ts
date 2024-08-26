@@ -1,6 +1,6 @@
 import { interview } from "../models";
 import { InterviewEntity } from "../../../../domain/entities";
-import RabbitMQClient from "@/infrastructure/MQ/client";
+import RabbitMQClient from "../../../MQ/client";
 
 export const createInterview = async (
   data: InterviewEntity
