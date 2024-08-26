@@ -11,11 +11,13 @@ export const createInterview = async (
     );
     const interviewData = new interview({
       title: data.title,
+      interviewerId: data.interviewerId,
       description: data.description,
       interviewType: data.interviewType,
-      jobPosition:data.jobPosition,
-      date:new Date(data.date),
-      participants:data.participants
+      jobPosition: data.jobPosition,
+      interviewStatus: "Scheduled",
+      date: new Date(data.date),
+      participants: data.participants,
     });
     const saveData=await interviewData.save()
     return saveData
