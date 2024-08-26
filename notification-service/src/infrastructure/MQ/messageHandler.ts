@@ -24,6 +24,11 @@ export default class MessageHandler {
       response={success:true,message:result}
       break
 
+    case 'InterviewNofication':
+      console.log(data,'inteview datas')
+      response='ok it we can do'
+      break;  
+
    default:
        response = { success: false, error: "Unknow operation" };
       console.log("unknown operation:", operation);
