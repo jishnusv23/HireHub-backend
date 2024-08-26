@@ -34,7 +34,13 @@ const interviewSchema = new Schema(
       required: true,
     },
     startTime: {
+      type: Date,
+      required: true,
+    },
+    uniqueId: {
       type: String,
+      required: true,
+      unique: true, 
     },
     interviewType: {
       type: String,
