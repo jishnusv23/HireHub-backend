@@ -1,25 +1,39 @@
 import { Channel, ConsumeMessage } from "amqplib";
+import EventEmitter from "events";
+
+const eventEmitter = new EventEmitter();
 
 export default class Consumer {
-  constructor(private channel: Channel, private rpcQueue: string) {}
+  constructor(
+    private channel: Channel,
+    private replyQueueName: string,
+    private eventEmitter: EventEmitter
+  ) {}
+
   async consumeMessages() {
-    console.log("Ready to consume message....................");
+    console.log("Get ready to consume message");
 
     this.channel.consume(
-      this.rpcQueue,
-      async (message: ConsumeMessage | null) => {
+      this.replyQueueName,
+      (message: ConsumeMessage | null) => {
         if (message !== null) {
-          const { correlationId, replyTo } = message?.properties || {};
-          const operation = message?.properties?.headers?.function;
-          if (!correlationId || !replyTo) {
-            console.log(
-              "correlationId or replyto is missing .........................👽"
+          const correlationId = message.properties?.correlationId;
+          const content = message.content?.toString();
+
+          if (correlationId && content) {
+            this.eventEmitter.emit(correlationId.toString(), content);
+          } else {
+            console.error(
+              "Received a message with missing properties:",
+              message
             );
           }
-          const data = JSON.parse(message.content.toString());
+        } else {
+          console.log("Consume is empty, no messages");
         }
       },
       {
+        //*no acknowledgment
         noAck: true,
       }
     );
