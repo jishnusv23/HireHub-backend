@@ -7,12 +7,14 @@ export const createInterview = async (
 ): Promise<InterviewEntity | any> => {
   try {
     const client = await RabbitMQClient.getInstance();
+    console.log("Sending message to userQueue:", data.interviewerId);
     const updateRole = await client.produce(
       data.interviewerId,
       "updateRoleInterviewer",
       "toUser"
     );
-    console.log("🚀 ~ file: createInterview.ts:11 ~ updateRole:", updateRole)
+    console.log("Message sent:", updateRole);
+    // console.log("🚀 ~ file: createInterview.ts:11 ~ updateRole:", updateRole)
     if(updateRole){
        const saveData = await interview.create(data);
         return saveData;
