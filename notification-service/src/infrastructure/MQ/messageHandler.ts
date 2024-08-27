@@ -1,4 +1,4 @@
-import { verificationOtp,forgoPassMailHandler } from "../services";
+import { verificationOtp,forgoPassMailHandler,InterviewNotification } from "../services";
 
 import RabbitMQClient from "./client";
 
@@ -26,7 +26,7 @@ export default class MessageHandler {
 
     case 'InterviewNofication':
       console.log(data,'inteview datas')
-      response='ok it we can do'
+      response=await InterviewNotification(data)
       break;  
 
    default:
