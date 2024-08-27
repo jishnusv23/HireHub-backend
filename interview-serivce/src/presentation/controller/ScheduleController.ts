@@ -13,38 +13,38 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
       // Validate and sanitize input here if needed
       console.log("Received scheduling request:", req.body);
 
-      const { meetingLink, uniqueId } = generateMeetLink(req.body);
-      const interviewData = {
-        ...req.body,
-        meetingLink,
-        uniqueId,
-      };
+      // const { meetingLink, uniqueId } = generateMeetLink(req.body);
+      // const interviewData = {
+      //   ...req.body,
+      //   meetingLink,
+      //   uniqueId,
+      // };
 
-      const response = await IScheduleUseCases(dependancies).execute(
-        interviewData
-      );
-      console.log("ScheduleUseCases response:", response);
+      // const response = await IScheduleUseCases(dependancies).execute(
+      //   interviewData
+      // );
+      // console.log("ScheduleUseCases response:", response);
 
-      if (response) {
-        const information = await sendInterviewNotify(response);
-        console.log("Notification info:", information);
+      // if (response) {
+      //   const information = await sendInterviewNotify(response);
+      //   console.log("Notification info:", information);
 
-        if (information) {
+      //   if (information) {
           
-          return res
-            .status(201)
-            .json({
-              success: true,
-              data: response,
-              message: "Schedule successful",
-            });
-        }
+      //     return res
+      //       .status(201)
+      //       .json({
+      //         success: true,
+      //         data: response,
+      //         message: "Schedule successful",
+      //       });
+      //   }
 
-      }
+      // }
 
       return res
-        .status(400)
-        .json({ success: false, message: "Invalid form data" });
+        .status(201)
+        .json({ success: true,data:null, message: "Invalid form data" });
     } catch (error: any) {
       console.error("Error in scheduling interview:", error);
       return res
