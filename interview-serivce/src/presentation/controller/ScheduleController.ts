@@ -22,8 +22,9 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
       console.log("🚀 ~ file: ScheduleController.ts:12 ~ returnasync ~ response:", response)
       if(response){
 
-        const information=sendInterviewNotify(response)
+        const information= await sendInterviewNotify(response)
         console.log("🚀 ~ file: ScheduleController.ts:17 ~ return ~ information:", information)
+        
       }
     } catch (error: any) {
       next(error);
