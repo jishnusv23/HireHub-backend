@@ -13,8 +13,6 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
     try {
       console.log(req.body);
       const { meetingLink, uniqueId } = generateMeetLink(req.body);
-      const information=sendInterviewNotify(req.body)
-      console.log("🚀 ~ file: ScheduleController.ts:17 ~ return ~ information:", information)
       const interviewData={
         ...req.body,
         meetingLink,
@@ -22,6 +20,11 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
       }
       const response=await IScheduleUseCases(dependancies).execute(interviewData)
       console.log("🚀 ~ file: ScheduleController.ts:12 ~ returnasync ~ response:", response)
+      if(response){
+
+        const information=sendInterviewNotify(response)
+        console.log("🚀 ~ file: ScheduleController.ts:17 ~ return ~ information:", information)
+      }
     } catch (error: any) {
       next(error);
     }
