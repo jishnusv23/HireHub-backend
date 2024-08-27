@@ -1,5 +1,5 @@
 
-import { sendInterviewNotify } from "@/infrastructure/services/sendNotify";
+import { sendInterviewNotify } from "../../infrastructure/services/sendNotify";
 import { generateMeetLink } from "../../_lib/LinkCreator/generateMeetLink";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
