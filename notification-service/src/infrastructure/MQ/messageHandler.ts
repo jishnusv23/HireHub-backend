@@ -27,9 +27,10 @@ export default class MessageHandler {
 
 
     case 'InterviewNofication':
-      console.log(data,'inteview datas')
-      response=await InterviewNotification(data)
-      break;  
+      // console.log(data,'inteview datas')
+      const resultIn=await InterviewNotification(data)
+      response={success:true,message:resultIn}
+      break
 
    default:
        response = { success: false, error: "Unknow operation" };

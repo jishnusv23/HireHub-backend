@@ -96,7 +96,7 @@ export const notifyInterview = async (
       html: message,
     };
      const info = await transporter.sendMail(mailOptions);
-     console.log(`Email sent to ${participantEmail}: ${info.messageId}`);
+    //  console.log(`Email sent to ${participantEmail}: ${info.messageId}`);
 
      return `InterviewNotification email sent to ${participantEmail}`;
   } catch (error: any) {
