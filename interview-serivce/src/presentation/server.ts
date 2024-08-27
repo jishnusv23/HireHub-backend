@@ -8,26 +8,26 @@ import RabbitMQClient from "../infrastructure/MQ/client";
 
 const PORT: number = Number(process.env.PORT) || 4002;
 const app: Application = express();
-const corsOptions = {
-  origin:'http://localhost:5173', 
-  methods: "GET,POST,PUT,DELETE,HEAD",
-  credentials: true,
-};
+// const corsOptions = {
+//   origin:'http://localhost:50199999973', 
+//   methods: "GET,POST,PUT,DELETE,HEAD",
+//   credentials: true,
+// };
 
-console.log("CORS Origin:", corsOptions.origin);
+// console.log("CORS Origin:", corsOptions.origin);
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
-app.get("/api/interview/test", (req: Request, res: Response) => {
-  res
-    .status(201)
-    .json({ success: true, message: "interview service working " });
-});
+// app.get("/api/interview/test", (req: Request, res: Response) => {
+//   res
+//     .status(201)
+//     .json({ success: true, message: "interview service working " });
+// });
 
 app.use("/", routes(dependacies));
 
