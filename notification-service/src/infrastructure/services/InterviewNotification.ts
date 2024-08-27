@@ -12,10 +12,10 @@ export const InterviewNotification = async (data: any) => {
         console.log("Sending email to:", email);
 
         try {
-          // Send notification email to each participant
+         
           const result = await notifyInterview(data, email);
           console.log(`Email sent to ${email}: ${result}`);
-          return { email, result };
+          return result
         } catch (emailError) {
           console.error(`Error sending email to ${email}:`, emailError);
           
