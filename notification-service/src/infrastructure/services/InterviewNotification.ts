@@ -6,6 +6,7 @@ export const InterviewNotification = async (data: any) => {
     console.log("🚀 ~ file: InterviewNotification.ts:6 ~ InterviewNotification ~ participants:", participants)
     //   const response=await notifyInterview(data,participantEmails)
     //   return response
+    console.log(data.meetingLink,'link')
     const response = await Promise.all(
       participants.map(async (email: string) => {
         console.log("Sending email to:", email);
