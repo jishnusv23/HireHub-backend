@@ -30,6 +30,7 @@ export default class MessageHandler {
       console.log(data,'inteview datas')
       const resutlIn=await InterviewNotification(data)
       response={success:true,message:resutlIn}
+      console.log("🚀 ~ file: messageHandler.ts:31 ~ MessageHandler ~ response:", response)
       break;  
 
    default:
