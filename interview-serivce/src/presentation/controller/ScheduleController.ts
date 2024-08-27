@@ -24,8 +24,13 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
 
         const information= await sendInterviewNotify(response)
         console.log("🚀 ~ file: ScheduleController.ts:17 ~ return ~ information:", information)
+        if(information){
+          return res.status(201).json({success:true,data:response,message:'schedule successfully'})
+        }
         
+
       }
+      return res.status(401).json({success:false,message:"Invalid Form"})
     } catch (error: any) {
       next(error);
     }
