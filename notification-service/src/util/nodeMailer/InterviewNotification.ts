@@ -95,11 +95,10 @@ export const notifyInterview = async (
       subject: `Interview Scheduled for ${NotifyData.jobPosition}`,
       html: message,
     };
-    const info = await transporter.sendMail(mailOptions);
+     const info = await transporter.sendMail(mailOptions);
+     console.log(`Email sent to ${participantEmail}: ${info.messageId}`);
 
-    console.log(`Email sent to ${NotifyData.email}: ${info.messageId}`);
-
-    return `Verification email sent to ${NotifyData.email}`;
+     return `InterviewNotification email sent to ${participantEmail}`;
   } catch (error: any) {
     console.error("Something wrong in interview Notification");
 
