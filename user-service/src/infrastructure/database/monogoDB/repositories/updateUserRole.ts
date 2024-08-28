@@ -1,6 +1,7 @@
 import { User } from "../models";
 import { UserEntities } from "../../../../domain/entities";
-import { generateAccessToken } from "hirehub-middleware-version";
+import { generateAccessToken } from "../../../../_lib/http/jwt/generateAccessToken";
+
 
 export const updateRole = async (data: string): Promise<boolean | any> => {
   try {
@@ -16,7 +17,7 @@ export const updateRole = async (data: string): Promise<boolean | any> => {
       console.log("Updated user:", updateRole);
 
       
-      const token = await generateAccessToken({
+      const token = generateAccessToken({
         _id: String(updateRole._id),
         email: updateRole.email,
         role: updateRole.role,
