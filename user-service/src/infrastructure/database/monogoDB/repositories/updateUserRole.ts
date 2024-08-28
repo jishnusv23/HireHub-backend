@@ -10,7 +10,7 @@ export const updateRole=async(data:string):Promise<boolean|any>=>{
         );
         if(updateRole){
             const token=await generateAccessToken({
-                _id:updateRole.id,
+                _id:String(updateRole._id),
                 email:updateRole.email,
                 role:updateRole.role
             })
