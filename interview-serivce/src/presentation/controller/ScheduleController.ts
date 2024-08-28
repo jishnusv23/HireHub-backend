@@ -2,6 +2,8 @@ import { sendInterviewNotify } from "../../infrastructure/services/sendNotify";
 import { generateMeetLink } from "../../_lib/LinkCreator/generateMeetLink";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
+import { updateUserRole } from "../../infrastructure/services/updateUserRole ";
+import { InterviewEntity } from "../../domain/entities";
 
 export const SchedulInterviewController = (dependancies: IDependancies) => {
   const {
@@ -22,12 +24,20 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
 
       const response = await IScheduleUseCases(dependancies).execute(
         interviewData
-      );
+      )
       console.log("ScheduleUseCases response:", response);
 
       if (response) {
         const information = await sendInterviewNotify(response);
-        console.log("Notification info:", information);
+        
+
+         const roleUpdateResult = await updateUserRole(response.interviewerId as string);
+         if (roleUpdateResult && roleUpdateResult.accessToken) {
+           res.cookie("access_token", roleUpdateResult.accessToken, {
+             httpOnly: true,
+           
+           });
+         }
 
         if (information) {
           
