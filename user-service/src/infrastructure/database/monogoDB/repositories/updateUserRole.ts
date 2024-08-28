@@ -17,14 +17,14 @@ export const updateRole = async (data: string): Promise<boolean | any> => {
       console.log("Updated user:", updateRole);
 
       
-      const token = generateAccessToken({
+      const accessToken = generateAccessToken({
         _id: String(updateRole._id),
         email: updateRole.email,
         role: "interviewer",
       });
-
-      console.log("Updated token:", token);
-      return true;
+        
+      console.log("Updated token:", accessToken);
+      return { success: true, accessToken };
     }
 
     return false;
