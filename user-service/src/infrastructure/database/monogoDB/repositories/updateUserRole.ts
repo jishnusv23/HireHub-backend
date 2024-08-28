@@ -1,6 +1,6 @@
 import { User } from "../models";
 import { UserEntities } from "../../../../domain/entities";
-
+import {generateAccessToken} from 'hirehub-middleware-version'
 export const updateRole=async(data:string):Promise<boolean|any>=>{
     try{
         const updateRole = await User.findOneAndUpdate(
@@ -9,6 +9,12 @@ export const updateRole=async(data:string):Promise<boolean|any>=>{
           {new:true}
         );
         if(updateRole){
+            const token=await generateAccessToken({
+                _id:updateRole.id,
+                email:updateRole.email,
+                role:updateRole.role
+            })
+        console.log('updated token',token)
             return true
         }
         return false
