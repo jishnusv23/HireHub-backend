@@ -17,7 +17,7 @@ export const createInterview = async (
     // console.log("🚀 ~ file: createInterview.ts:11 ~ updateRole:", updateRole)
     if(updateRole){
        const saveData = await interview.create(data);
-        return saveData;
+        return {saveData,updateRole};
     }
     return null
     
