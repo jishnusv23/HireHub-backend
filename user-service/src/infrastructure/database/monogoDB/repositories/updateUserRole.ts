@@ -24,7 +24,7 @@ export const updateRole = async (data: string): Promise<boolean | any> => {
       });
         
       console.log("Updated token:", accessToken);
-      return { success: true, accessToken };
+      return { accessToken };
     }
 
     return false;
