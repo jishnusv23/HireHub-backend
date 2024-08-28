@@ -20,7 +20,7 @@ export const updateRole = async (data: string): Promise<boolean | any> => {
       const token = generateAccessToken({
         _id: String(updateRole._id),
         email: updateRole.email,
-        role: updateRole.role,
+        role: "interviewer",
       });
 
       console.log("Updated token:", token);
