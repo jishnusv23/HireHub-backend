@@ -19,6 +19,7 @@ export const getAllMeetDetails = async (
     const totalInterveiwesData = await interview.countDocuments(query);
     const data = await interview
       .find({ interviewerId })
+      .sort({ createdAt: -1 })
       .skip(skipNo)
       .limit(limit);
     console.log("🚀 ~ file: getAllMeetDetails.ts:19 ~ data:", data);
