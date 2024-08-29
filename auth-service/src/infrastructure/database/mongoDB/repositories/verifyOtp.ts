@@ -2,6 +2,7 @@ import { Otp } from "../models/otpModel";
 import { UserEntities } from "../../../../domain/entities";
 
 import RabbitMQClient from "../.../../../../rabbitmq/client";
+import { verifyOTP } from "../../../../redis/verifyOtp";
 
 export const verifyOtp = async (
   email: string,
@@ -9,7 +10,7 @@ export const verifyOtp = async (
 ): Promise<UserEntities | any> => {
   try {
     
-    const verifyed = await Otp.findOne({ email: email, otp: otp });
+    const verifyed = await verifyOTP(email,otp)
     console.log("🚀 ~ file: verifyOtp.ts:13 ~ verifyed:", verifyed)
     if (verifyed) {
        const client= await RabbitMQClient.getInstance()
