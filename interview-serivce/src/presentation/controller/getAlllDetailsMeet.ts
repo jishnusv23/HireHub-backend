@@ -25,7 +25,11 @@ export const getAllMeetDetailsController = (dependacies: IDependancies) => {
         "🚀 ~ file: getAllMeetDetailsController.ts:13 ~ return async ~ response:",
         response
       );
-
+      if(response){
+        return res.status(201).json({success:true,data:response,message:'Fetching all data successfully'})
+      }else{
+        return res.status(404).json({success:true,data:null,message:'invalid user'})
+      }
     
     } catch (error: any) {
       next(error);
