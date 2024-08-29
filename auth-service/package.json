@@ -32,6 +32,7 @@
     "express-rate-limit": "^7.4.0",
     "google-auth-library": "^9.13.0",
     "hirehub-middleware-version": "^1.0.1",
+    "ioredis": "^5.4.1",
     "jsonwebtoken": "^9.0.2",
     "jwt-middleware-learnup": "^1.1.0",
     "module-alias": "^2.2.3",
