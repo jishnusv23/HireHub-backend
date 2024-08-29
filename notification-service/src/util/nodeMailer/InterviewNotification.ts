@@ -67,6 +67,7 @@ export const notifyInterview = async (
     <div class="container">
       <div class="header" style="background-color: #007bff; color: #ffffff; padding: 10px 20px; text-align: center;">
         <h1 style="margin: 0; font-size: 24px;">Interview Scheduled</h1>
+        <h1 style="margin: 0; font-size: 24px;">Host ${NotifyData.interviewerEmail}</h1>
       </div>
       <div class="content" style="padding: 20px;">
         <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">Dear ${participantEmail},</p>
