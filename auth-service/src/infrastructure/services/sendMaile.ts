@@ -1,5 +1,4 @@
 import { generateOTP } from "../../_lib/utils/otp/genarateOtp";
-import { updateOTP } from "../database/mongoDB/repositories/updateOtp";
 import RabbitMQClient from "../rabbitmq/client";
 import { storeOtp } from "./storeOtp";
 
