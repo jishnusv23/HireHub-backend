@@ -33,6 +33,9 @@ const interviewSchema = new Schema(
       type: String,
       required: true,
     },
+    interviewerEmail:{
+      type:String
+    },
     startTime: {
       type: String,
       required: true,
