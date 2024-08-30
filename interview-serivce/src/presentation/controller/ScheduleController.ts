@@ -57,12 +57,7 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
         .json({ success: false,data:null, message: "Invalid form data" });
     } catch (error: any) {
       console.error("Error in scheduling interview:", error);
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "An error occurred while scheduling the interview",
-        });
+      next(error)
     }
   };
 };
