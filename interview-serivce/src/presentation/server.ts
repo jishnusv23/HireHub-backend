@@ -9,8 +9,8 @@ import RabbitMQClient from "../infrastructure/MQ/client";
 const PORT: number = Number(process.env.PORT) || 4002;
 const app: Application = express();
 const corsOptions = {
-  origin:'http://localhost:50199999973', 
-  methods: "GET,POST,PUT,DELETE,HEAD",
+  origin: "http://localhost:50199999973",
+  methods: "GET,POST,PUT,PATCH,DELETE,HEAD",
   credentials: true,
 };
 
