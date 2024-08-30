@@ -7,7 +7,7 @@ export const createInterview = async (
 ): Promise<InterviewEntity | any> => {
   try {
     
-    console.log("Sending message to userQueue:", data.interviewerId);
+    
   
        const saveData = await interview.create(data);
 
