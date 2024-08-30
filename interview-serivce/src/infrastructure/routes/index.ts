@@ -18,7 +18,7 @@ export const routes = (dependancies: IDependancies) => {
 
       router
         .route("/cancelInterview")
-        .patch(jwtMiddleware, roleMiddleware(["interviewer"]),cancelInterview);
+        .put(jwtMiddleware, roleMiddleware(["interviewer"]),cancelInterview);
 
   return router;
 };
