@@ -1,7 +1,7 @@
 
 import { NextFunction, Request, response, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
-import { sendInterviewNotify } from "@/infrastructure/services/sendNotify";
+import { sendInterviewNotify } from "../../infrastructure/services/sendNotify";
 
 export const updateInterveiweController=(dependacies:IDependancies)=>{
     const {useCases:{IUpdateUseCases}}=dependacies
