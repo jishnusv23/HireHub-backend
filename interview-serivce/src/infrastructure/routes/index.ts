@@ -13,7 +13,7 @@ export const routes = (dependancies: IDependancies) => {
     .get(jwtMiddleware, roleMiddleware(["interviewer"]), getAllInterviewes);
 
     router
-      .route("/updateInterview")
+      .route("/updateInterview/:id")
       .put(jwtMiddleware, roleMiddleware(["interviewer"]),updateInterveiwes);
 
   return router;
