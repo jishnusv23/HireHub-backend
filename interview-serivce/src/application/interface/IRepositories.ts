@@ -12,5 +12,9 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
-  updateInterview:(data:InterviewEntity,id:string)=>Promise<InterviewEntity|null>
+  updateInterview: (
+    data: InterviewEntity,
+    id: string
+  ) => Promise<InterviewEntity | null>;
+  cancelInterview:(id:string)=>Promise<InterviewEntity|null>
 }
