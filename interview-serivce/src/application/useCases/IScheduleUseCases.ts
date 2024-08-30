@@ -7,7 +7,7 @@ export const IScheduleUseCases = (dependancies: IDependancies) => {
   return {
     execute: async (data: InterviewEntity) => {
       try {
-        console.log(data);
+       
         return await createInterview(data);
       } catch (error: any) {
         throw new Error(error?.message||'Interview creation failed')
