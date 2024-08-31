@@ -8,7 +8,7 @@ export const cancelInterveiwController=(dependancies:IDependancies)=>{
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{
             console.log(req.body, "intervieweID");
-            const {data}=req.body.data
+            const {data}=req.body
 
             const response=await ICancelInterviewUseCases(dependancies).execute(data)
             console.log("🚀 ~ file: cancelInterviewController.ts:13 ~ returnasync ~ response:", response)
