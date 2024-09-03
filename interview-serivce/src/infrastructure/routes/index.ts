@@ -4,7 +4,7 @@ import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller";
 
 export const routes = (dependancies: IDependancies) => {
-  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview } = controller(dependancies);
+  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew } = controller(dependancies);
   const router = Router();
 
   router.route("/scheduleInterview").post(createInterview);
@@ -19,6 +19,10 @@ export const routes = (dependancies: IDependancies) => {
       router
         .route("/cancelInterview")
         .put(jwtMiddleware, roleMiddleware(["interviewer"]),cancelInterview);
+
+
+        //*verify 
+        router.route("/verifyInterview").post(VerifyInterivew)
 
   return router;
 };
