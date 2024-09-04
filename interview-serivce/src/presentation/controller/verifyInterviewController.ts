@@ -14,7 +14,18 @@ export const verifyInterviewController=(dependancies:IDependancies)=>{
                 const isValid=InterviewTimeDateValid(response.date,response.startTime as string)
                 if(isValid){
                     console.log(isValid)
+                    return res.status(200).json({success:true,message:'Interview is Valid'})
+                }else{
+                    return res
+                      .status(400)
+                      .json({
+                        success: false,
+                        messsage:
+                          "Interview is not within the allowed time window",
+                      });
                 }
+            }else{
+                return res.status(404).json({success:false,message:'Not found the interview'})
             }
 
         }catch(error:any){
