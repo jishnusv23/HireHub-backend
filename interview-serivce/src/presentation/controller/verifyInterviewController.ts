@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
-import { InterviewTimeDateValid } from "@/_lib/common/verifyInterview";
+import { InterviewTimeDateValid } from "../../_lib/common/verifyInterview";
 
 export const verifyInterviewController=(dependancies:IDependancies)=>{
     const {useCases:{IFetchCurrentInterveiwUseCases}}=dependancies
