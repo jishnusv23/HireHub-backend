@@ -17,7 +17,8 @@ export interface InterviewEntity {
   participants: string[];
   interviewStatus: interviewStatus;
   meetingLink?: string;
-  interviewerEmail:string
+  interviewerEmail: string;
+  Ongoing:boolean
   startTime?: string;
   uniqueId: string;
   interviewType: string;

@@ -45,6 +45,10 @@ const interviewSchema = new Schema(
       required: true,
       unique: true, 
     },
+    Ongoing:{
+      type:Boolean,
+      default:false
+    },
     interviewType: {
       type: String,
       required: true,

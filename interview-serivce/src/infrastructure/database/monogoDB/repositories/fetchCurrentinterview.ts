@@ -5,7 +5,8 @@ export const fetchCurrentInterview=async(uniqueId:string,interviewerId:string):P
     try{
         const currentInterview = await interview.findOneAndUpdate(
           { uniqueId: uniqueId, interviewerId: interviewerId },
-          { $set: { interviewStatus: "Ongoing" } },{new:true}
+          { $set: { Ongoing: true } },
+          { new: true }
         );
         if(currentInterview){
             return currentInterview
