@@ -3,7 +3,10 @@ import { interview } from "../models";
 
 export const fetchCurrentInterview=async(uniqueId:string,interviewerId:string):Promise<InterviewEntity|null>=>{
     try{
-        const currentInterview=await interview.findOne({uniqueId:uniqueId,interviewerId:interviewerId})
+        const currentInterview = await interview.findOneAndUpdate(
+          { uniqueId: uniqueId, interviewerId: interviewerId },
+          { $set: { interviewStatus: "Ongoing" } },{new:true}
+        );
         if(currentInterview){
             return currentInterview
         }
