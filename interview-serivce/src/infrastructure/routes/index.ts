@@ -24,7 +24,7 @@ export const routes = (dependancies: IDependancies) => {
         //*verifyInterviewer side 
         router.route("/verifyInterview").post(VerifyInterivew)
 
-        router.route("/isStartingInterview").post(MeetAccessInterviewee)
+        router.route("/isStartingInterview").get(MeetAccessInterviewee)
 
   return router;
 };
