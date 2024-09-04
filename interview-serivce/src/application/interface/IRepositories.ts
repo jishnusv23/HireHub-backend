@@ -17,5 +17,9 @@ export interface IRepositories {
     id: string
   ) => Promise<InterviewEntity | null>;
   cancelInterview: (id: string) => Promise<InterviewEntity | null>;
-  fetchCurrentInterview(uniqueId:string,interviewerId:string):Promise<InterviewEntity|null>
+  fetchCurrentInterview(
+    uniqueId: string,
+    interviewerId: string
+  ): Promise<InterviewEntity | null>;
+  MeetAccessInterviewee:(uniqueId:string)=>Promise<InterviewEntity|null>
 }
