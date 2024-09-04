@@ -12,6 +12,7 @@ export const verifyInterviewController=(dependancies:IDependancies)=>{
             console.log("🚀 ~ file: verifyInterviewController.ts:11 ~ returnasync ~ response:", response)
             if(response){
                 const isValid=InterviewTimeDateValid(response.date,response.startTime as string)
+                console.log("🚀 ~ file: verifyInterviewController.ts:15 ~ returnasync ~ isValid:", isValid)
                 if(isValid){
                     console.log(isValid)
                     return res.status(200).json({success:true,message:'Interview is Valid'})

@@ -46,5 +46,5 @@ export const InterviewTimeDateValid = (date: any, time: string): boolean => {
     return true; 
   }
 
-  return false;
+  return false; // Invalid interview time
 };
