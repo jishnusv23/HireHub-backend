@@ -6,7 +6,7 @@ export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
 
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{
-            console.log(req.query,'meet validation')
+            console.log(req.body,'meet validation')
         }catch(error:any){
             next(error)
         }
