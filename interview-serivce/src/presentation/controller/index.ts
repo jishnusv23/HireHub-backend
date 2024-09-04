@@ -1,4 +1,5 @@
 import { IDependancies } from "../../application/interface/IDependancies";
+import { MeetVerifyAccessController } from "./MeetverifyAccessController";
 import { SchedulInterviewController } from "./ScheduleController";
 import { cancelInterveiwController } from "./cancelInterviewController";
 import { getAllMeetDetailsController } from "./getAlllDetailsMeet";
@@ -11,6 +12,7 @@ export const controller = (dependacies: IDependancies) => {
     getAllInterviewes:getAllMeetDetailsController(dependacies),
     updateInterveiwes:updateInterveiweController(dependacies),
     cancelInterview:cancelInterveiwController(dependacies),
-    VerifyInterivew:verifyInterviewController(dependacies)
+    VerifyInterivew:verifyInterviewController(dependacies),
+    MeetAccessInterviewee:MeetVerifyAccessController(dependacies)
   };
 };
