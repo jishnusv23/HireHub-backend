@@ -1,4 +1,4 @@
-import { verificationOtp,forgoPassMailHandler,InterviewNotification } from "../services";
+import { verificationOtp,forgoPassMailHandler,InterviewNotification,CancelInterviewNotificationHandler } from "../services";
 
 import RabbitMQClient from "./client";
 
