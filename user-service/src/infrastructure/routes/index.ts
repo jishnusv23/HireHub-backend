@@ -18,7 +18,7 @@ export const routes = (dependancies: IDependancies) => {
     ,blockunblockUser)
 
   //*--------
-  router.route("/updateImge").post(updateImg)
+  router.route("/updateImge").put(updateImg)
 
   return router;
 };
