@@ -15,7 +15,7 @@ export const notifyInterview = async (
     });
     const formattedDate = formatDate(NotifyData.date);
 
-    const message = `
+     const message = `
   <html>
   <head>
     <style>
@@ -30,7 +30,7 @@ export const notifyInterview = async (
         padding: 20px;
       }
       .header {
-        background-color: #ff4c4c;
+        background-color: #007bff;
         color: #ffffff;
         padding: 10px 20px;
         text-align: center;
@@ -56,35 +56,59 @@ export const notifyInterview = async (
         text-decoration: none;
         border-radius: 5px;
         font-weight: bold;
-        font-size: 16px;
       }
       .footer {
         text-align: center;
         padding: 20px;
         font-size: 14px;
         color: #777777;
+      /* Add Tailwind's preflight base styles */
+      body {
+        @apply font-sans bg-gray-100;
       }
     </style>
   </head>
   <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
     <div class="container">
-      <div class="header" style="background-color: #00308F; color: #ffffff; padding: 10px 20px; text-align: center;">
-        <h1 style="margin: 0; font-size: 24px;">HireHub - Interview Scheduled</h1>
+      <div class="header" style="background-color: #007bff; color: #ffffff; padding: 10px 20px; text-align: center;">
+        <h1 style="margin: 0; font-size: 24px;">Interview Scheduled</h1>
+        <h1 style="margin: 0; font-size: 24px;">Host ${NotifyData.interviewerEmail}</h1>
+  <body class="bg-gray-100 m-0 p-0">
+    <div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+      <div class="bg-blue-600 text-white text-center p-4">
+        <h1 class="text-2xl font-bold">Interview Scheduled</h1>
       </div>
       <div class="content" style="padding: 20px;">
         <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">Dear ${participantEmail},</p>
-       
-        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">We are pleased to inform you that your interview with <strong>HireHub</strong> has been scheduled. Please find the details below:</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">We are pleased to inform you that you have been scheduled for an interview with HireHub. Below are the details of your interview:</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>HOST:</strong> ${NotifyData.interviewerEmail}</p>
         <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Title:</strong> ${NotifyData.title}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Description:</strong> ${NotifyData.description}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Interview Type:</strong> ${NotifyData.interviewType}</p>
         <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Job Position:</strong> ${NotifyData.jobPosition}</p>
-        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Scheduled Date:</strong> ${formattedDate}</p>
-        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Host:</strong> ${NotifyData.interviewerEmail}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Date:</strong> ${NotifyData.date}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Start Time:</strong> ${NotifyData.startTime}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Meeting Link:</strong> <a href="${NotifyData.meetingLink}" style="display: inline-block; padding: 10px 20px; margin-top: 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold;">Join Meeting</a></p>
         <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">Please be prepared for the interview and ensure that you are available at the specified time.</p>
         <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">We look forward to your participation.</p>
-       <a href="${NotifyData.meetingLink}" class="button">Meeting Link:</a>
+      <div class="p-6">
+        <p class="text-gray-800 mb-4">Dear ${participantEmail},</p>
+        <p class="text-gray-800 mb-4">We are pleased to inform you that you have been scheduled for an interview with HireHub. Below are the details of your interview:</p>
+        <p class="text-gray-800 mb-2"><strong>Title:</strong> ${NotifyData.title}</p>
+        <p class="text-gray-800 mb-2"><strong>Description:</strong> ${NotifyData.description}</p>
+        <p class="text-gray-800 mb-2"><strong>Interview Type:</strong> ${NotifyData.interviewType}</p>
+        <p class="text-gray-800 mb-2"><strong>Job Position:</strong> ${NotifyData.jobPosition}</p>
+        <p class="text-gray-800 mb-2"><strong>Date:</strong> ${formattedDate}</p>
+        <p class="text-gray-800 mb-2"><strong>Start Time:</strong> ${NotifyData.startTime}</p>
+        <p class="text-gray-800 mb-2"><strong>Host:</strong> ${NotifyData.interviewerEmail}</p>
+        <p class="text-gray-800 mb-4"><strong>Meeting Link:</strong> <a href="${NotifyData.meetingLink}" class="inline-block bg-blue-600 text-white py-2 px-4 rounded-md font-bold no-underline">Join Meeting</a></p>
+        <p class="text-gray-800 mb-4">Please be prepared for the interview and ensure that you are available at the specified time.</p>
+        <p class="text-gray-800">We look forward to your participation.</p>
       </div>
       <div class="footer" style="text-align: center; padding: 20px; font-size: 14px; color: #777777;">
         <p style="margin: 0;">Best regards,<br/>HireHub Team</p>
+      <div class="text-center p-4 text-sm text-gray-600">
+        <p>Best regards,<br/>HireHub Team</p>
       </div>
     </div>
   </body>
