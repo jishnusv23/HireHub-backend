@@ -1,3 +1,4 @@
+import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
 import { IDependancies } from "@/application/interface/IDependancies";
 import { NextFunction, Request, Response } from "express";
 
@@ -23,13 +24,27 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
           .status(200)
           .json({ success: false, data: {}, message: "OTP doesnt match" });
       } else {
-        return res
-          .status(202)
-          .json({
-            success: true,
-            data: result,
-            message: "OTP verified successfully",
-          });
+        const userId = result?._id?.toString() as string;
+
+        const accesstoken = generateAccessToken({
+          _id: String(result?._id),
+          email: result.email,
+          role: result.role,
+        });
+        const refreshtoken = generateRefreshToken({
+          _id: String(result?._id),
+          email: result.email,
+          role: result.role,
+        });
+
+        res.cookie("access_token", accesstoken, { httpOnly: true });
+        res.cookie("refresh_token ", refreshtoken, { httpOnly: true });
+
+        return res.status(202).json({
+          success: true,
+          data: result,
+          message: "OTP verified successfully",
+        });
       }
     } catch (error: any) {
       console.error("Something wrong in verifyotp", error);
