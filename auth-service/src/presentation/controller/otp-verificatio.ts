@@ -9,10 +9,10 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log(req.body);
-      const { email, otp } = req.body;
-      console.log("🚀 ~ file: otp-verificatio.ts:13 ~ return ~ email:", email)
+      const { datas, otp } = req.body;
+      console.log("🚀 ~ file: otp-verificatio.ts:13 ~ return ~ email:", datas.email)
 
-      const result = await verifyOtpUseCases(dependancies).execute(email, otp);
+      const result = await verifyOtpUseCases(dependancies).execute(datas, otp);
       console.log(
         "🚀 ~ file: otp-verificatio.ts:15 ~ return ~ result:",
         result
