@@ -49,40 +49,40 @@ export const sigupController = (dependancies: IDependancies) => {
 
         // console.log("🚀 ~ file: signup.ts:46 ~ return ~ result:", result)
 
-        const created = await createUserUseCases(dependancies).execute(
-          afterValidUser
-        );
-        console.log(created,'lpppppppppppppppppppppppppppppppp')
-        if (!created) {
-          res
-            .status(500)
-            .json({ success: false, message: "User creation failed" });
-        } else {
+        // const created = await createUserUseCases(dependancies).execute(
+        //   afterValidUser
+        // );
+        // console.log(created,'lpppppppppppppppppppppppppppppppp')
+        // if (!created) {
+        //   res
+        //     .status(500)
+        //     .json({ success: false, message: "User creation failed" });
+        // } else {
           //*integrate the kafka here
-          const userId = created?._id?.toString() as string;
+          // const userId = created?._id?.toString() as string;
 
-          const accesstoken = generateAccessToken({
+          // const accesstoken = generateAccessToken({
           
-            _id: String(created?._id),
-            email: created.email,
-            role: created.role,
-          });
-          const refreshtoken = generateRefreshToken({
-            _id: String(created?._id),
-            email: created.email,
-            role: created.role,
-          });
+          //   _id: String(created?._id),
+          //   email: created.email,
+          //   role: created.role,
+          // });
+          // const refreshtoken = generateRefreshToken({
+          //   _id: String(created?._id),
+          //   email: created.email,
+          //   role: created.role,
+          // });
           
-          res.cookie("access_token", accesstoken, { httpOnly: true });
-          res.cookie("refresh_token ", refreshtoken, { httpOnly: true });
+          // res.cookie("access_token", accesstoken, { httpOnly: true });
+          // res.cookie("refresh_token ", refreshtoken, { httpOnly: true });
           
-          console.log(req.cookies,'kookokokokokoko')
+          // console.log(req.cookies,'kookokokokokoko')
          return  res .status(200).json({
             success: true,
-            message: "User created successfully",
-            data: created,
+            message: "User desn't exists",
+            data:null ,
           });
-        }
+        
       }
 
     } catch (error: any) {

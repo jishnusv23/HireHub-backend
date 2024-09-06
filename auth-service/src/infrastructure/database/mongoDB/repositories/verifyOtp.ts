@@ -5,16 +5,16 @@ import RabbitMQClient from "../.../../../../rabbitmq/client";
 import { verifyOTP } from "../../../../redis/verifyOtp";
 
 export const verifyOtp = async (
-  email: string,
+  datas: UserEntities,
   otp: string
 ): Promise<UserEntities | any> => {
   try {
     
-    const verifyed = await verifyOTP(email,otp)
+    const verifyed = await verifyOTP(datas.email,otp)
     console.log("🚀 ~ file: verifyOtp.ts:13 ~ verifyed:", verifyed)
     if (verifyed) {
        const client= await RabbitMQClient.getInstance()
-       const  result = await client.produce({email}, "verifyAcc", "toUser");
+       const result = await client.produce(datas, "createUser", "toUser");
        return result as UserEntities
 
     }

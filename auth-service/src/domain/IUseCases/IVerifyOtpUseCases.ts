@@ -1,5 +1,5 @@
 import { IOtp, UserEntities } from "../entities";
 
 export interface IVerifyOtpUseCases {
-  execute(email: string, otp: string): Promise<UserEntities | null>;
+  execute(datas: UserEntities, otp: string): Promise<UserEntities | null>;
 }

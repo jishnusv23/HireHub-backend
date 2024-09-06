@@ -6,11 +6,11 @@ export const verifyOtpUseCases = (dependancies: IDependancies) => {
     repositories: { verifyOtp },
   } = dependancies;
   return {
-    execute: async (email: string, otp: string): Promise<UserEntities | null> => {
-      console.log("🚀 ~ file: verifyOtpUseCases.ts:10 ~ execute: ~ email: string, otp: string:", email, otp)
+    execute: async (datas: UserEntities, otp: string): Promise<UserEntities | null> => {
+      console.log("🚀 ~ file: verifyOtpUseCases.ts:10 ~ execute: ~ email: string, otp: string:", datas.email, otp)
       try {
         
-        const result = await verifyOtp(email, otp);
+        const result = await verifyOtp(datas, otp);
         console.log("🚀 ~ file: verifyOtpUseCases.ts:14 ~ execute: ~ result:", result)
         if (result) {
           return result;
