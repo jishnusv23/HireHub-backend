@@ -6,6 +6,7 @@ import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 import { generateOTP } from "../../_lib/utils/otp/genarateOtp";
 import { confirmOtpNotification } from "../../infrastructure/services/sendMaile";
+import { InterviewParticipants } from "../../infrastructure/services/InterviewParticipants";
 export const sigupController = (dependancies: IDependancies) => {
   const {
     useCases: { createUserUseCases, findUserByEmailUseCases },
@@ -16,6 +17,7 @@ export const sigupController = (dependancies: IDependancies) => {
       console.log("Singup controller working", req.body);
 
       let afterValidUser = await validateUser(req.body);
+      let checkParticipants=await InterviewParticipants(afterValidUser.email)
 
       afterValidUser.password = await hashpassword(afterValidUser.password);
       const existingUser = await findUserByEmailUseCases(dependancies).execute(
