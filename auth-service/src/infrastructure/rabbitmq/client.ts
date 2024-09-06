@@ -62,7 +62,7 @@ class RabbitMQClient {
   }
   userQueue = config.queues.userQueue;
   notifQueue = config.queues.notifQueue;
-  interviewQueue=config.queues.interviewQueue
+  // interviewQueue=config.queues.interviewQueue
 
   public async produce(data: any, operation: string, to: string) {
     let toQueue: string = "";
@@ -72,9 +72,9 @@ class RabbitMQClient {
         break;
       case "toNotif":
         toQueue = this.notifQueue;
-      case "toInterview":
-        toQueue = this.interviewQueue;
-      default:
+      // case "toInterview":
+      //   toQueue = this.interviewQueue;
+      // default:
         console.log("Unknown operation", operation);
         break;
     }
