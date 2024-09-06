@@ -35,12 +35,12 @@ export default class MessageHandler {
         break;
       case "cancelInterview":
         console.log(data, "inteview  for cancel notification");
-        // const resutlIn = await InterviewNotification(data);
-        // response = { success: true, message: resutlIn };
-        // console.log(
-        //   "🚀 ~ file: messageHandler.ts:31 ~ MessageHandler ~ response:",
-        //   response
-        // );
+        const resutlCancel = await CancelInterviewNotificationHandler(data);
+        response = { success: true, message: resutlCancel };
+        console.log(
+          "🚀 ~ file: messageHandler.ts:31 ~ MessageHandler ~ response:",
+          response
+        );
         break;
 
       default:
