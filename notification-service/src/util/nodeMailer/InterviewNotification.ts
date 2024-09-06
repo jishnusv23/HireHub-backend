@@ -15,7 +15,7 @@ export const notifyInterview = async (
     });
     const formattedDate = formatDate(NotifyData.date);
 
-   const message = `
+  const message = `
 <html>
 <head>
   <style>
@@ -60,13 +60,14 @@ export const notifyInterview = async (
     }
     .button {
       background-color: #007bff;
-      color: white;
+      color: white !important; /* Ensures the button text stays white */
       padding: 12px 24px;
       text-decoration: none;
       border-radius: 5px;
       display: inline-block;
       margin-top: 20px;
       font-size: 16px;
+      text-align: center;
     }
     .button:hover {
       background-color: #0056b3;
@@ -102,6 +103,8 @@ export const notifyInterview = async (
 </body>
 </html>
 `;
+
+
 
     const mailOptions = {
       from: process.env.COMPANY_EMAIL,
