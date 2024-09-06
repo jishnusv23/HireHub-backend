@@ -6,17 +6,21 @@ export const confirmOtpNotification=async(email:string)=>{
     try{
       const otp = await generateOTP();
       
-      await storeOtp(email,otp);
+    const responseOtp=  await storeOtp(email,otp);
+      console.log("🚀 ~ file: sendMaile.ts:10 ~ confirmOtpNotification ~ responseOtp:", responseOtp)
       // console.log("🚀 ~ file: sendMaile.ts:13 ~ confirmOtpNotification ~ result:", result)
-      let data={
+      if(responseOtp){
+
+        let data={
           email,
           otp
         }
         const client=await RabbitMQClient.getInstance()
         const response = await client.produce(data, "verifyOtp", "toNotif");
-     
-      console.log("🚀 ~ file: sendMaile.ts:21 ~ confirmOtpNotification ~ response:", response)
-      return response
+        
+        console.log("🚀 ~ file: sendMaile.ts:21 ~ confirmOtpNotification ~ response:", response)
+        return response
+      }
     }catch(err){
 
     }
