@@ -1,90 +1,110 @@
 import { formatDate } from '../../_lib/common/FormDate'
 import nodemailer from 'nodemailer'
 
-export const CancelInterviewNotify=async(NotificationData:any,participantEmail:string):Promise<string>=>{
-    try{
-        const transporter=nodemailer.createTransport({
-            service:"gmail",
-            auth:{
-                user: process.env.COMPANY_EMAIL,
-                pass: process.env.COMPANY_PASSWORD,
-            }
-        })
-        const forMattedDate=formatDate(NotificationData.date)
-       const message = `
-<html>
-<head>
-  <style>
-    /* Include Tailwind CSS preflight base styles */
-    body {
-      @apply font-sans bg-gray-100;
-    }
-  </style>
-</head>
-<body class="bg-gray-100 m-0 p-0">
-  <div class="flex items-center justify-center min-h-screen">
-    <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-      
-      <!-- HireHub Header -->
-      <div class="bg-gray-900 text-white text-center py-4">
-        <h1 class="text-4xl font-bold">HireHub</h1>
+export const CancelInterviewNotify = async (
+  NotifyData: any,
+  participantEmail: string
+): Promise<string> => {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.COMPANY_EMAIL,
+        pass: process.env.COMPANY_PASSWORD,
+      },
+    });
+    const formattedDate = formatDate(NotifyData.date);
+const message = `
+  <html>
+  <head>
+    <style>
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+      .header {
+        background-color: #ff4c4c;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-align: center;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .content p {
+        margin: 0 0 15px;
+        line-height: 1.6;
+        color: #333333;
+      }
+      .content p strong {
+        color: #333333;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 14px;
+        color: #777777;
+      }
+    </style>
+  </head>
+  <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
+    <div class="container">
+      <div class="header" style="background-color: #ff4c4c; color: #ffffff; padding: 10px 20px; text-align: center;">
+        <h1 style="margin: 0; font-size: 24px;">Interview Canceled</h1>
       </div>
-      
-      <!-- Main Content Starts -->
-      <div class="bg-red-700 text-white text-center py-6">
-        <h2 class="text-2xl font-extrabold">Interview Cancelled</h2>
-        <p class="mt-2">Reminder - Your meeting has been canceled.</p>
+      <div class="content" style="padding: 20px;">
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">Dear ${participantEmail},</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">We regret to inform you that the interview for the following position has been canceled:</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Title:</strong> ${NotifyData.title}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Job Position:</strong> ${NotifyData.jobPosition}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Scheduled Date:</strong> ${formattedDate}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;"><strong>Host:</strong> ${NotifyData.interviewerEmail}</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">We apologize for any inconvenience caused. You will be contacted soon for rescheduling the interview.</p>
+        <p style="margin: 0 0 15px; line-height: 1.6; color: #333333;">If you have any questions, feel free to contact us.</p>
+       <a href="${process.env.LOGIN_URL}" class="button">Go to Website</a>
       </div>
-      <div class="p-6">
-        <p class="text-gray-800 mb-4">Dear ${participantEmail},</p>
-        <p class="text-gray-800 mb-4">Your interview for <strong>HireHub</strong> has been canceled. Please see the details below:</p>
-        
-        <div class="border-t border-b border-gray-300 py-4">
-          <p class="text-gray-700 mb-2"><strong>Title:</strong> ${NotificationData.title}</p>
-          <p class="text-gray-700 mb-2"><strong>Description:</strong> ${NotificationData.description}</p>
-          <p class="text-gray-700 mb-2"><strong>Interview Type:</strong> ${NotificationData.interviewType}</p>
-          <p class="text-gray-700 mb-2"><strong>Job Position:</strong> ${NotificationData.jobPosition}</p>
-          <p class="text-gray-700 mb-2"><strong>Date:</strong> ${forMattedDate}</p>
-          <p class="text-gray-700 mb-2"><strong>Scheduled Time:</strong> ${NotificationData.startTime}</p>
-          <p class="text-gray-700 mb-2"><strong>Host:</strong> ${NotificationData.interviewerEmail}</p>
-          <p class="text-gray-700 mb-4"><strong>Meeting Link:</strong> 
-            <a href="${NotificationData.meetingLink}" class="inline-block bg-blue-700 text-white py-2 px-6 rounded-md font-bold no-underline hover:bg-blue-800 transition">Join Meeting</a>
-          </p>
-          <p class="text-gray-700 mb-4"><strong>Meeting Key:</strong> 1362901020</p>
-        </div>
-
-        <p class="text-gray-800 mt-4">You can also join the meeting using our iOS or Android apps for mobile.</p>
-
-        <div class="mt-6 text-center">
-          <a href="${process.env.LOGIN_URL}" class="inline-block bg-red-600 text-white py-2 px-6 rounded-md font-bold no-underline hover:bg-red-700 transition">Cancel Meeting</a>
-        </div>
-      </div>
-      
-      <!-- Footer -->
-      <div class="bg-gray-100 text-center py-4 text-sm text-gray-600 border-t border-gray-200">
-        <p>Best regards,<br/>The HireHub Team</p>
+      <div class="footer" style="text-align: center; padding: 20px; font-size: 14px; color: #777777;">
+        <p style="margin: 0;">Best regards,<br/>HireHub Team</p>
       </div>
     </div>
-  </div>
-</body>
-</html>
+  </body>
+  </html>
 `;
 
-const mailOptions = {
-  from: process.env.COMPANY_EMAIL,
-  to: participantEmail,
-  subject: `Interview Cancel for ${NotificationData.jobPosition}`,
-  html: message,
+
+    const mailOptions = {
+      from: process.env.COMPANY_EMAIL,
+      to: participantEmail,
+      subject: `Interview Cancel for ${NotifyData.jobPosition}`,
+      html: message,
+    };
+    const info = await transporter.sendMail(mailOptions);
+    //  console.log(`Email sent to ${participantEmail}: ${info.messageId}`);
+
+    return `InterviewNotification email sent to ${participantEmail}`;
+  } catch (error: any) {
+    console.error(
+      "Something wrong in cancelInterviewNotificationMailer",
+      error
+    );
+    throw new Error(error?.message);
+  }
 };
-const info = await transporter.sendMail(mailOptions);
-//  console.log(`Email sent to ${participantEmail}: ${info.messageId}`);
-
-return `InterviewNotification email sent to ${participantEmail}`;
-       
-    }catch(error:any){
-        console.error('Something wrong in cancelInterviewNotificationMailer',error);
-        throw new Error(error?.message)
-        
-    }
-
-}
