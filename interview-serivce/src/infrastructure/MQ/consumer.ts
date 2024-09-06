@@ -19,6 +19,7 @@ export default class Consumer {
         if (message !== null) {
           const correlationId = message.properties?.correlationId;
           const content = message.content?.toString();
+        
 
           if (correlationId && content) {
             this.eventEmitter.emit(correlationId.toString(), content);
