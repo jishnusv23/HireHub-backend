@@ -12,6 +12,10 @@ const interviewSchema = new Schema(
       type: String,
       required: true,
     },
+    reminded:{
+      type:Boolean,
+      default:false
+    },
     description: {
       type: String,
       required: true,
