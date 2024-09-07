@@ -14,11 +14,12 @@ export interface InterviewEntity {
   jobPosition: string;
   interviewerId: Types.ObjectId | string;
   date: Date;
+  reminded:boolean
   participants: string[];
   interviewStatus: interviewStatus;
   meetingLink?: string;
   interviewerEmail: string;
-  Ongoing:boolean
+  Ongoing: boolean;
   startTime?: string;
   uniqueId: string;
   interviewType: string;
