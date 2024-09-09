@@ -12,9 +12,7 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
     try {
       console.log(req.body);
       const { datas, otp } = req.body;
-    console.log("Original password:", datas.password); 
-    datas.password = await hashpassword(datas.password);
-    console.log("Hashed password:", datas.password); 
+      datas.password = await hashpassword(datas.password);
       const result = await verifyOtpUseCases(dependancies).execute(datas, otp);
       console.log(
         "🚀 ~ file: otp-verificatio.ts:15 ~ return ~ result:",
@@ -22,7 +20,7 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
       );
 
       if (!result) {
-     return    res
+        return res
           .status(200)
           .json({ success: false, data: {}, message: "OTP doesnt match" });
       } else {
