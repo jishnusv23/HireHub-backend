@@ -1,5 +1,6 @@
 import { interview } from "../database/monogoDB/models";
 import cron from "node-cron";
+import RabbitMQClient from "../MQ/client";
 
  const reminderInteriview = async () => {
   try {
@@ -30,10 +31,15 @@ import cron from "node-cron";
       const reminderTime = new Date(interviewDateTime.getTime() - 15 * 60000);
 
       if (now >= reminderTime && now < interviewDateTime) {
-        console.log(
-          `Sending the reminder for the interivew ${interview.participants} and the time was ${interview.startTime}`
+        // console.log(
+        //   `Sending the reminder for the interivew ${interview.participants} and the time was ${interview.startTime}`
+        // );
+        const client=await RabbitMQClient.getInstance()
+        const response = await client.produce(
+          interview,
+          "reminderInterview",
+          "toNotif"
         );
-
         interview.reminded = true;
         await interview.save();
       }
