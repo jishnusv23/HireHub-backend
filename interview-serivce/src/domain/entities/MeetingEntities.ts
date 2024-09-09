@@ -10,11 +10,12 @@ enum interviewStatus {
 export interface InterviewEntity {
   _id?: string;
   title: string;
+  instantMeet:boolean
   description: string;
   jobPosition: string;
   interviewerId: Types.ObjectId | string;
   date: Date;
-  reminded:boolean
+  reminded: boolean;
   participants: string[];
   interviewStatus: interviewStatus;
   meetingLink?: string;

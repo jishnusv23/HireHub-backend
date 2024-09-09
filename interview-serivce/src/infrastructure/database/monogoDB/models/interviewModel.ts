@@ -12,6 +12,10 @@ const interviewSchema = new Schema(
       type: String,
       required: true,
     },
+    instantMeet:{
+      type:Boolean,
+      default:false
+    },
     reminded:{
       type:Boolean,
       default:false
