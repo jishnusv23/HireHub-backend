@@ -12,9 +12,9 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
     try {
       console.log(req.body);
       const { datas, otp } = req.body;
-      console.log("🚀 ~ file: otp-verificatio.ts:13 ~ return ~ email:", datas.email)
-      datas.password=await hashpassword(datas.password)
-      console.log("🚀 ~ file: otp-verificatio.ts:17 ~ return ~  datas.passwrod:",  datas.passwrod)
+    console.log("Original password:", datas.password); 
+    datas.password = await hashpassword(datas.password);
+    console.log("Hashed password:", datas.password); 
       const result = await verifyOtpUseCases(dependancies).execute(datas, otp);
       console.log(
         "🚀 ~ file: otp-verificatio.ts:15 ~ return ~ result:",
