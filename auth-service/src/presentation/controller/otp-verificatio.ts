@@ -1,5 +1,6 @@
+import { hashpassword } from "../../_lib/http/bcrypt";
 import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
-import { IDependancies } from "@/application/interface/IDependancies";
+import { IDependancies } from "../../application/interface/IDependancies";
 import { NextFunction, Request, Response } from "express";
 
 export const OtpVerificationController = (dependancies: IDependancies) => {
@@ -12,7 +13,8 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
       console.log(req.body);
       const { datas, otp } = req.body;
       console.log("🚀 ~ file: otp-verificatio.ts:13 ~ return ~ email:", datas.email)
-
+      datas.passwrod=await hashpassword(datas.passwrod)
+      console.log("🚀 ~ file: otp-verificatio.ts:17 ~ return ~  datas.passwrod:",  datas.passwrod)
       const result = await verifyOtpUseCases(dependancies).execute(datas, otp);
       console.log(
         "🚀 ~ file: otp-verificatio.ts:15 ~ return ~ result:",
