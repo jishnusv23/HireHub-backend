@@ -5,6 +5,7 @@ import cors from "cors";
 import { routes } from "../infrastructure/routes";
 import { dependacies } from "../_boot/dependencies";
 import RabbitMQClient from "../infrastructure/MQ/client";
+import { setupCronJobs } from "../infrastructure/CronJob";
 
 const PORT: number = Number(process.env.PORT) || 4002;
 const app: Application = express();
@@ -14,6 +15,7 @@ const corsOptions = {
   credentials: true,
 };
 
+setupCronJobs()
 // console.log("CORS Origin:", corsOptions.origin);
 
 
