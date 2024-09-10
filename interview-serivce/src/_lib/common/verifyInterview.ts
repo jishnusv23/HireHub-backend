@@ -1,16 +1,7 @@
 export const InterviewTimeDateValid = (date: any, time: string): boolean => {
-  // console.log(
-  //   "🚀 ~ file: verifyInterview.ts:3 ~ InterviewTimeDateValid ~ date:",
-  //   date
-  // );
-  // console.log("🚀 ~ file: verifyInterview.ts:4 ~ time:", time);
 
-  // If the date is already a Date object, convert it to ISO string first
   const dateISO = date instanceof Date ? date.toISOString() : date;
-  // console.log(
-  //   "🚀 ~ file: verifyInterview.ts:6 ~ InterviewTimeDateValid ~ dateISO:",
-  //   dateISO
-  // );
+  
 
 
   const datePart = dateISO.split("T")[0];
@@ -33,7 +24,7 @@ export const InterviewTimeDateValid = (date: any, time: string): boolean => {
     differenceInMillis
   );
 
-  // Convert the difference to minutes
+ 
   const differenceInMinutes = differenceInMillis / (1000 * 60);
   console.log(
     "🚀 ~ file: verifyInterview.ts:18 ~ InterviewTimeDateValid ~ differenceInMinutes:",
@@ -42,9 +33,9 @@ export const InterviewTimeDateValid = (date: any, time: string): boolean => {
 
 
   if (differenceInMinutes >= -5 && differenceInMinutes <= 330) {
-    // Adjust the upper limit to match your requirements (e.g., 5.5 hours = 330 minutes)
+    // Adjust the upper limit to match 
     return true; 
   }
 
-  return false; // Invalid interview time
+  return false; 
 };
