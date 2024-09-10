@@ -6,7 +6,8 @@ export const fetchInstantMeetData = (): {
   description: string;
   jobPosition: string;
   participants: any[];
-  instantMeet:boolean
+  interviewType:string
+  instantMeet: boolean;
 } => {
   try {
     const todayDate = new Date();
@@ -21,10 +22,11 @@ export const fetchInstantMeetData = (): {
     const data = {
       startTime: formattedTime,
       date: todayDate,
-      title: "",
-      description: "",
-      jobPosition: "",
-      instantMeet:true,
+      title: "a",
+      description: "b",
+      jobPosition: "c",
+      instantMeet: true,
+      interviewType: "HR",
       participants: [],
     };
 

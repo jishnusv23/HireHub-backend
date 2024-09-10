@@ -18,7 +18,7 @@ export const getAllMeetDetails = async (
 
     const totalInterveiwesData = await interview.countDocuments(query);
     const data = await interview
-      .find({ interviewerId })
+      .find({ interviewerId },{instantMeet:false})
       .sort({ createdAt: -1 })
       .skip(skipNo)
       .limit(limit);
