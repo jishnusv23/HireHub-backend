@@ -11,6 +11,14 @@ export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
             const response=await IMeetAccessIntervieweeUseCases(dependancies).execute(uniqueId as string)
            const Emailvalid= response?.participants.some((participantEmail)=>participantEmail===email)
            if(response){
+            if(response.instantMeet){
+                return res
+                  .status(201)
+                  .json({
+                    success: true,
+                    message: "you can acess this link go...",
+                  });
+            }
 
            
           if(!Emailvalid) {
