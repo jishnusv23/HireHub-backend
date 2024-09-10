@@ -4,7 +4,7 @@ import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller";
 
 export const routes = (dependancies: IDependancies) => {
-  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee } = controller(dependancies);
+  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet } = controller(dependancies);
   const router = Router();
 
   router.route("/scheduleInterview").post(createInterview);
@@ -25,6 +25,9 @@ export const routes = (dependancies: IDependancies) => {
         router.route("/verifyInterview").post(VerifyInterivew)
 
         router.route("/isStartingInterview").get(MeetAccessInterviewee)
+
+        //*instant Meet 
+        router.route("/InstantMeet").post(jwtMiddleware,InstantMeet)
 
   return router;
 };
