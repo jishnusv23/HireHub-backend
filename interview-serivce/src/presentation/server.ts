@@ -6,6 +6,7 @@ import { routes } from "../infrastructure/routes";
 import { dependacies } from "../_boot/dependencies";
 import RabbitMQClient from "../infrastructure/MQ/client";
 import { setupCronJobs } from "../infrastructure/CronJob";
+import { createServer, Server } from "http";
 
 const PORT: number = Number(process.env.PORT) || 4002;
 const app: Application = express();
@@ -33,11 +34,21 @@ app.get("/api/interview/test", (req: Request, res: Response) => {
 
 app.use("/", routes(dependacies));
 
-const start = () => {
-  app.listen(PORT, async() => {
-    console.log(`💡The Interview service running successfully ${PORT}`);
-    await RabbitMQClient.getInstance();
-    
+const start = (): Promise<Server> => {
+  const httpServer = createServer(app); // Create HTTP server using Express app
+  return new Promise((resolve, reject) => {
+    httpServer.listen(PORT, async () => {
+      try {
+        console.log(
+          `💡 The Interview service running successfully on port ${PORT}`
+        );
+        await RabbitMQClient.getInstance(); // Initialize RabbitMQ client
+        resolve(httpServer); // Resolve the promise with the HTTP server instance
+      } catch (error) {
+        console.error("Error starting the server:", error);
+        reject(error); // Reject the promise if there is an error
+      }
+    });
   });
 };
 export default { start };
