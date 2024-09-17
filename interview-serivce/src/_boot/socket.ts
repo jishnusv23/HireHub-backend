@@ -31,17 +31,20 @@ export const socket = (server: HTTPServer) => {
       console.log("online-users", onlineUsersList);
       io.emit("online-users", onlineUsersList);
     });
-    socket.on("join-room", (roomId: string) => {
-      console.log("roomId", roomId);
+    socket.on("join-room", ({ roomId, peerId }) => {
+      console.log(`${peerId} joined room ${roomId}`);
       socket.join(roomId);
+
+      socket.to(roomId).emit("new-peer", peerId);
     });
     //video-call
-    socket.on("start-call", ({ roomId, id }) => {
-      console.log("rommId-video call", roomId);
-      console.log(id, "userId");
-      socket.to(roomId).emit("incoming-call", id);
-      console.log("emitted->", userId);
-    });
+   socket.on("start-call", ({ roomId, peerId }) => {
+     console.log(`Call started by ${peerId} in room ${roomId}`);
+     socket.to(roomId).emit("incoming-call", peerId);
+   });
+
+
+
     socket.on("end-call", (roomId) => {
       socket.to(roomId).emit("end-call");
     });
