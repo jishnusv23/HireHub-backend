@@ -186,82 +186,199 @@
 
 //   console.log("Socket.IO server initialized.");
 // };
-import { Server } from "http";
+// import { Server } from "http";
+// import { Server as SocketIOServer, Socket } from "socket.io";
+
+// let io: SocketIOServer;
+// let onlineUsers: { userId: string; socketId: string }[] = [];
+// let InterviewRoom: string = "";
+// let rooms: { [key: string]: string[] } = {};
+
+// export const socket = (server: Server) => {
+//   if (!io) {
+//     io = new SocketIOServer(server, {
+//       cors: {
+//         origin: "*",
+//       },
+//     });
+
+//     io.on("connection", (socket: Socket) => {
+//       console.log("Socket connected in backend", socket.id);
+
+//       socket.on("new-user", (userId: string) => {
+//         onlineUsers = onlineUsers.filter((user) => user.userId !== userId);
+//         if (userId) {
+//           onlineUsers.push({ userId: userId, socketId: socket.id });
+//           io.emit("online-users", onlineUsers);
+//         }
+//         console.log("Online users:", onlineUsers);
+//       });
+
+//       socket.on("join-room", async (roomId: string, senderId: string) => {
+//         socket.join(roomId);
+//         console.log(`User ${senderId} joined room ${roomId}`);
+//       });
+
+//       socket.on("room-joined", ({ roomId, id }) => {
+//         socket.join(roomId);
+//         if (!rooms[roomId]) {
+//           rooms[roomId] = [];
+//         }
+//         rooms[roomId].push(id);
+//         console.log(`Users in room ${roomId}:`, rooms[roomId]);
+
+//         socket.emit(
+//           "user-list",
+//           rooms[roomId].filter((userId: string) => userId !== id)
+//         );
+
+//         io.to(roomId).emit("new-user-joined", id);
+//         io.to(roomId).emit("room-users", rooms[roomId]);
+//       });
+
+//       socket.on("interviewCurrentRoom", (room: string) => {
+//         InterviewRoom = room;
+//         console.log("Interview current room:", InterviewRoom);
+//       });
+
+//       socket.on("logout-user", (userId: string) => {
+//         onlineUsers = onlineUsers.filter((user) => user.userId !== userId);
+//         io.emit("online-users", onlineUsers);
+//       });
+
+//       socket.on("disconnect", () => {
+//         const userRoom = Object.keys(rooms).find((roomId) =>
+//           rooms[roomId].includes(socket.id)
+//         );
+
+//         if (userRoom) {
+//           rooms[userRoom] = rooms[userRoom].filter((id) => id !== socket.id);
+//           io.to(userRoom).emit("user-disconnected", socket.id);
+//           io.to(userRoom).emit("room-users", rooms[userRoom]);
+//         }
+
+//         onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
+//         io.emit("online-users", onlineUsers);
+//         console.log(`Socket disconnected: ${socket.id}`);
+//       });
+//     });
+//   }
+//   return io;
+// };
+import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
+import { v4 as uuidV4 } from "uuid";
 
-let io: SocketIOServer;
-let onlineUsers: { userId: string; socketId: string }[] = [];
-let InterviewRoom: string = "";
-let rooms: { [key: string]: string[] } = {};
+interface IUser {
+  peerId: string;
+  userName: string;
+}
 
-export const socket = (server: Server) => {
-  if (!io) {
-    io = new SocketIOServer(server, {
-      cors: {
-        origin: "*",
-      },
-    });
+interface IRoomParams {
+  roomId: string;
+  peerId: string;
+}
 
-    io.on("connection", (socket: Socket) => {
-      console.log("Socket connected in backend", socket.id);
+interface IJoinRoomParams extends IRoomParams {
+  userName: string;
+}
 
-      socket.on("new-user", (userId: string) => {
-        onlineUsers = onlineUsers.filter((user) => user.userId !== userId);
-        if (userId) {
-          onlineUsers.push({ userId: userId, socketId: socket.id });
-          io.emit("online-users", onlineUsers);
-        }
-        console.log("Online users:", onlineUsers);
-      });
+interface IMessage {
+  content: string;
+  author?: string;
+  timestamp: number;
+}
 
-      socket.on("join-room", async (roomId: string, senderId: string) => {
-        socket.join(roomId);
-        console.log(`User ${senderId} joined room ${roomId}`);
-      });
+const rooms: Record<string, Record<string, IUser>> = {};
+const chats: Record<string, IMessage[]> = {};
 
-      socket.on("room-joined", ({ roomId, id }) => {
-        socket.join(roomId);
-        if (!rooms[roomId]) {
-          rooms[roomId] = [];
-        }
-        rooms[roomId].push(id);
-        console.log(`Users in room ${roomId}:`, rooms[roomId]);
+export const socket = (server: HttpServer) => {
+  const io = new SocketIOServer(server, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+    },
+  });
 
-        socket.emit(
-          "user-list",
-          rooms[roomId].filter((userId: string) => userId !== id)
-        );
+  io.on("connection", (socket: Socket) => {
+    console.log("a user connected");
 
-        io.to(roomId).emit("new-user-joined", id);
-        io.to(roomId).emit("room-users", rooms[roomId]);
-      });
+    const createRoom = () => {
+      const roomId = uuidV4();
+      rooms[roomId] = {};
+      socket.emit("room-created", { roomId });
+      console.log("user created the room");
+    };
 
-      socket.on("interviewCurrentRoom", (room: string) => {
-        InterviewRoom = room;
-        console.log("Interview current room:", InterviewRoom);
-      });
-
-      socket.on("logout-user", (userId: string) => {
-        onlineUsers = onlineUsers.filter((user) => user.userId !== userId);
-        io.emit("online-users", onlineUsers);
+    const joinRoom = ({ roomId, peerId, userName }: IJoinRoomParams) => {
+      if (!rooms[roomId]) rooms[roomId] = {};
+      if (!chats[roomId]) chats[roomId] = [];
+      socket.emit("get-messages", chats[roomId]);
+      console.log("user joined the room", roomId, peerId, userName);
+      rooms[roomId][peerId] = { peerId, userName };
+      socket.join(roomId);
+      socket.to(roomId).emit("user-joined", { peerId, userName });
+      socket.emit("get-users", {
+        roomId,
+        participants: rooms[roomId],
       });
 
       socket.on("disconnect", () => {
-        const userRoom = Object.keys(rooms).find((roomId) =>
-          rooms[roomId].includes(socket.id)
-        );
-
-        if (userRoom) {
-          rooms[userRoom] = rooms[userRoom].filter((id) => id !== socket.id);
-          io.to(userRoom).emit("user-disconnected", socket.id);
-          io.to(userRoom).emit("room-users", rooms[userRoom]);
-        }
-
-        onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
-        io.emit("online-users", onlineUsers);
-        console.log(`Socket disconnected: ${socket.id}`);
+        console.log("user left the room", peerId);
+        leaveRoom({ roomId, peerId });
       });
+    };
+
+    const leaveRoom = ({ peerId, roomId }: IRoomParams) => {
+      if (rooms[roomId] && rooms[roomId][peerId]) {
+        delete rooms[roomId][peerId];
+        socket.to(roomId).emit("user-disconnected", peerId);
+      }
+    };
+
+    const startSharing = ({ peerId, roomId }: IRoomParams) => {
+      console.log({ roomId, peerId });
+      socket.to(roomId).emit("user-started-sharing", peerId);
+    };
+
+    const stopSharing = (roomId: string) => {
+      socket.to(roomId).emit("user-stopped-sharing");
+    };
+
+    const addMessage = (roomId: string, message: IMessage) => {
+      console.log({ message });
+      if (chats[roomId]) {
+        chats[roomId].push(message);
+      } else {
+        chats[roomId] = [message];
+      }
+      io.to(roomId).emit("add-message", message);
+    };
+
+    const changeName = ({
+      peerId,
+      userName,
+      roomId,
+    }: {
+      peerId: string;
+      userName: string;
+      roomId: string;
+    }) => {
+      if (rooms[roomId] && rooms[roomId][peerId]) {
+        rooms[roomId][peerId].userName = userName;
+        io.to(roomId).emit("name-changed", { peerId, userName });
+      }
+    };
+
+    socket.on("create-room", createRoom);
+    socket.on("join-room", joinRoom);
+    socket.on("start-sharing", startSharing);
+    socket.on("stop-sharing", stopSharing);
+    socket.on("send-message", addMessage);
+    socket.on("change-name", changeName);
+
+    socket.on("disconnect", () => {
+      console.log("user disconnected");
     });
-  }
-  return io;
+  });
 };
