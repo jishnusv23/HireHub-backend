@@ -114,8 +114,8 @@ export const socket = (server: HttpServer) => {
 
     socket.on("create-room", createRoom);
     socket.on("join-room", joinRoom);
-    socket.on("code-change", (roomId, content) => {
-      socket.to(roomId).emit("update-code", content);
+    socket.on("code-change", ({roomId, content}) => {
+      io.to(roomId).emit("update-code", content);
     });
     socket.on("leave-room", ({ roomId, peerId }) => {
       leaveRoom({ roomId, peerId });
