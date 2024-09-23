@@ -111,7 +111,9 @@ export const socket = (server: HttpServer) => {
       }
     };
     
-
+      socket.on("open-codeEditor", (roomId) => {
+        socket.to(roomId).emit("auto-openTerminal");
+      });
 
     socket.on("create-room", createRoom);
     socket.on("join-room", joinRoom);
