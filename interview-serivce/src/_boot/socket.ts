@@ -1,4 +1,3 @@
-
 import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
 import { v4 as uuidV4 } from "uuid";
@@ -30,7 +29,6 @@ export const socket = (server: HttpServer) => {
   const io = new SocketIOServer(server, {
     cors: {
       origin: "*",
-      
     },
   });
 
@@ -63,8 +61,6 @@ export const socket = (server: HttpServer) => {
       });
     };
 
-   
-   
     const leaveRoom = ({ peerId, roomId }: IRoomParams) => {
       if (rooms[roomId] && rooms[roomId][peerId]) {
         const userName = rooms[roomId][peerId].userName;
@@ -83,7 +79,7 @@ export const socket = (server: HttpServer) => {
     };
 
     const stopSharing = (roomId: string) => {
-      socket.to(roomId).emit("user-stopped-sharing");
+      socket.to(roomId).emit("user-stopped-sharing")
     };
 
     const addMessage = (roomId: string, message: IMessage) => {
@@ -110,17 +106,18 @@ export const socket = (server: HttpServer) => {
         io.to(roomId).emit("name-changed", { peerId, userName });
       }
     };
-    
-      socket.on("open-codeEditor", (roomId) => {
-        socket.to(roomId).emit("auto-openTerminal");
-      });
+
+   socket.on("open-codeEditor", ({ roomId }) => {
+     console.log("Auto-open terminal event emitted for room:", roomId);
+     io.to(roomId).emit("auto-openTerminal", true);
+   });
 
     socket.on("create-room", createRoom);
     socket.on("join-room", joinRoom);
     socket.on("code-change", (roomId, content) => {
       socket.to(roomId).emit("update-code", content);
     });
-     socket.on("leave-room", ({ roomId, peerId }) => {
+    socket.on("leave-room", ({ roomId, peerId }) => {
       leaveRoom({ roomId, peerId });
       socket.leave(roomId);
     });
