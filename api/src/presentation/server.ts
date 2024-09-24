@@ -47,7 +47,7 @@ const routes = [
     changeOrigin: true,
   },
   {
-    context: "/api/interview",
+    context: "/api/execution",
     target: String(process.env.EXECUTION_SERVICE),
     changeOrigin: true,
   },
