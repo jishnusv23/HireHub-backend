@@ -8,7 +8,7 @@ export const executionServiceProvider=async(data:any)=>{
 
     try {
       const response = await axios.post(
-        `${process.env.EXECUTION_SERVICE}/code-execution`,
+        `${process.env.EXECUTION_SERVICE}/code-excution`,
         data,
         config
       );
