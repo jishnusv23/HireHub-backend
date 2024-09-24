@@ -63,9 +63,9 @@ export const socket = (server: HttpServer) => {
 
     const leaveRoom = ({ peerId, roomId }: IRoomParams) => {
       if (rooms[roomId] && rooms[roomId][peerId]) {
-        const userName = rooms[roomId][peerId].userName;
+        const userName = rooms[roomId][peerId].userName
         delete rooms[roomId][peerId];
-        io.to(roomId).emit("user-disconnected", peerId);
+        io.to(roomId).emit("user-disconnected", peerId)
         io.to(roomId).emit("get-users", {
           roomId,
           participants: rooms[roomId],

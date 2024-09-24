@@ -4,6 +4,7 @@ import { MeetVerifyAccessController } from "./MeetverifyAccessController";
 import { SchedulInterviewController } from "./ScheduleController";
 import { cancelInterveiwController } from "./cancelInterviewController";
 import { getAllMeetDetailsController } from "./getAlllDetailsMeet";
+import { submissionController } from "./submissioController";
 import { updateInterveiweController } from "./updateInterviewController";
 import { verifyInterviewController } from "./verifyInterviewController";
 
@@ -15,6 +16,7 @@ export const controller = (dependacies: IDependancies) => {
     cancelInterview:cancelInterveiwController(dependacies),
     VerifyInterivew:verifyInterviewController(dependacies),
     MeetAccessInterviewee:MeetVerifyAccessController(dependacies),
-    InstantMeet:InstantMeetController(dependacies)
+    InstantMeet:InstantMeetController(dependacies),
+    submissionCode:submissionController(dependacies)
   };
 };
