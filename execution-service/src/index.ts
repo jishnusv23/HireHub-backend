@@ -18,14 +18,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
-app.use('/',router)
 
-app.get("/api/execution/test", (req: Request, res: Response) => {
+app.get("/test", (req: Request, res: Response) => {
   res
-    .status(201)
+    .status(200)
     .json({ success: true, message: "execution service working " });
 });
 
+// app.use('/',router)
 app.listen(PORT, () => {
   console.log("The execution service will runign the port", PORT);
 });
