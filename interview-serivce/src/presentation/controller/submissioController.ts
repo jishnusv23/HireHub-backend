@@ -7,8 +7,8 @@ export const submissionController=(dependancies:IDependancies)=>{
 
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{
-            console.log(req.body,'request body here __________________________')
-            const response=await executionServiceProvider(req.body.data)
+            console.log(req.body,'request body here __________________________',req.body?.data)
+            const response=await executionServiceProvider(req.body)
             console.log("🚀 ~ file: submissioController.ts:12 ~ returnasync ~ response:", response)
 
         }catch(error:any){
