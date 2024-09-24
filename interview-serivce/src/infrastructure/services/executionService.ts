@@ -8,7 +8,7 @@ export const executionServiceProvider=async(data:any)=>{
 
     try {
       const response = await axios.post(
-        `http://localhost:2001/api/execution/code-execution`,
+        `${process.env.EXECUTION_SERVICE}/code-execution`,
         data,
         config
       );
