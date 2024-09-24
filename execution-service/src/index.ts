@@ -18,13 +18,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
-app.use('/',router)
 
 app.get("/test", (req: Request, res: Response) => {
   res
-    .status(201)
-    .json({ success: true, message: "execution service working " });
+  .status(201)
+  .json({ success: true, message: "execution service working " });
 });
+app.use('/',router)
+// app.use('/',router)
 // kjkj
 
 app.listen(PORT, () => {
