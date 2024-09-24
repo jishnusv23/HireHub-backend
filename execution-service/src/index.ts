@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import { config } from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+import router from "./routes";
 config();
 
 const app: Application = express();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
+app.use('/',router)
 
 app.get("/api/execution/test", (req: Request, res: Response) => {
   res
