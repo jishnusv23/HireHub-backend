@@ -6,7 +6,17 @@ export const executionServiceProvider=async(data:any)=>{
     console.log(data,'geting the data in execution provider')
     console.log(process.env.EXECUTION_SERVICE,'execution service url ');
 
-    const response = axios.post(`${process.env.EXECUTION_SERVICE}/code-excution`,data,config);
-    console.log("🚀 ~ file: executionService.ts:10 ~ executionServiceProvider ~ response:", response)
-    return 'oke the data is getting '
+    try {
+      const response = await axios.post(
+        `${process.env.EXECUTION_SERVICE}/code-execution`,
+        data,
+        config
+      );
+      console.log("Response:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error in executionServiceProvider:", error);
+      throw error; // Re-throw the error so it can be caught in the controller
+    }
+    
 }
