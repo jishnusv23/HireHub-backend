@@ -23,7 +23,7 @@ app.use(cors(corsOption));
 
 app.get("/test", (req,res) => {
   res.status(200).json({success:true,message:'Get Ready Api'})
-  console.log("api is working");
+  console.log("api is working",);
 });
 const routes = [
   {
@@ -42,13 +42,13 @@ const routes = [
     changeOrigin: true,
   },
   {
-    context: "/api/interview",
-    target: String(process.env.INTERVIEW_SERVICE),
+    context: "/api/execution",
+    target: String(process.env.EXECUTION_SERVICE),
     changeOrigin: true,
   },
   {
-    context: "/api/execution",
-    target: String(process.env.EXECUTION_SERVICE),
+    context: "/api/interview",
+    target: String(process.env.INTERVIEW_SERVICE),
     changeOrigin: true,
   },
 ];
