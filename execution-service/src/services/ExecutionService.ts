@@ -24,6 +24,8 @@ export class ExecutionService {
     if (!executor) {
       throw new Error(`Unsupported language:${language}`);
     }
-    return executor.execute(code)
+    const res = await executor.execute(code);
+
+    return res;
   }
 }
