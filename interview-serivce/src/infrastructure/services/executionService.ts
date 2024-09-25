@@ -12,7 +12,7 @@ export const executionServiceProvider=async(data:any)=>{
         data,
         config
       );
-      console.log("Response:", response.data);
+      console.log("Response:", response.data.output );
       return response.data;
     } catch (error:any) {
       console.error("Error in executionServiceProvider:", error?.message);
