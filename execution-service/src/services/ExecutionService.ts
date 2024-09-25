@@ -27,7 +27,7 @@ export class ExecutionService {
     }
     const res = await executor.execute(code);
     if(typeof res.output==='string'){
-      res.output=stripAnsi(res.output)
+      res.output=extractContent(res.output)
     }
     console.log(res)
     console.log(JSON.stringify(res))
