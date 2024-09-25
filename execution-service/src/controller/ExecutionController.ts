@@ -24,7 +24,7 @@ export class ExecutionController {
         result
       );
           console.log("____my res", result.output);
-      res.json({success:true,output:result.output});
+      res.json({success:true,output:result.output,error:result.error});
     } catch (error: any) {
       res.status(505).json({ success: false, error: error?.message });
       next(error);
