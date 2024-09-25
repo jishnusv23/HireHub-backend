@@ -15,7 +15,7 @@ export const submissionController = (dependancies: IDependancies) => {
         "🚀 ~ file: submissioController.ts:12 ~ returnasync ~ response:",
         response
       );
-      if (response.data.error) {
+      if (response?.error) {
         return res.status(400).json({
           sucess: false,
           output: response.data.output,
