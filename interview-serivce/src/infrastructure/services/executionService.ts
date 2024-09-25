@@ -14,9 +14,9 @@ export const executionServiceProvider=async(data:any)=>{
       );
       console.log("Response:", response.data);
       return response.data;
-    } catch (error) {
-      console.error("Error in executionServiceProvider:", error);
-      throw error; // Re-throw the error so it can be caught in the controller
+    } catch (error:any) {
+      console.error("Error in executionServiceProvider:", error?.message);
+      throw error; 
     }
     
 }
