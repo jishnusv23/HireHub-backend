@@ -1,4 +1,7 @@
- export function extractContent(output: string): string {
-  const match = output.match(/\x1B\[\d+m(.*?)\x1B/);
-  return match ? match[1] : output;
+ export function extractContent(str: string): string {
+
+  return str.replace(
+    /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+    ""
+  )
 }

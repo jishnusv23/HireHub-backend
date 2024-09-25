@@ -4,7 +4,7 @@ import { JavaScriptExecutor } from "../utils/Languages/JavaScriptExecutor";
 import { PythonExecutor } from "../utils/Languages/PythonExecutor";
 import { FileService } from "./FileService";
 import { ExecutionResult, ProcessService } from "./ProcessService";
-
+import stripAnsi from "strip-ansi";
 export class ExecutionService {
   private executors: Map<string, LanguageExecutor>;
 
