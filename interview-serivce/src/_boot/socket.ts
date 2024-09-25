@@ -112,6 +112,11 @@ export const socket = (server: HttpServer) => {
      io.to(roomId).emit("auto-openTerminal", true);
    });
 
+   socket.on("open-outputBox", ({ roomId, showOutput }) => {
+     console.log("event room:", roomId);
+     io.to(roomId).emit("outputBox-open", showOutput);
+   });
+
     socket.on("create-room", createRoom);
     socket.on("join-room", joinRoom);
     socket.on("code-change", ({roomId, content}) => {
