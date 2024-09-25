@@ -11,7 +11,7 @@ export class PythonExecutor implements LanguageExecutor {
   public async execute(code: string): Promise<ExecutionResult> {
     const filePath = await this.fileservice.createTempFile(code, ".py");
     try{
-        return await this.processService.executeProcess(code,[filePath])
+        return await this.processService.executeProcess("python", [filePath]);
     }finally{
         await this.fileservice.removeTempFile(filePath)
 
