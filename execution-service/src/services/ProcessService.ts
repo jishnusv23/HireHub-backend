@@ -25,6 +25,8 @@ export class ProcessService {
 
       process.on("close", (code) => {
         if (code == 0) {
+          console.log("__________###",output);
+          
           resolve({ output: output.trim() });
         } else {
           resolve({ output: output.trim(), error: errorOutPut.trim() });
