@@ -18,13 +18,13 @@ export const submissionController = (dependancies: IDependancies) => {
       if (response?.error) {
         return res.status(400).json({
           sucess: false,
-          output: response.data.output,
-          error: response.data.error,
+          output: response.output,
+          error: response.error,
         });
       }
       return res
         .status(200)
-        .json({ success: true, output: response.data.output });
+        .json({ success: true, output: response.output });
     } catch (error: any) {
       console.error(`Something wrong in execution-submisioncontroller`, error);
       return res
