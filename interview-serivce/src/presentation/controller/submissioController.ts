@@ -15,18 +15,13 @@ export const submissionController = (dependancies: IDependancies) => {
         "🚀 ~ file: submissioController.ts:12 ~ returnasync ~ response:",
         response.output
       );
-      const sime = response.output;
-      console.log(
-        "🚀 ~ file: submissioController.ts:19 ~ return ~ sime:",
-        sime
-      );
-      const data = {
-        output: sime,
-      };
-      console.log(
-        "🚀 ~ file: submissioController.ts:21 ~ return ~ data:",
-        data
-      );
+    //   const data = {
+    //     output: String(response.output),
+    //   };
+    //   console.log(
+    //     "🚀 ~ file: submissioController.ts:21 ~ return ~ data:",
+    //     data
+    //   );
       if (response?.error) {
         return res.status(400).json({
           sucess: false,
@@ -34,7 +29,7 @@ export const submissionController = (dependancies: IDependancies) => {
           error: response.error,
         });
       }
-      return res.status(200).json({ success: true ,sime});
+      return res.status(200).json({ success: true });
     } catch (error: any) {
       console.error(`Something wrong in execution-submisioncontroller`, error);
       return res.status(500).json({
