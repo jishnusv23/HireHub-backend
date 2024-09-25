@@ -23,6 +23,7 @@ export class ExecutionController {
         "🚀 ~ file: ExecutionController.ts:15 ~ ExecutionController ~ executeCode ~ result:",
         result
       );
+      res.json({success:true,...result});
     } catch (error: any) {
       res.status(505).json({ success: false, error: error?.message });
       next(error);
