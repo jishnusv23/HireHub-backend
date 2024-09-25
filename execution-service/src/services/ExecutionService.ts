@@ -3,6 +3,7 @@ import { JavaScriptExecutor } from "../utils/Languages/JavaScriptExecutor";
 import { PythonExecutor } from "../utils/Languages/PythonExecutor";
 import { FileService } from "./FileService";
 import { ExecutionResult, ProcessService } from "./ProcessService";
+import stripAnsi from 'strip-ansi'
 export class ExecutionService {
   private executors: Map<string, LanguageExecutor>;
 
@@ -25,7 +26,11 @@ export class ExecutionService {
       throw new Error(`Unsupported language:${language}`);
     }
     const res = await executor.execute(code);
-
+    if(typeof res.output==='string'){
+      res.output=stripAnsi(res.output)
+    }
+    console.log(res)
+    console.log(JSON.stringify(res))
     return res;
   }
 }
