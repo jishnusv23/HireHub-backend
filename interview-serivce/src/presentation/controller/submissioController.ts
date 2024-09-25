@@ -13,7 +13,19 @@ export const submissionController = (dependancies: IDependancies) => {
       const response = await executionServiceProvider(req.body);
       console.log(
         "🚀 ~ file: submissioController.ts:12 ~ returnasync ~ response:",
-        response
+        response.output
+      );
+      const sime = response.output;
+      console.log(
+        "🚀 ~ file: submissioController.ts:19 ~ return ~ sime:",
+        sime
+      );
+      const data = {
+        output: sime,
+      };
+      console.log(
+        "🚀 ~ file: submissioController.ts:21 ~ return ~ data:",
+        data
       );
       if (response?.error) {
         return res.status(400).json({
@@ -22,17 +34,13 @@ export const submissionController = (dependancies: IDependancies) => {
           error: response.error,
         });
       }
-      return res
-        .status(200)
-        .json({ success: true, output: response.output });
+      return res.status(200).json({ success: true ,sime});
     } catch (error: any) {
       console.error(`Something wrong in execution-submisioncontroller`, error);
-      return res
-        .status(500)
-        .json({
-          sucess: false,
-          error: error?.message || "An Inernal server error occured",
-        });
+      return res.status(500).json({
+        sucess: false,
+        error: error?.message || "An Inernal server error occured",
+      });
     }
   };
 };
