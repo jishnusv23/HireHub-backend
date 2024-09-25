@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { Controller } from "../controller/ExecutionController";
+import { ExecutionController } from "../controller/ExecutionController";
 const router = Router();
+const executionController = new ExecutionController();
 
+router.route("/code-excution").post(executionController.executeCode.bind(executionController));
 
-router.route("/code-excution").post(Controller.ExecutionController)
-
-
-export default router
+export default router;
