@@ -26,11 +26,13 @@ export interface IRepositories {
   AddQuestions: (
     data: TechQuestionEntities
   ) => Promise<TechQuestionEntities | null>;
-  getAllQuestions:(page?: number,
+  getAllQuestions: (
+    page?: number,
     limit?: number,
-    userId?: string,)=>Promise<{
+    userId?: string
+  ) => Promise<{
     data: TechQuestionEntities[];
     totalPages: number;
     currentPage: number;
-  }>
+  }>;
 }

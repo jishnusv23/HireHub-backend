@@ -16,9 +16,9 @@ export const getAllQuestions = async (
       .limit(limit);
     console.log("🚀 ~ file: getAllQuestions.ts:12 ~ data:", data);
     return {
-        data,
-        totalPages:Math.ceil(totalPages/limit),
-        currentPae:page
+      data,
+      totalPages: Math.ceil(totalPages / limit),
+      currentPage: page,
     };
   } catch (error: any) {
     console.error("Something wrong in getAllQuestions_______________", error);
