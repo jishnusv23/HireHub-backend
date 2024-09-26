@@ -3,7 +3,7 @@ import { IDependancies } from "../interface/IDependancies";
 
 export const IAddquestionUseCases=(dependancies:IDependancies)=>{
     const {repositories:{AddQuestions}}=dependancies
-
+    console.log(AddQuestions,'____________________')
     return {
         execute:async(data:TechQuestionEntities)=>{
             try{

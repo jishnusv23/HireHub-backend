@@ -7,7 +7,7 @@ export const AddQuestionController=(dependancies:IDependancies)=>{
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{
             console.log(req.body,'add question geting request')
-            const response=await IAddquestionUseCases(req.body)
+            const response=await IAddquestionUseCases(dependancies).execute(req.body)
             console.log("🚀 ~ file: AddQuestionController.ts:11 ~ returnasync ~ response:", response)
             if(response){
                 return res.status(200).json({success:true,data:response})
@@ -16,6 +16,7 @@ export const AddQuestionController=(dependancies:IDependancies)=>{
             }
 
         }catch(error:any){
+
             next(error)
         }
     }
