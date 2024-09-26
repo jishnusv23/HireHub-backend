@@ -1,4 +1,4 @@
-import { InterviewEntity } from "../../domain/entities";
+import { InterviewEntity, TechQuestionEntities } from "../../domain/entities";
 
 export interface IRepositories {
   createInterview: (data: InterviewEntity) => Promise<InterviewEntity | null>;
@@ -21,5 +21,6 @@ export interface IRepositories {
     uniqueId: string,
     interviewerId: string
   ): Promise<InterviewEntity | null>;
-  MeetAccessInterviewee:(uniqueId:string)=>Promise<InterviewEntity|null>
+  MeetAccessInterviewee: (uniqueId: string) => Promise<InterviewEntity | null>;
+  AddQuestions:(data:TechQuestionEntities)=>Promise<TechQuestionEntities|null>
 }

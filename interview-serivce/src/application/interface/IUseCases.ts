@@ -1,4 +1,4 @@
-import { ICreateInterviewUsesCases,IGetAllInterviewesForUseCases,IUpdateInterviewUseCases,ICancelInterviewUseCases,IFetchCurrentInterviewUseCases,IMeetAccessIntervieweeUseCases } from "../../domain/IUseCases";
+import { ICreateInterviewUsesCases,IGetAllInterviewesForUseCases,IUpdateInterviewUseCases,ICancelInterviewUseCases,IFetchCurrentInterviewUseCases,IMeetAccessIntervieweeUseCases,IAddquestionUseCases } from "../../domain/IUseCases";
 
 export interface IUseCases {
   IScheduleUseCases: (dependancies: any) => ICreateInterviewUsesCases;
@@ -10,5 +10,8 @@ export interface IUseCases {
   IFetchCurrentInterveiwUseCases: (
     dependancies: any
   ) => IFetchCurrentInterviewUseCases;
-  IMeetAccessIntervieweeUseCases:(dependancies:any)=>IMeetAccessIntervieweeUseCases
+  IMeetAccessIntervieweeUseCases: (
+    dependancies: any
+  ) => IMeetAccessIntervieweeUseCases;
+  IAddquestionUseCases:(dependancies:any)=>IAddquestionUseCases
 }
