@@ -1,3 +1,4 @@
+
 import { InterviewEntity, TechQuestionEntities } from "../../domain/entities";
 
 export interface IRepositories {
@@ -22,5 +23,14 @@ export interface IRepositories {
     interviewerId: string
   ): Promise<InterviewEntity | null>;
   MeetAccessInterviewee: (uniqueId: string) => Promise<InterviewEntity | null>;
-  AddQuestions:(data:TechQuestionEntities)=>Promise<TechQuestionEntities|null>
+  AddQuestions: (
+    data: TechQuestionEntities
+  ) => Promise<TechQuestionEntities | null>;
+  getAllQuestions:(page?: number,
+    limit?: number,
+    userId?: string,)=>Promise<{
+    data: TechQuestionEntities[];
+    totalPages: number;
+    currentPage: number;
+  }>
 }

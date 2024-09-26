@@ -3,8 +3,9 @@ import { jwtMiddleware, roleMiddleware } from "hirehub-middleware-version";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller";
 
+
 export const routes = (dependancies: IDependancies) => {
-  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode,AddQuestions} = controller(dependancies);
+  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode,AddQuestions,geAllQuestionForInterivewer} = controller(dependancies);
   const router = Router();
 
   router.route("/scheduleInterview").post(createInterview);
@@ -34,6 +35,15 @@ export const routes = (dependancies: IDependancies) => {
 
         //*addquestion for interviewer
         router.route("/addQuestion").post(AddQuestions);
+
+        //*get all question for interivewer
+        router
+          .route("/getAllQuestions")
+          .get(
+            jwtMiddleware,
+            roleMiddleware(["interviewer"]),
+            geAllQuestionForInterivewer
+          );
 
   return router;
 };
