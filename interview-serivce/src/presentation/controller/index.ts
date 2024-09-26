@@ -1,4 +1,5 @@
 import { IDependancies } from "../../application/interface/IDependancies";
+import { AddQuestionController } from "./AddQuestionController";
 import { InstantMeetController } from "./InstantMeetController";
 import { MeetVerifyAccessController } from "./MeetverifyAccessController";
 import { SchedulInterviewController } from "./ScheduleController";
@@ -17,6 +18,7 @@ export const controller = (dependacies: IDependancies) => {
     VerifyInterivew:verifyInterviewController(dependacies),
     MeetAccessInterviewee:MeetVerifyAccessController(dependacies),
     InstantMeet:InstantMeetController(dependacies),
-    submissionCode:submissionController(dependacies)
+    submissionCode:submissionController(dependacies),
+    AddQuestions:AddQuestionController(dependacies)
   };
 };

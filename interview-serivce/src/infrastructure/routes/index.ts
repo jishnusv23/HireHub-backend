@@ -4,7 +4,7 @@ import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller";
 
 export const routes = (dependancies: IDependancies) => {
-  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode} = controller(dependancies);
+  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode,AddQuestions} = controller(dependancies);
   const router = Router();
 
   router.route("/scheduleInterview").post(createInterview);
@@ -31,6 +31,9 @@ export const routes = (dependancies: IDependancies) => {
 
         //*code submission
         router.route("/code-submission").post(submissionCode)
+
+        //*addquestion for interviewer
+        router.route("/addQuestion").post(AddQuestions);
 
   return router;
 };
