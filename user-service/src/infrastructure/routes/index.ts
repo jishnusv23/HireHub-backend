@@ -6,7 +6,7 @@ import { requireAdmin } from "../../_lib/common/middleWare/requireAdmin";
 // import { jwtMiddleware } from "jwt-middleware-learnup";
 
 export const routes = (dependancies: IDependancies) => {
-  const { getUser,getAllInterviewee,blockunblockUser,updateImg } = controller(dependancies);
+  const { getUser,getAllInterviewee,blockunblockUser,updateImg,getAllInterivewer } = controller(dependancies);
   const router = Router();
 
   router.route("/getUser").get(jwtMiddleware, getUser);
@@ -16,6 +16,12 @@ export const routes = (dependancies: IDependancies) => {
 
   router.route("/profile-status-update").put(jwtMiddleware,roleMiddleware(['admin'])
     ,blockunblockUser)
+
+
+    //*Interivewer
+      router
+        .route("/get-all-interviewer")
+        .get(jwtMiddleware, roleMiddleware(["admin"]), getAllInterivewer);
 
   //*--------
   router.route("/updateImge").put(updateImg)

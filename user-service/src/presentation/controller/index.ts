@@ -4,11 +4,13 @@ import { getAllInterviewee } from "./getAll.vieweeController"
 import { updateProfileImgController } from "./updateProfileImgController"
 
 import { statusUpdateContoller } from "./statusUpdateController"
+import { getAllInterviewer } from "./getAllInterviewerController"
 export const controller=(dependancies:IDependancies)=>{
     return {
       getUser: getUserController(dependancies),
       getAllInterviewee: getAllInterviewee(dependancies),
       blockunblockUser: statusUpdateContoller(dependancies),
-      updateImg:updateProfileImgController(dependancies)
+      updateImg:updateProfileImgController(dependancies),
+      getAllInterivewer:getAllInterviewer(dependancies)
     };
 }
