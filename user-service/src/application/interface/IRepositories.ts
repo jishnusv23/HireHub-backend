@@ -16,5 +16,17 @@ export interface IRepositories {
     id: string,
     isBlocked: boolean
   ) => Promise<UserEntities | null>;
-  updaetProfileImage:(email:string,url:string)=>Promise<UserEntities|null>
+  updaetProfileImage: (
+    email: string,
+    url: string
+  ) => Promise<UserEntities | null>;
+  getAllInterviewer: (
+    page?: number,
+    limit?: number,
+    search?: string
+  ) => Promise<{
+    data: UserEntities[];
+    totalPages: number;
+    currentPage: number;
+  }>;
 }
