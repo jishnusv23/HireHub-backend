@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import {IDependancies} from '../../application/interface/IDependancies'
-const getAllQuestionsInterivewer=(dependancies:IDependancies)=>{
+ export const getAllQuestionsInterivewer=(dependancies:IDependancies)=>{
     const {useCases:{IGetAllQuestionUseCases}}=dependancies
 
     return async(req:Request,res:Response,next:NextFunction)=>{
