@@ -48,6 +48,11 @@ export const socket = (server: HttpServer) => {
       socket.emit("get-messages", chats[roomId]);
       console.log("user joined the room", roomId, peerId, userName);
       rooms[roomId][peerId] = { peerId, userName };
+      const length = Object.keys(rooms[roomId]).length;
+      socket.on("find-roomlength",({roomId})=>{
+        
+         io.to(roomId).emit("room-length", length);
+      });
       socket.join(roomId);
       socket.to(roomId).emit("user-joined", { peerId, userName });
       socket.emit("get-users", {
@@ -65,12 +70,15 @@ export const socket = (server: HttpServer) => {
       if (rooms[roomId] && rooms[roomId][peerId]) {
         const userName = rooms[roomId][peerId].userName
         delete rooms[roomId][peerId];
+        const length = Object.keys(rooms[roomId]).length;
         io.to(roomId).emit("user-disconnected", peerId)
         io.to(roomId).emit("get-users", {
           roomId,
           participants: rooms[roomId],
         });
+          io.to(roomId).emit("room-length", length);
         console.log(`User ${userName} (${peerId}) left room ${roomId}`);
+        
       }
     };
     const startSharing = ({ peerId, roomId }: IRoomParams) => {
