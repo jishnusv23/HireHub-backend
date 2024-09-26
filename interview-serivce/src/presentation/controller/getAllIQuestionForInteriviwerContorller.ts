@@ -10,7 +10,21 @@ import {IDependancies} from '../../application/interface/IDependancies'
                 const { page, limit, userId } = req.query;
                 console.log("🚀 ~ file: getAllIQuestionForInteriviwerContorller.ts:11 ~ returnasync ~ page:", page)
 
+            const response=await IGetAllQuestionUseCases(dependancies).execute(Number(page),Number(limit),userId as string)
 
+            if (response) {
+              return res
+                .status(201)
+                .json({
+                  success: true,
+                  data: response,
+                  message: "Fetching all data successfully",
+                });
+            } else {
+              return res
+                .status(404)
+                .json({ success: true, data: null, message: "invalid user" });
+            }
         }catch(error:any){
 
         }
