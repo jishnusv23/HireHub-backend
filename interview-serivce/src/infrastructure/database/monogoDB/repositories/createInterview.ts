@@ -15,8 +15,6 @@ export const createInterview = async (
 
         return saveData
     
-  
-    
   } catch (error: any) {
     console.error("Error in createInterview:", error);
     throw new Error(error?.message);
