@@ -1,4 +1,4 @@
-import { UserEntities } from "../../domain/entities";
+import { contentEntities, UserEntities } from "../../domain/entities";
 import { IOtp } from "../../domain/entities";
 
 export interface IRepositories {
@@ -29,4 +29,5 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
+  contentCreate:(data:contentEntities)=>Promise<contentEntities|null>
 }

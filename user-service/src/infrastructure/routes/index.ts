@@ -6,7 +6,7 @@ import { requireAdmin } from "../../_lib/common/middleWare/requireAdmin";
 // import { jwtMiddleware } from "jwt-middleware-learnup";
 
 export const routes = (dependancies: IDependancies) => {
-  const { getUser,getAllInterviewee,blockunblockUser,updateImg,getAllInterivewer } = controller(dependancies);
+  const { getUser,getAllInterviewee,blockunblockUser,updateImg,getAllInterivewer,addContentBlog } = controller(dependancies);
   const router = Router();
 
   router.route("/getUser").get(jwtMiddleware, getUser);
@@ -25,6 +25,9 @@ export const routes = (dependancies: IDependancies) => {
 
   //*--------
   router.route("/updateImge").put(updateImg)
+
+  //create content
+  router.route("/content-create").post(jwtMiddleware,addContentBlog)
 
   return router;
 };
