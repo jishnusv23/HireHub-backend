@@ -20,13 +20,17 @@ const contentSchema = new Schema({
     required: true,
   },
   date: {
-    type: Date, 
+    type: Date,
     required: true,
   },
   content: {
     type: String,
-    required: true, 
+    required: true,
   },
+  Imgurl:{
+    type:String,
+    required:true
+  }
 });
 
 

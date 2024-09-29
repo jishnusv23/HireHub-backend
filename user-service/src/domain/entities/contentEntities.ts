@@ -6,4 +6,5 @@ export interface contentEntities {
   date: Date;
   content: string;
   tag:string
+  Imgurl:string
 }
