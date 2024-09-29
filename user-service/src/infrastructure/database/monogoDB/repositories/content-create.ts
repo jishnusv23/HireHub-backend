@@ -8,6 +8,7 @@ export const contentCreate=async(data:contentEntities):Promise<contentEntities|n
     if(!saveContentData){
         throw new Error('contenet creattion failed')
     }else{
+        
         return saveContentData
     }
     }catch(error:any){
