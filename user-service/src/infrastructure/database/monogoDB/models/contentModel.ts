@@ -30,6 +30,16 @@ const contentSchema = new Schema({
   Imgurl:{
     type:String,
     required:true
+  },
+  AdminAccept:{
+    type:Boolean,
+    required:true,
+    default:false
+  },
+  response:{
+    type:Number,
+    required:true,
+    default:0
   }
 });
 

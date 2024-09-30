@@ -5,6 +5,8 @@ export interface contentEntities {
   author: string;
   date: Date;
   content: string;
-  tag:string
-  Imgurl:string
+  tag: string;
+  AdminAccept:boolean,
+  response:number
+  Imgurl: string;
 }

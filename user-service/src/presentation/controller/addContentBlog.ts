@@ -19,7 +19,7 @@ export const AddContentBlog=(dependancies:IDependancies)=>{
                 return res.status(400).json({success:false,message:'Invalid content data ',data:null}) 
             }else{
                 return res.status(200).json({success:true,message:'successfull'})
-            }
+            }   
 
         }catch(error:any){
             next(error)
