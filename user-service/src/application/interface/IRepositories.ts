@@ -30,5 +30,13 @@ export interface IRepositories {
     currentPage: number;
   }>;
   contentCreate: (data: contentEntities) => Promise<contentEntities | null>;
-  fetchAllContent:(page?:number,limit?:number)=>Promise<{data:contentEntities[],totalPages:number,currentPage:number}>
+  fetchAllContent: (
+    page?: number,
+    limit?: number
+  ) => Promise<{
+    data: contentEntities[];
+    totalPages: number;
+    currentPage: number;
+  }>;
+  updateHandClapp:( handClapp:number,id:string)=>Promise<string|null>
 }

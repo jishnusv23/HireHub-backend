@@ -10,9 +10,20 @@ export const AddContentBlog=(dependancies:IDependancies)=>{
         try{
             console.log(req.body,'geting the fronend data in here______________________')
             console.log(req.user,'this is the current user_____________________________')
-            const data={
-                ...req.body,
-                userId:req.user?._id as string
+            let data
+            if(req.user?.role=='admin'){
+
+                data = {
+                  ...req.body,
+                  userId: req.user?._id as string,
+                  AdminAccept:true
+                }
+            }else{
+                  data = {
+                    ...req.body,
+                    userId: req.user?._id as string,
+                   
+                  };
             }
             const response=await ICreateContentUseCases(dependancies).execute(data)
             if(!response){
