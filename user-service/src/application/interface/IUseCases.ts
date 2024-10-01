@@ -1,4 +1,4 @@
-import { IFindUserByIdUseCases, IGetAllVieweeUseCases,IStatusUseCases,IUpdateProfileImgUseCases,IGetAllInterivewerUseCases,ICreateUseCases,IFetchAllContentUseCases,IUpdateHandClappUseCases,IGetAllContentRequestUseCases } from "../../domain/IUseCases";
+import { IFindUserByIdUseCases, IGetAllVieweeUseCases,IStatusUseCases,IUpdateProfileImgUseCases,IGetAllInterivewerUseCases,ICreateUseCases,IFetchAllContentUseCases,IUpdateHandClappUseCases,IGetAllContentRequestUseCases,IContentAcceptenceUseCases } from "../../domain/IUseCases";
 
 export interface IUseCases {
   findUserByIdUseCases: (dependancies: any) => IFindUserByIdUseCases;
@@ -9,5 +9,8 @@ export interface IUseCases {
   ICreateContentUseCases: (depandancies: any) => ICreateUseCases;
   fetchAllContentUseCases: (depandancies: any) => IFetchAllContentUseCases;
   updateHandClappUseCases: (dependancies: any) => IUpdateHandClappUseCases;
-  getallContentRequestUseCases:(dependancies:any)=>IGetAllContentRequestUseCases
+  getallContentRequestUseCases: (
+    dependancies: any
+  ) => IGetAllContentRequestUseCases;
+  contentAcceptanceUseCases:(depandancies:any)=>IContentAcceptenceUseCases
 }
