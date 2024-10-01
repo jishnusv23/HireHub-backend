@@ -41,6 +41,9 @@ const contentSchema = new Schema({
     required:true,
     default:0
   }
+},
+{
+  timestamps:true
 });
 
 

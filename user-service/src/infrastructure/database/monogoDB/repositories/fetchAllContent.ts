@@ -11,10 +11,10 @@ export const fetchAllContent=async(page:number=1,limit:number=8)=>{
        .limit(limit);
      console.log("🚀 ~ file: getAllInterviewee.ts:20 ~ data:", data);
      return {
-        data,
-        totalPages:Math.ceil(totalContents/limit),
-        currentPages:page
-     }
+       data,
+       totalPages: Math.ceil(totalContents / limit),
+       currentPage: page,
+     };
   }catch(error:any){
     console.error('Something wrong in fetchAllContent',error);
     throw new Error(error?.message)
