@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 
 
 export const fetchContentController=(depandancies:IDependancies)=>{
-    const {}=depandancies
+    const {useCases:{fetchAllContentUseCases}}=depandancies
 
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{

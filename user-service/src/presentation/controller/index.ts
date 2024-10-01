@@ -6,6 +6,7 @@ import { updateProfileImgController } from "./updateProfileImgController"
 import { statusUpdateContoller } from "./statusUpdateController"
 import { getAllInterviewer } from "./getAllInterviewerController"
 import { AddContentBlog } from "./addContentBlog"
+import { fetchContentController } from "./fetchContentController"
 export const controller=(dependancies:IDependancies)=>{
     return {
       getUser: getUserController(dependancies),
@@ -13,6 +14,7 @@ export const controller=(dependancies:IDependancies)=>{
       blockunblockUser: statusUpdateContoller(dependancies),
       updateImg:updateProfileImgController(dependancies),
       getAllInterivewer:getAllInterviewer(dependancies),
-      addContentBlog:AddContentBlog(dependancies)
+      addContentBlog:AddContentBlog(dependancies),
+      fetchAllContent:fetchContentController(dependancies)
     };
 }

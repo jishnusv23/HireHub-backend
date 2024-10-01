@@ -29,5 +29,6 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
-  contentCreate:(data:contentEntities)=>Promise<contentEntities|null>
+  contentCreate: (data: contentEntities) => Promise<contentEntities | null>;
+  fetchAllContent:(page?:number,limit?:number)=>Promise<{data:contentEntities[],totalPages:number,currentPage:number}>
 }
