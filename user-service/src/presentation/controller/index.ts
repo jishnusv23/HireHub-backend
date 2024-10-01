@@ -8,6 +8,7 @@ import { getAllInterviewer } from "./getAllInterviewerController"
 import { AddContentBlog } from "./addContentBlog"
 import { fetchContentController } from "./fetchContentController"
 import { updateHandClappController } from "./updateHandClapController"
+import { getAllContentRequestController } from "./getAllContentRequestController"
 export const controller=(dependancies:IDependancies)=>{
     return {
       getUser: getUserController(dependancies),
@@ -17,6 +18,7 @@ export const controller=(dependancies:IDependancies)=>{
       getAllInterivewer:getAllInterviewer(dependancies),
       addContentBlog:AddContentBlog(dependancies),
       fetchAllContent:fetchContentController(dependancies),
-      updateHandClapp:updateHandClappController(dependancies)
+      updateHandClapp:updateHandClappController(dependancies),
+      getAllContentRequest:getAllContentRequestController(dependancies)
     };
 }
