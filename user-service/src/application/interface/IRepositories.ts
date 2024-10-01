@@ -39,5 +39,13 @@ export interface IRepositories {
     currentPage: number;
   }>;
   updateHandClapp: (handClapp: number, id: string) => Promise<string | null>;
-  getAllContentRequest:(page?:number,limit?:number)=>Promise<{data:contentEntities[],totalPages:number,currentPage:number}>
+  getAllContentRequest: (
+    page?: number,
+    limit?: number
+  ) => Promise<{
+    data: contentEntities[];
+    totalPages: number;
+    currentPage: number;
+  }>;
+  contentAcceptance:(id:string,AdminAccept:boolean)=>Promise<contentEntities|null>
 }
