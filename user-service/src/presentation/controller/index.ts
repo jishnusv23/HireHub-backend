@@ -7,6 +7,7 @@ import { statusUpdateContoller } from "./statusUpdateController"
 import { getAllInterviewer } from "./getAllInterviewerController"
 import { AddContentBlog } from "./addContentBlog"
 import { fetchContentController } from "./fetchContentController"
+import { updateHandClappController } from "./updateHandClapController"
 export const controller=(dependancies:IDependancies)=>{
     return {
       getUser: getUserController(dependancies),
@@ -15,6 +16,7 @@ export const controller=(dependancies:IDependancies)=>{
       updateImg:updateProfileImgController(dependancies),
       getAllInterivewer:getAllInterviewer(dependancies),
       addContentBlog:AddContentBlog(dependancies),
-      fetchAllContent:fetchContentController(dependancies)
+      fetchAllContent:fetchContentController(dependancies),
+      updateHandClapp:updateHandClappController(dependancies)
     };
 }

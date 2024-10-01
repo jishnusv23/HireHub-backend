@@ -2,11 +2,10 @@ import { Router } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller/";
 import {jwtMiddleware,roleMiddleware} from 'hirehub-middleware-version'
-import { requireAdmin } from "../../_lib/common/middleWare/requireAdmin";
-// import { jwtMiddleware } from "jwt-middleware-learnup";
+
 
 export const routes = (dependancies: IDependancies) => {
-  const { getUser,getAllInterviewee,blockunblockUser,updateImg,getAllInterivewer,addContentBlog,fetchAllContent } = controller(dependancies);
+  const { getUser,getAllInterviewee,blockunblockUser,updateImg,getAllInterivewer,addContentBlog,fetchAllContent,updateHandClapp } = controller(dependancies);
   const router = Router();
 
   router.route("/getUser").get(jwtMiddleware, getUser);
@@ -29,6 +28,9 @@ export const routes = (dependancies: IDependancies) => {
   //create content
   router.route("/content-create").post(jwtMiddleware,addContentBlog)
   router.route("/content-all").get(fetchAllContent);
+
+  //*handclappupdate
+  router.route("/handsClapp").put(updateHandClapp)
 
   return router;
 };
