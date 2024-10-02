@@ -1,14 +1,28 @@
+import { InterviewEntity } from "@/domain/entities";
 import { interview } from "../models";
 
 
 export const getAllInterivewesById=async(id:string)=>{
  try{
-    const allInteivewes=await interview.find({interviewerId:id})
-    console.log("🚀 ~ file: getAllInterivewesById.ts:7 ~ getAllInterivewesById ~ allInteivewes:", allInteivewes)
-    if(allInteivewes){
-        return allInteivewes
-    }else{
-        return null
+    const allInterviews = await interview.find({ interviewerId: id });
+  
+    if (allInterviews) {
+      const interviews = allInterviews.map(
+        (interview: any) => interview.toObject() as InterviewEntity
+      );
+
+      const totalInterviews = interviews.length; // Total interviews
+      const completedInterviews = interviews.filter(
+        (interview) => interview.interviewStatus === "Completed"
+      ).length; // Filter by completed status
+
+      return {
+        // data: allInterviews,
+        totalInterviews,
+        completedInterviews,
+      };
+    } else {
+      return null;
     }
     
  }  catch(error:any){
