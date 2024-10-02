@@ -13,7 +13,7 @@ export const InterivewesByIdController = (dependancies: IDependancies) => {
       if(!response){
         return res.status(400).json({success:false,data:{},message:"id is wrong or interivewes does not get"})
       }else{
-        return res.status(200).json({success:true,data:response,message:'successfully fetched'})
+        return res.status(200).json({success:true,data:response.totalInterviews,message:'successfully fetched'})
       }
     } catch (error: any) {
       next(error);

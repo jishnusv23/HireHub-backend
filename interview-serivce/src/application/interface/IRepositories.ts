@@ -35,5 +35,7 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
-  getAllInterivewesById:(id:string)=>Promise<InterviewEntity|null>
+  getAllInterivewesById: (
+    id: string
+  ) => Promise<{data:InterviewEntity[], totalInterviews :number,completedInterviews:number}>
 }
