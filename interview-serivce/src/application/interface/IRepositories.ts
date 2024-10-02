@@ -35,4 +35,5 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
+  getAllInterivewesById:(id:string)=>Promise<InterviewEntity|null>
 }
