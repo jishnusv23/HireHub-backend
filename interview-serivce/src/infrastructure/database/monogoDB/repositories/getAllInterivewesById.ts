@@ -3,7 +3,7 @@ import { interview } from "../models";
 
 export const getAllInterivewesById=async(id:string)=>{
  try{
-    const allInteivewes=await interview.findById(id)
+    const allInteivewes=await interview.find({interviewerId:id})
     console.log("🚀 ~ file: getAllInterivewesById.ts:7 ~ getAllInterivewesById ~ allInteivewes:", allInteivewes)
     if(allInteivewes){
         return allInteivewes
