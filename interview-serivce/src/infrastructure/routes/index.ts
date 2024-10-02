@@ -45,6 +45,11 @@ export const routes = (dependancies: IDependancies) => {
             geAllQuestionForInterivewer
           );
 
-          router.route("/interivewes/:id").get(jwtMiddleware,roleMiddleware(['interivewer']),getAllInterivewesById);
+          router
+            .route("/interviewsById/:id")
+            .get(
+          
+              getAllInterivewesById
+            );
   return router;
 };
