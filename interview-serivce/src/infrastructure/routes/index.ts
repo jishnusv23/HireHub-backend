@@ -5,7 +5,7 @@ import { controller } from "../../presentation/controller";
 
 
 export const routes = (dependancies: IDependancies) => {
-  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode,AddQuestions,geAllQuestionForInterivewer} = controller(dependancies);
+  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode,AddQuestions,geAllQuestionForInterivewer,getAllInterivewesById} = controller(dependancies);
   const router = Router();
 
   router.route("/scheduleInterview").post(createInterview);
@@ -45,5 +45,6 @@ export const routes = (dependancies: IDependancies) => {
             geAllQuestionForInterivewer
           );
 
+          router.route("/interivewes/:id").get(jwtMiddleware,roleMiddleware(['interivewer']),getAllInterivewesById);
   return router;
 };
