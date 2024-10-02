@@ -5,6 +5,7 @@ import { MeetVerifyAccessController } from "./MeetverifyAccessController";
 import { SchedulInterviewController } from "./ScheduleController";
 import { cancelInterveiwController } from "./cancelInterviewController";
 import { getAllQuestionsInterivewer } from "./getAllIQuestionForInteriviwerContorller";
+import { InterivewesByIdController } from "./getAllInterviewesByIdController";
 import { getAllMeetDetailsController } from "./getAlllDetailsMeet";
 import { submissionController } from "./submissioController";
 import { updateInterveiweController } from "./updateInterviewController";
@@ -21,6 +22,7 @@ export const controller = (dependacies: IDependancies) => {
     InstantMeet:InstantMeetController(dependacies),
     submissionCode:submissionController(dependacies),
     AddQuestions:AddQuestionController(dependacies),
-    geAllQuestionForInterivewer:getAllQuestionsInterivewer(dependacies)
+    geAllQuestionForInterivewer:getAllQuestionsInterivewer(dependacies),
+    getAllInterivewesById:InterivewesByIdController(dependacies)
   };
 };
