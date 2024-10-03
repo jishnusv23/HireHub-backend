@@ -10,6 +10,7 @@ import { fetchContentController } from "./fetchContentController"
 import { updateHandClappController } from "./updateHandClapController"
 import { getAllContentRequestController } from "./getAllContentRequestController"
 import { contentAcceptanceController } from "./Acceptencecontent-acceptanceController"
+import { usersFetchAdminController } from "./usersFetchAdminController"
 export const controller=(dependancies:IDependancies)=>{
     return {
       getUser: getUserController(dependancies),
@@ -21,6 +22,7 @@ export const controller=(dependancies:IDependancies)=>{
       fetchAllContent:fetchContentController(dependancies),
       updateHandClapp:updateHandClappController(dependancies),
       getAllContentRequest:getAllContentRequestController(dependancies),
-      ContentAcceptance:contentAcceptanceController(dependancies)
+      ContentAcceptance:contentAcceptanceController(dependancies),
+      userFetchAdmin:usersFetchAdminController(dependancies)
     };
 }
