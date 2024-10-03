@@ -1,4 +1,4 @@
-import { ICreateInterviewUsesCases,IGetAllInterviewesForUseCases,IUpdateInterviewUseCases,ICancelInterviewUseCases,IFetchCurrentInterviewUseCases,IMeetAccessIntervieweeUseCases,IAddquestionUseCases,IGetAllQuestionsUseCases,IGetAllInterivewesByIdUseCases } from "../../domain/IUseCases";
+import { ICreateInterviewUsesCases,IGetAllInterviewesForUseCases,IUpdateInterviewUseCases,ICancelInterviewUseCases,IFetchCurrentInterviewUseCases,IMeetAccessIntervieweeUseCases,IAddquestionUseCases,IGetAllQuestionsUseCases,IGetAllInterivewesByIdUseCases,IAdminFetchInterivewesUseCases } from "../../domain/IUseCases";
 
 export interface IUseCases {
   IScheduleUseCases: (dependancies: any) => ICreateInterviewUsesCases;
@@ -15,5 +15,8 @@ export interface IUseCases {
   ) => IMeetAccessIntervieweeUseCases;
   IAddquestionUseCases: (dependancies: any) => IAddquestionUseCases;
   IGetAllQuestionUseCases: (dependancies: any) => IGetAllQuestionsUseCases;
-  IGeetAllInterivewesByIdUseCases:(dependancies:any)=>IGetAllInterivewesByIdUseCases
+  IGeetAllInterivewesByIdUseCases: (
+    dependancies: any
+  ) => IGetAllInterivewesByIdUseCases;
+  IAdminFetchInterivewesUseCases:(depandcies:any)=>IAdminFetchInterivewesUseCases
 }
