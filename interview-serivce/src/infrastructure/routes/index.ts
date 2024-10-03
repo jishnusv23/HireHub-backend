@@ -5,7 +5,7 @@ import { controller } from "../../presentation/controller";
 
 
 export const routes = (dependancies: IDependancies) => {
-  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode,AddQuestions,geAllQuestionForInterivewer,getAllInterivewesById} = controller(dependancies);
+  const { createInterview, getAllInterviewes,updateInterveiwes,cancelInterview,VerifyInterivew,MeetAccessInterviewee,InstantMeet ,submissionCode,AddQuestions,geAllQuestionForInterivewer,getAllInterivewesById,adminFetchInterivewes} = controller(dependancies);
   const router = Router();
 
   router.route("/scheduleInterview").post(createInterview);
@@ -51,5 +51,19 @@ export const routes = (dependancies: IDependancies) => {
           
               getAllInterivewesById
             );
+
+            //adminfetchInterivewe
+
+            router
+              .route("/Admin-Fetch-interivewes")
+              .get(
+                jwtMiddleware,
+                roleMiddleware(["admin"]),
+                adminFetchInterivewes
+              );
+
+
+
+
   return router;
 };

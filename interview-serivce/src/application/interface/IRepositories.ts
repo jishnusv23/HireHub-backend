@@ -35,7 +35,14 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
-  getAllInterivewesById: (
-    id: string
-  ) => Promise<InterviewEntity[]|null>
+  getAllInterivewesById: (id: string) => Promise<InterviewEntity[] | null>;
+
+  AdminFetchInterivewes: (
+    page?: number,
+    limit?: number
+  ) => Promise<{
+    data: InterviewEntity[];
+    totalPages: number;
+    currentPage: number;
+  }>;
 }
