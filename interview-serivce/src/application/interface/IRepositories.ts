@@ -37,5 +37,5 @@ export interface IRepositories {
   }>;
   getAllInterivewesById: (
     id: string
-  ) => Promise<{data:InterviewEntity[], totalInterviews :number,completedInterviews:number}>
+  ) => Promise<InterviewEntity[]|null>
 }
