@@ -16,11 +16,7 @@ export const getAllInterivewesById=async(id:string)=>{
         (interview) => interview.interviewStatus === "Completed"
       ).length; // Filter by completed status
 
-      return {
-        // data: allInterviews,
-        totalInterviews,
-        completedInterviews,
-      };
+      return allInterviews
     } else {
       return null;
     }
