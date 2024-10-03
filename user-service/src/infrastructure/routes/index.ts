@@ -34,9 +34,9 @@ export const routes = (dependancies: IDependancies) => {
   router.route("/content-acceptance").put(jwtMiddleware,roleMiddleware(['admin']),ContentAcceptance)
 
   //for fetchallusers-in-interivewer
-  router
-    .route("/fetch-users-admin/:id")
-    .get(jwtMiddleware, roleMiddleware(["admin"]), userFetchAdmin);
+ router
+   .route("/fetch-users-admin/:id")
+   .get( userFetchAdmin);
 
   return router;
 };
