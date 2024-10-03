@@ -47,5 +47,9 @@ export interface IRepositories {
     totalPages: number;
     currentPage: number;
   }>;
-  contentAcceptance:(id:string,AdminAccept:boolean)=>Promise<contentEntities|null>
+  contentAcceptance: (
+    id: string,
+    AdminAccept: boolean
+  ) => Promise<contentEntities | null>;
+  usersFetchAdmin:(id:string)=>Promise<UserEntities[]|null>
 }
