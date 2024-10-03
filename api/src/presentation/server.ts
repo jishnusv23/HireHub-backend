@@ -1,23 +1,57 @@
 import express, { Request, Response, Application, NextFunction } from "express";
 import cookieParser from "cookie-parser";
-import { config } from "dotenv";
+// import { config } from "dotenv";
 import cors from "cors";
-
-import { corsOptions } from "../_boot/config";
-import { setupRoutes } from "../routes";
+import proxy from "express-http-proxy";
+import { METHODS } from "http";
 
 config();
 const app: Application = express();
 
 const PORT = Number(process.env.PORT) || 2001;
 
+const corsOption = {
+  origin: String(process.env.FRONT_END_URL),
+  methods: "GET,POST,PUT,DELETE,HEAD",
+  credentials: true,
+};
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors(corsOptions));
+app.use(cors(corsOption));
 
+const routes = [
+  {
+    context: "/api/auth",
+    target: String(process.env.AUTH_SERVICE),
+    changeOrigin: true,
+  },
+  {
+    context: "/api/user",
+    target: String(process.env.USER_SERVICE),
+    changeOrigin: true,
+  },
+  {
+    context: "/api/notify",
+    target: String(process.env.NOTIFY_SERVICE),
+    changeOrigin: true,
+  },
+  {
+    context: "/api/execution",
+    target: String(process.env.EXECUTION_SERVICE),
+    changeOrigin: true,
+  },
+  {
+    context: "/api/interview",
+    target: String(process.env.INTERVIEW_SERVICE),
+    changeOrigin: true,
+  },
+];
 
-setupRoutes(app);
+routes.forEach((route) => {
+  app.use(route.context, proxy(route.target));
+});
 
 const start = () => {
   app.listen(PORT, () => {

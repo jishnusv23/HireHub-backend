@@ -14,6 +14,6 @@ import { CorsOptions } from "cors";
 
 export const corsOptions: CorsOptions = {
   origin: String(process.env.FRONT_END_URL),
-  methods: "GET,POST,PUT,DELET,HEAD,PATCH",
+  methods: "GET,POST,PUT,DELET,HEAD",
   credentials:true
 };
