@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { OAuth2Client } from "google-auth-library";
-import { UserEntities, Role } from "../../domain/entities";
+
 import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 export const googleAuthController = (dependancies: IDependancies) => {
@@ -19,7 +20,7 @@ export const googleAuthController = (dependancies: IDependancies) => {
       });
       const payload = ticket.getPayload();
       if (!payload || !payload.email) {
-        return res.status(404).json({
+        return res.status(HttpStatusCode.NOT_FOUND).json({
           success: false,
           message:
             "Google token is invalid or does not contain an email address.",
@@ -42,14 +43,14 @@ export const googleAuthController = (dependancies: IDependancies) => {
           res.cookie("access_token", accesstoken, { httpOnly: true });
           res.cookie("refresh_token", refreshtoken, { httpOnly: true });
         return res
-          .status(201)
+          .status(HttpStatusCode.CREATED)
           .json({
             success: true,
             message: "Google Login !",
             data: UserExists,
           });
       } else if (UserExists&&UserExists.isBlocked) {
-        return res.status(404).json({
+        return res.status(HttpStatusCode.NOT_FOUND).json({
           success: false,
           
           data: null,
@@ -84,7 +85,7 @@ export const googleAuthController = (dependancies: IDependancies) => {
         res.cookie("access_token", accesstoken, { httpOnly: true });
         res.cookie("refresh_token", refreshtoken, { httpOnly: true });
         return res
-          .status(201)
+          .status(HttpStatusCode.CREATED)
           .json({ success: true, data: user, message: "User Login Google" });
       }
     } catch (error: any) {

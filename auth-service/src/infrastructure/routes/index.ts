@@ -11,16 +11,22 @@ export const routes = (dependancies: IDependancies) => {
   const router = Router();
 
   router.route("/signup").post(signup);
+
   router.route("/findByEmail/:email").post(findByEmail);
+
   router.route("/googleAuth").post(googleAuth)
+
   router.route('/login').post(login)
   // router.route("/getUser").get(jwtMiddleware,getUser);
   router.route('/logout').delete(jwtMiddleware,logout)
+
   router.route("/oneTime-pass").post(OtpOneTimepass);
+
   router.route("/optverification").post(otpLimitter, otpVerify);
   
   
   router.route("/forgot-password-email").post(forgotPasswordMail);
+  
   router.route("/updatePassword").post(updatePassword)
 
 
