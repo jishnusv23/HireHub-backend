@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 
 export const InterivewesByIdController = (dependancies: IDependancies) => {
   const {
@@ -19,7 +20,7 @@ export const InterivewesByIdController = (dependancies: IDependancies) => {
       );
       if (!response) {
         return res
-          .status(400)
+          .status(HttpStatusCode.NOT_FOUND)
           .json({
             success: false,
             data: {},
@@ -27,7 +28,7 @@ export const InterivewesByIdController = (dependancies: IDependancies) => {
           });
       } else {
         return res
-          .status(200)
+          .status(HttpStatusCode.OK)
           .json({
             success: true,
             data: response,

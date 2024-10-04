@@ -7,6 +7,7 @@ import { dependacies } from "../_boot/dependencies";
 import RabbitMQClient from "../infrastructure/MQ/client";
 import { setupCronJobs } from "../infrastructure/CronJob";
 import { createServer, Server } from "http";
+import errorHandler from "../_lib/common/error/errorhandler";
 
 const PORT: number = Number(process.env.PORT) || 4002;
 const app: Application = express();
@@ -34,19 +35,30 @@ app.get("/api/interview/test", (req: Request, res: Response) => {
 
 app.use("/", routes(dependacies));
 
+app.use("*", (req: Request, res: Response) => {
+  res.status(404).json({
+    success: false,
+    status: 404,
+    message: "Api Not found--->Interiview",
+  });
+});
+
+//!error handler
+app.use(errorHandler)
+
 const start = (): Promise<Server> => {
-  const httpServer = createServer(app); // Create HTTP server using Express app
+  const httpServer = createServer(app); 
   return new Promise((resolve, reject) => {
     httpServer.listen(PORT, async () => {
       try {
         console.log(
           `💡 The Interview service running successfully on port ${PORT}`
         );
-        await RabbitMQClient.getInstance(); // Initialize RabbitMQ client
-        resolve(httpServer); // Resolve the promise with the HTTP server instance
+        await RabbitMQClient.getInstance(); 
+        resolve(httpServer); 
       } catch (error) {
         console.error("Error starting the server:", error);
-        reject(error); // Reject the promise if there is an error
+        reject(error); 
       }
     });
   });
