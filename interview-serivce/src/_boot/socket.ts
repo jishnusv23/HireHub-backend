@@ -134,6 +134,9 @@ export const socket = (server: HttpServer) => {
       leaveRoom({ roomId, peerId });
       socket.leave(roomId);
     });
+    socket.on("Interivewer-left",({roomId})=>{
+      io.to(roomId).emit('meet-close','interivewer-left the meet')
+    });
     socket.on("start-sharing", startSharing);
     socket.on("stop-sharing", stopSharing);
     socket.on("send-message", addMessage);
