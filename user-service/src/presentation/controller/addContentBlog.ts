@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import { IDependancies } from "../../application/interface/IDependancies"
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode "
 
 
 
@@ -27,9 +28,9 @@ export const AddContentBlog=(dependancies:IDependancies)=>{
             }
             const response=await ICreateContentUseCases(dependancies).execute(data)
             if(!response){
-                return res.status(400).json({success:false,message:'Invalid content data ',data:null}) 
+                return res.status(HttpStatusCode.BAD_REQUEST).json({success:false,message:'Invalid content data ',data:null}) 
             }else{
-                return res.status(200).json({success:true,message:'successfull'})
+                return res.status(HttpStatusCode.OK).json({success:true,message:'successfull'})
             }   
 
         }catch(error:any){
