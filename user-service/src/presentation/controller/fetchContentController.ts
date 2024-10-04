@@ -1,4 +1,5 @@
-import { IDependancies } from "@/application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
+import { IDependancies } from "../../application/interface/IDependancies";
 import { NextFunction, Request, Response } from "express";
 
 
@@ -20,14 +21,14 @@ export const fetchContentController=(depandancies:IDependancies)=>{
              //*page!!
              if (page !== undefined && isNaN(page)) {
                return res
-                 .status(400)
+                 .status(HttpStatusCode.BAD_REQUEST)
                  .json({ success: false, message: "Invalid Page Number" });
              }
 
              //* limiit!!
              if (limit !== undefined && isNaN(limit)) {
                return res
-                 .status(400)
+                 .status(HttpStatusCode.BAD_REQUEST)
                  .json({ success: false, message: "Invalid limit Number" });
              }
 
@@ -35,14 +36,14 @@ export const fetchContentController=(depandancies:IDependancies)=>{
              console.log("🚀 ~ file: fetchContentController.ts:35 ~ returnasync ~ response:", response)
              if(response){
                 res
-        .status(201)
+        .status(HttpStatusCode.CREATED)
         .json({
           success: true,
           message: "Getting All Contents",
           data: response,
         });
              }else{
-                res.status(400).json({
+                res.status(HttpStatusCode.BAD_REQUEST).json({
                   success: false,
                   message: "Not getting blogs",
                   data: null,

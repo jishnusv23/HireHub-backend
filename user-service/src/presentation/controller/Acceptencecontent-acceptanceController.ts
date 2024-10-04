@@ -1,4 +1,5 @@
-import { IDependancies } from "@/application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
+import { IDependancies } from "../../application/interface/IDependancies";
 import { NextFunction, Request, Response } from "express";
 
 
@@ -12,7 +13,7 @@ export const contentAcceptanceController=(dependancies:IDependancies)=>{
                 const {id,AdminAccept}=req.body
                  if (!id || typeof AdminAccept !== "boolean") {
                    return res
-                     .status(400)
+                     .status(HttpStatusCode.BAD_REQUEST)
                      .json({ success: false, message: "Invalid data" });
                  }
 
@@ -24,14 +25,14 @@ export const contentAcceptanceController=(dependancies:IDependancies)=>{
                    response
                  );
                  if (response) {
-                   return res.status(200).json({
+                   return res.status(HttpStatusCode.OK).json({
                      success: true,
                      data: response,
                      message: "Accepted updated successfully",
                    });
                  } else {
                    return res
-                     .status(404)
+                     .status(HttpStatusCode.NOT_FOUND)
                      .json({ success: false, message: "Content not found" });
                  }
         }catch(error){

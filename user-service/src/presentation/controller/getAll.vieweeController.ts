@@ -1,3 +1,4 @@
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 
@@ -27,7 +28,7 @@ export const getAllInterviewee = (dependancies: IDependancies) => {
       //* limiit!!
       if (limit !== undefined && isNaN(limit)) {
         return res
-          .status(400)
+          .status(HttpStatusCode.BAD_REQUEST)
           .json({ success: false, message: "Invalid limit Number" });
       }
       const response = await getAllIntervieweesUseCases(dependancies).execute(
@@ -39,7 +40,7 @@ export const getAllInterviewee = (dependancies: IDependancies) => {
         response
       );
       res
-        .status(201)
+        .status(HttpStatusCode.CREATED)
         .json({
           success: true,
           message: "Getting All Interviewee",
