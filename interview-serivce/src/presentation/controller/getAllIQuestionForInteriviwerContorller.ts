@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import {IDependancies} from '../../application/interface/IDependancies'
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
  export const getAllQuestionsInterivewer=(dependancies:IDependancies)=>{
     const {useCases:{IGetAllQuestionUseCases}}=dependancies
 
@@ -14,7 +15,7 @@ import {IDependancies} from '../../application/interface/IDependancies'
 
             if (response) {
               return res
-                .status(201)
+                .status(HttpStatusCode.CREATED)
                 .json({
                   success: true,
                   data: response,
@@ -22,7 +23,7 @@ import {IDependancies} from '../../application/interface/IDependancies'
                 });
             } else {
               return res
-                .status(404)
+                .status(HttpStatusCode.NOT_FOUND)
                 .json({ success: true, data: null, message: "invalid user" });
             }
         }catch(error:any){
