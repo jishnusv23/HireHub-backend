@@ -9,8 +9,9 @@
 //     port: envNumber("PORT", 4002),
 //   },
 // };
-
+import { config } from "dotenv";
 import { CorsOptions } from "cors";
+config()
 
 export const corsOptions: CorsOptions = {
   origin: String(process.env.FRONT_END_URL),

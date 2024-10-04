@@ -1,3 +1,5 @@
+import { config } from "dotenv";
+config()
 export interface RouteConfig {
   context: string;
   target: string;
