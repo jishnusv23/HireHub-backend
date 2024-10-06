@@ -11,6 +11,7 @@ import { updateHandClappController } from "./updateHandClapController"
 import { getAllContentRequestController } from "./getAllContentRequestController"
 import { contentAcceptanceController } from "./Acceptencecontent-acceptanceController"
 import { usersFetchAdminController } from "./usersFetchAdminController"
+import { ChangeUserNameController } from "./changeUserNameController"
 export const controller=(dependancies:IDependancies)=>{
     return {
       getUser: getUserController(dependancies),
@@ -23,6 +24,7 @@ export const controller=(dependancies:IDependancies)=>{
       updateHandClapp:updateHandClappController(dependancies),
       getAllContentRequest:getAllContentRequestController(dependancies),
       ContentAcceptance:contentAcceptanceController(dependancies),
-      userFetchAdmin:usersFetchAdminController(dependancies)
+      userFetchAdmin:usersFetchAdminController(dependancies),
+      changeUserName:ChangeUserNameController(dependancies)
     };
 }
