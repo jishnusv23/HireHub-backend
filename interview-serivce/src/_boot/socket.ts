@@ -1,5 +1,6 @@
 import { Server as HttpServer } from "http";
 import { Server as SocketIOServer, Socket } from "socket.io";
+import { interview } from "../infrastructure/database/monogoDB/models";
 import { v4 as uuidV4 } from "uuid";
 
 interface IUser {
@@ -134,9 +135,41 @@ export const socket = (server: HttpServer) => {
       leaveRoom({ roomId, peerId });
       socket.leave(roomId);
     });
-    socket.on("Interivewer-left",({roomId})=>{
-      io.to(roomId).emit('meet-close','interivewer-left the meet')
+
+
+    socket.on("Interviewer-left", async({ roomId }) => {
+      if (rooms[roomId]) {
+       
+        io.to(roomId).emit(
+          "meet-close",
+          "The meeting has ended. The interviewer has left."
+        );
+         await interview.findOneAndUpdate(
+           {
+             uniqueId:roomId,
+           },
+           { interviewStatus: "Completed" },
+           { new: true } 
+         );
+
+        
+        const socketsInRoom = io.sockets.adapter.rooms.get(roomId);
+        if (socketsInRoom) {
+          for (const socketId of socketsInRoom) {
+            io.sockets.sockets.get(socketId)?.leave(roomId);
+          }
+        }
+
+        
+        delete rooms[roomId];
+        delete chats[roomId];
+
+        console.log(
+          `Room ${roomId} has been deleted due to interviewer leaving`
+        );
+      }
     });
+
     socket.on("start-sharing", startSharing);
     socket.on("stop-sharing", stopSharing);
     socket.on("send-message", addMessage);
