@@ -51,5 +51,6 @@ export interface IRepositories {
     id: string,
     AdminAccept: boolean
   ) => Promise<contentEntities | null>;
-  usersFetchAdmin:(id:string)=>Promise<UserEntities[]|null>
+  usersFetchAdmin: (id: string) => Promise<UserEntities[] | null>;
+  changeUserName:(name:string,id:string)=>Promise<UserEntities|null>
 }

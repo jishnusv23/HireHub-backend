@@ -5,7 +5,7 @@ import {jwtMiddleware,roleMiddleware} from 'hirehub-middleware-version'
 
 
 export const routes = (dependancies: IDependancies) => {
-  const { getUser,getAllInterviewee,blockunblockUser,updateImg,getAllInterivewer,addContentBlog,fetchAllContent,updateHandClapp,getAllContentRequest,ContentAcceptance,userFetchAdmin } = controller(dependancies);
+  const { getUser,getAllInterviewee,blockunblockUser,updateImg,getAllInterivewer,addContentBlog,fetchAllContent,updateHandClapp,getAllContentRequest,ContentAcceptance,userFetchAdmin,changeUserName } = controller(dependancies);
   const router = Router();
 
   router.route("/getUser").get(jwtMiddleware, getUser);
@@ -22,6 +22,7 @@ export const routes = (dependancies: IDependancies) => {
 
   //*--------
   router.route("/updateImge").put(updateImg)
+  router.route("/user-name-change").put(jwtMiddleware,changeUserName)
 
   //create content
   router.route("/content-create").post(jwtMiddleware,addContentBlog)
