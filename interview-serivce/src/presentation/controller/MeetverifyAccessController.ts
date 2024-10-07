@@ -14,7 +14,7 @@ export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
            if(response){
            if (response.instantMeet) {
         
-             if (response.meetParticipants >= 4) {
+             if (response.meetParticipants ==4) {
                return res.status(HttpStatusCode.FORBIDDEN).json({
                  success: false,
                  message:
