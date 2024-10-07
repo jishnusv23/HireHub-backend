@@ -43,7 +43,7 @@ export const socket = (server: HttpServer) => {
       console.log("user created the room");
     };
 
-    const joinRoom = ({ roomId, peerId, userName }: IJoinRoomParams) => {
+    const joinRoom = async({ roomId, peerId, userName }: IJoinRoomParams) => {
       if (!rooms[roomId]) rooms[roomId] = {};
       if (!chats[roomId]) chats[roomId] = [];
       socket.emit("get-messages", chats[roomId]);
@@ -51,11 +51,12 @@ export const socket = (server: HttpServer) => {
       rooms[roomId][peerId] = { peerId, userName };
       const length = Object.keys(rooms[roomId]).length;
 
-      socket.on("find-roomlength",async({roomId})=>{
+      socket.on("find-roomlength",({roomId})=>{
         
          io.to(roomId).emit("room-length", length);
-         await interview.findOneAndUpdate({uniqueId:roomId},{meetParticipants:length},{new :true})
+       
       });
+      await updateParticipantCount(roomId,length)
       socket.join(roomId);
       socket.to(roomId).emit("user-joined", { peerId, userName });
       socket.emit("get-users", {
@@ -74,15 +75,39 @@ export const socket = (server: HttpServer) => {
         const userName = rooms[roomId][peerId].userName
         delete rooms[roomId][peerId];
         const length = Object.keys(rooms[roomId]).length;
-  await interview.findOneAndUpdate(
-                   { uniqueId: roomId },
-                   { meetParticipants: length },
-                   { $new: true }
-                 );
+        io.to(roomId).emit("user-disconnected", peerId)
+        io.to(roomId).emit("get-users", {
+          roomId,
+          participants: rooms[roomId],
+        });
+          io.to(roomId).emit("room-length", length);
+        console.log(`User ${userName} (${peerId}) left room ${roomId}`);
+         await updateParticipantCount(roomId, length);
 
+        
         
       }
     };
+
+    const updateParticipantCount = async (roomId: string, count: number) => {
+      try {
+        const updatedInterview = await interview.findOneAndUpdate(
+          { uniqueId: roomId },
+          { meetParticipants: count },
+          { new: true }
+        );
+        return updatedInterview;
+      } catch (error) {
+        console.error(
+          `Failed to update participant count for room ${roomId}:`,
+          error
+        );
+        throw error;
+      }
+    };
+
+
+
     const startSharing = ({ peerId, roomId }: IRoomParams) => {
       console.log({ roomId, peerId });
       socket.to(roomId).emit("user-started-sharing", peerId);
@@ -116,6 +141,8 @@ export const socket = (server: HttpServer) => {
         io.to(roomId).emit("name-changed", { peerId, userName });
       }
     };
+
+
 
    socket.on("open-codeEditor", ({ roomId }) => {
      console.log("Auto-open terminal event emitted for room:", roomId);
