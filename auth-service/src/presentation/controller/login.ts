@@ -1,5 +1,6 @@
 import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
 import loginValidation from "../../_lib/validation/login.validation";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 
@@ -37,7 +38,7 @@ export const LoginController = (dependancies: IDependancies) => {
       }
       if (result.isBlocked) {
         return res
-          .status(401)
+          .status(HttpStatusCode.UNAUTHORIZED)
           .json({
             success: false,
             message: "User is been blocked my HireHub team..!",
@@ -60,7 +61,7 @@ export const LoginController = (dependancies: IDependancies) => {
       res.cookie("refresh_token", refreshtoken, { httpOnly: true });
 
       //   //successfully
-      return res.status(201).json({
+      return res.status(HttpStatusCode.CREATED).json({
         success: true,
         data: result,
         message: "User Created successfully",

@@ -1,4 +1,5 @@
 import { IDependancies } from "../../application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode";
 import { Request, Response, NextFunction } from "express";
 
 export const getUserController = (dependancies: IDependancies) => {
@@ -10,7 +11,7 @@ export const getUserController = (dependancies: IDependancies) => {
         // console.log(req.user);
       if (!req.user) {
         return res
-          .status(200)
+          .status(HttpStatusCode.OK)
           .json({
             success: false,
             message: "Authentication requireeeeeeeeeed",
@@ -26,11 +27,11 @@ export const getUserController = (dependancies: IDependancies) => {
       if (!response) {
         // throw new Error("user not found");
           return res
-            .status(404)
+            .status(HttpStatusCode.NOT_FOUND)
             .json({ success: false, message: "User not found" });
       }
       return res
-        .status(201)
+        .status(HttpStatusCode.ACCEPTED)
         .json({ success: true, data: response, message: "user Exists" });
     } catch (error: any) {
       next(error);

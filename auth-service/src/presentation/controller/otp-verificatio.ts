@@ -1,5 +1,6 @@
 import { hashpassword } from "../../_lib/http/bcrypt";
 import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { NextFunction, Request, Response } from "express";
 
@@ -21,7 +22,7 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
 
       if (!result) {
         return res
-          .status(200)
+          .status(HttpStatusCode.OK)
           .json({ success: false, data: {}, message: "OTP doesnt match" });
       } else {
         const userId = result?._id?.toString() as string;
@@ -40,7 +41,7 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
         res.cookie("access_token", accesstoken, { httpOnly: true });
         res.cookie("refresh_token ", refreshtoken, { httpOnly: true });
 
-        return res.status(202).json({
+        return res.status(HttpStatusCode.CREATED).json({
           success: true,
           data: result,
           message: "OTP verified successfully",

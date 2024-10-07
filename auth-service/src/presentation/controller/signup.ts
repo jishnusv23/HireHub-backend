@@ -1,6 +1,7 @@
 import RabbitMQClient from "../../infrastructure/rabbitmq/client";
 import { hashpassword } from "../../_lib/http/bcrypt";
 import { generateAccessToken, generateRefreshToken } from "../../_lib/http/jwt";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode";
 import validateUser from "../../_lib/validation/signup.validation";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
@@ -24,60 +25,16 @@ export const sigupController = (dependancies: IDependancies) => {
         afterValidUser.email
       );
 
-      // console.log(
-      //   "🚀 ~ file: signup.ts:25 ~ return ~ existingUser:",
-      //   existingUser
-      // );
+    
       if (existingUser) {
-        return res.status(200).json({
+        return res.status(HttpStatusCode.OK).json({
           success: false,
           message: "User already exists",
           data: null,
         });
       } else {
-      //  const otp =await generateOTP()
-        // console.log("🚀 ~ file: signup.ts:36 ~ return ~ otp:", otp)
-
-        // const data={
-        //   email:afterValidUser.email,
-        //   otp:otp
-        // }
-        // const client=await RabbitMQClient.getInstance()
-        // const result = await client.produce(data, "verifyOtp", "toNotif");
-        // const otpNOtify=await confirmOtpNotification(afterValidUser.email)
-        // console.log("🚀 ~ file: signup.ts:46 ~ return ~ otpNOtify:", otpNOtify)
-
-        // console.log("🚀 ~ file: signup.ts:46 ~ return ~ result:", result)
-
-        // const created = await createUserUseCases(dependancies).execute(
-        //   afterValidUser
-        // );
-        // console.log(created,'lpppppppppppppppppppppppppppppppp')
-        // if (!created) {
-        //   res
-        //     .status(500)
-        //     .json({ success: false, message: "User creation failed" });
-        // } else {
-          //*integrate the kafka here
-          // const userId = created?._id?.toString() as string;
-
-          // const accesstoken = generateAccessToken({
-          
-          //   _id: String(created?._id),
-          //   email: created.email,
-          //   role: created.role,
-          // });
-          // const refreshtoken = generateRefreshToken({
-          //   _id: String(created?._id),
-          //   email: created.email,
-          //   role: created.role,
-          // });
-          
-          // res.cookie("access_token", accesstoken, { httpOnly: true });
-          // res.cookie("refresh_token ", refreshtoken, { httpOnly: true });
-          
-          // console.log(req.cookies,'kookokokokokoko')
-         return  res .status(200).json({
+      
+         return  res .status(HttpStatusCode.OK).json({
             success: true,
             message: "User desn't exists",
             data:null ,
