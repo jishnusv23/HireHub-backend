@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 
 
@@ -15,9 +16,9 @@ export const updateProfileImgController=(dependancies:IDependancies)=>{
               req.body.url
             );
             if(response){
-                return res.status(201).json({success:true,data:response,message:"Imge successfully updated"})
+                return res.status(HttpStatusCode.OK).json({success:true,data:response,message:"Imge successfully updated"})
             }else{
-                return res.status(404).json({success:true,data:null,message:'Something wrong'})
+                return res.status(HttpStatusCode.NOT_FOUND).json({success:true,data:null,message:'Something wrong'})
             }
 
         }catch(error:any){

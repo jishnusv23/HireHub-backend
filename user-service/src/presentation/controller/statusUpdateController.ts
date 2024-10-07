@@ -1,4 +1,5 @@
 import { IDependancies } from "../../application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { Request, Response, NextFunction } from "express";
 
 export const statusUpdateContoller = (dependancies: IDependancies) => {
@@ -17,7 +18,7 @@ export const statusUpdateContoller = (dependancies: IDependancies) => {
 
       if (!id || typeof isBlocked !== "boolean") {
         return res
-          .status(400)
+          .status(HttpStatusCode.BAD_REQUEST)
           .json({ success: false, message: "Invalid data" });
       }
 
@@ -27,14 +28,14 @@ export const statusUpdateContoller = (dependancies: IDependancies) => {
         response
       );
       if (response) {
-        return res.status(200).json({
+        return res.status(HttpStatusCode.OK).json({
           success: true,
           data: response,
           message: "Status updated successfully",
         });
       } else {
         return res
-          .status(404)
+          .status(HttpStatusCode.NOT_FOUND)
           .json({ success: false, message: "User not found" });
       }
     } catch (error: any) {

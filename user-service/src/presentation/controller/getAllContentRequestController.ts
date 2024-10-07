@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 
 export const getAllContentRequestController=(dependancies:IDependancies)=>{
@@ -17,14 +18,14 @@ export const getAllContentRequestController=(dependancies:IDependancies)=>{
             //*page!!
             if (page !== undefined && isNaN(page)) {
               return res
-                .status(400)
+                .status(HttpStatusCode.BAD_REQUEST)
                 .json({ success: false, message: "Invalid Page Number" });
             }
 
             //* limiit!!
             if (limit !== undefined && isNaN(limit)) {
               return res
-                .status(400)
+                .status(HttpStatusCode.BAD_REQUEST)
                 .json({ success: false, message: "Invalid limit Number" });
             }
             const response = await getallContentRequestUseCases(
@@ -34,7 +35,7 @@ export const getAllContentRequestController=(dependancies:IDependancies)=>{
               "🚀 ~ file: getAll.ts:34 ~ return ~ response:",
               response
             );
-            res.status(201).json({
+            res.status(HttpStatusCode.CREATED).json({
               success: true,
               message: "Getting All requestContent",
               data: response,
