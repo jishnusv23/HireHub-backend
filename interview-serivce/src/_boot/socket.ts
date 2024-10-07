@@ -50,9 +50,11 @@ export const socket = (server: HttpServer) => {
       console.log("user joined the room", roomId, peerId, userName);
       rooms[roomId][peerId] = { peerId, userName };
       const length = Object.keys(rooms[roomId]).length;
-      socket.on("find-roomlength",({roomId})=>{
+
+      socket.on("find-roomlength",async({roomId})=>{
         
          io.to(roomId).emit("room-length", length);
+         await interview.findOneAndUpdate({uniqueId:roomId},{meetParticipants:length},{new :true})
       });
       socket.join(roomId);
       socket.to(roomId).emit("user-joined", { peerId, userName });
@@ -67,18 +69,17 @@ export const socket = (server: HttpServer) => {
       });
     };
 
-    const leaveRoom = ({ peerId, roomId }: IRoomParams) => {
+    const leaveRoom = async({ peerId, roomId }: IRoomParams) => {
       if (rooms[roomId] && rooms[roomId][peerId]) {
         const userName = rooms[roomId][peerId].userName
         delete rooms[roomId][peerId];
         const length = Object.keys(rooms[roomId]).length;
-        io.to(roomId).emit("user-disconnected", peerId)
-        io.to(roomId).emit("get-users", {
-          roomId,
-          participants: rooms[roomId],
-        });
-          io.to(roomId).emit("room-length", length);
-        console.log(`User ${userName} (${peerId}) left room ${roomId}`);
+  await interview.findOneAndUpdate(
+                   { uniqueId: roomId },
+                   { meetParticipants: length },
+                   { $new: true }
+                 );
+
         
       }
     };

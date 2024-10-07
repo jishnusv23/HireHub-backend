@@ -65,6 +65,10 @@ const interviewSchema = new Schema(
       type: [String],
       required: true,
     },
+      meetParticipants:{
+        type:Number,
+        default:0
+      },
   },
   {
     timestamps: true,
