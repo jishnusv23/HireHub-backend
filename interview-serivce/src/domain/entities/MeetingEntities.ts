@@ -24,6 +24,7 @@ export interface InterviewEntity {
   startTime?: string;
   uniqueId: string;
   interviewType: string;
+  meetParticipants:number
   createdAt?: Date;
   updatedAt?: Date;
 }

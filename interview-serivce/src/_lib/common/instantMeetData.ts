@@ -26,8 +26,8 @@ export const fetchInstantMeetData = (): {
       description: "b",
       jobPosition: "c",
       instantMeet: true,
-      interviewType: "HR",
-      Ongoing:true,
+      interviewType: "Technical",
+      Ongoing: true,
       participants: [],
     };
 
