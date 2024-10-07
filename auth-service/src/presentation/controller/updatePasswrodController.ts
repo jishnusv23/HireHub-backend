@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode";
 import { verifyforgotPassword } from "../../_lib/http/jwt";
 import { hashpassword } from "../../_lib/http/bcrypt/hashpassword";
 
@@ -35,7 +36,7 @@ export const updatePasswordController = (dependancies: IDependancies) => {
         throw new Error("Password updation failed");
       }
       return res
-        .status(201)
+        .status(HttpStatusCode.CREATED)
         .json({ success: true, data: response, message: "Password Updated" });
     } catch (error: any) {
       next(error);

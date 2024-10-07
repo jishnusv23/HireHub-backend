@@ -1,6 +1,7 @@
 
 import { SendForgotPassMail } from "../../infrastructure/services/sendForgotMaile";
 import { generateForgotPasswords } from "../../_lib/http/jwt";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 
@@ -18,7 +19,7 @@ export const forgotPasswordMailsend = (dependancies: IDependancies) => {
       );
 
       if (response?.isBlocked) {
-        return res.status(200).json({
+        return res.status(HttpStatusCode.OK).json({
           success: true,
           data: response,
           message: "User is blocked",
@@ -27,7 +28,7 @@ export const forgotPasswordMailsend = (dependancies: IDependancies) => {
       }
 
       if (response?.isGAuth) {
-        return res.status(200).json({
+        return res.status(HttpStatusCode.OK).json({
           success: true,
           data: response,
           isGAuth: true,
@@ -41,7 +42,7 @@ export const forgotPasswordMailsend = (dependancies: IDependancies) => {
     //   const client=await RabbitMQClient.getInstance()
     //   const responseNotify=await client.produce(data{email:email,token:token},'forgotPassNotify',' ')
     if(token){
-        return res.status(201).json({success:true,data:{},message:"check your email"})
+        return res.status(HttpStatusCode.ACCEPTED).json({success:true,data:{},message:"check your email"})
 
     }
 
