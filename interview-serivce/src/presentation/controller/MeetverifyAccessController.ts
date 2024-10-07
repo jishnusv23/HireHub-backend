@@ -12,14 +12,23 @@ export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
             const response=await IMeetAccessIntervieweeUseCases(dependancies).execute(uniqueId as string)
            const Emailvalid= response?.participants.some((participantEmail)=>participantEmail===email)
            if(response){
-            if(response.instantMeet){
-                return res
-                  .status(HttpStatusCode.CREATED)
-                  .json({
-                    success: true,
-                    message: "you can acess this link go...",
-                  });
-            }
+           if (response.instantMeet) {
+        
+             if (response.meetParticipants >= 4) {
+               return res.status(HttpStatusCode.FORBIDDEN).json({
+                 success: false,
+                 message:
+                   "Maximum participant limit reached. Cannot join the meeting.",
+               });
+             }
+
+            
+             return res.status(HttpStatusCode.OK).json({
+               success: true,
+               message: "You can access this meeting",
+               data: response,
+             });
+           }
 
            
           if(!Emailvalid) {
