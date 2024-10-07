@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { jwtMiddleware, roleMiddleware } from "hirehub-middleware-version";
+import { roleMiddlewareEnum } from "../../_lib/common/middleware/roleMiddleWareEnum";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller";
 
@@ -11,15 +12,15 @@ export const routes = (dependancies: IDependancies) => {
   router.route("/scheduleInterview").post(createInterview);
   router
     .route("/scheduleDetails")
-    .get(jwtMiddleware, roleMiddleware(["interviewer"]), getAllInterviewes);
+    .get(jwtMiddleware, roleMiddleware([roleMiddlewareEnum.interviewer]), getAllInterviewes);
 
     router
       .route("/updateInterview/:id")
-      .put(jwtMiddleware, roleMiddleware(["interviewer"]),updateInterveiwes);
+      .put(jwtMiddleware, roleMiddleware([roleMiddlewareEnum.interviewer]),updateInterveiwes);
 
       router
         .route("/cancelInterview")
-        .put(jwtMiddleware, roleMiddleware(["interviewer"]),cancelInterview);
+        .put(jwtMiddleware, roleMiddleware([roleMiddlewareEnum.interviewer]),cancelInterview);
 
 
         //*verifyInterviewer side 
@@ -41,7 +42,7 @@ export const routes = (dependancies: IDependancies) => {
           .route("/getAllQuestions")
           .get(
             jwtMiddleware,
-            roleMiddleware(["interviewer"]),
+            roleMiddleware([roleMiddlewareEnum.interviewer]),
             geAllQuestionForInterivewer
           );
 
@@ -58,7 +59,7 @@ export const routes = (dependancies: IDependancies) => {
               .route("/Admin-Fetch-interivewes")
               .get(
                 jwtMiddleware,
-                roleMiddleware(["admin"]),
+                roleMiddleware([roleMiddlewareEnum.admin]),
                 adminFetchInterivewes
               );
 

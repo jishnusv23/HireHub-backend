@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 
 export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
@@ -13,7 +14,7 @@ export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
            if(response){
             if(response.instantMeet){
                 return res
-                  .status(201)
+                  .status(HttpStatusCode.CREATED)
                   .json({
                     success: true,
                     message: "you can acess this link go...",
@@ -22,16 +23,16 @@ export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
 
            
           if(!Emailvalid) {
-                return res.status(400).json({
+                return res.status(HttpStatusCode.BAD_REQUEST).json({
                   success: false,
                   message:
                     " You do not have access to this meeting.",
                 });
             }else if(response?.Ongoing){
-                return res.status(201).json({success:true,messagea:'you can acess this link go...'})
+                return res.status(HttpStatusCode.CREATED).json({success:true,messagea:'you can acess this link go...'})
             }
         }else{
-            return res.status(400).json({
+            return res.status(HttpStatusCode.BAD_REQUEST).json({
               success: false,
               message: "YSession has not started yet",
             });

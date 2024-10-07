@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 
 export const AddQuestionController=(dependancies:IDependancies)=>{
@@ -10,9 +11,9 @@ export const AddQuestionController=(dependancies:IDependancies)=>{
             const response=await IAddquestionUseCases(dependancies).execute(req.body)
             console.log("🚀 ~ file: AddQuestionController.ts:11 ~ returnasync ~ response:", response)
             if(response){
-                return res.status(200).json({success:true,data:response})
+                return res.status(HttpStatusCode.OK).json({success:true,data:response})
             }else{
-                return res.status(404).json({success:false,message:"question or type is not getting something problem "})
+                return res.status(HttpStatusCode.NOT_FOUND).json({success:false,message:"question or type is not getting something problem "})
             }
 
         }catch(error:any){
