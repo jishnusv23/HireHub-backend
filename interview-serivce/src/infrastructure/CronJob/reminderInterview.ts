@@ -55,7 +55,7 @@ import RabbitMQClient from "../MQ/client";
 };
 
 export const setupCronJobs = () => {
-  cron.schedule("* * * * *", () => {
+  cron.schedule("*/30 * * * *", () => {
     console.log(
       "Running interview reminder cron job at:",
       new Date().toISOString()
