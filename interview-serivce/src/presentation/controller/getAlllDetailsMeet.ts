@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 
 export const getAllMeetDetailsController = (dependacies: IDependancies) => {
@@ -26,9 +27,9 @@ export const getAllMeetDetailsController = (dependacies: IDependancies) => {
         response
       );
       if(response){
-        return res.status(201).json({success:true,data:response,message:'Fetching all data successfully'})
+        return res.status(HttpStatusCode.CREATED).json({success:true,data:response,message:'Fetching all data successfully'})
       }else{
-        return res.status(404).json({success:true,data:null,message:'invalid user'})
+        return res.status(HttpStatusCode.NOT_FOUND).json({success:true,data:null,message:'invalid user'})
       }
     
     } catch (error: any) {

@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { generateMeetLink } from "../../_lib/LinkCreator/generateMeetLink";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { fetchInstantMeetData } from "../../_lib/common/instantMeetData";
 import { updateUserRole } from "../../infrastructure/services/updateUserRole ";
 
@@ -35,7 +36,7 @@ export const InstantMeetController=(dependancies:IDependancies)=>{
             }
 
            return res
-            .status(201)
+            .status(HttpStatusCode.CREATED)
             .json({
               success: true,
               data: response,
@@ -43,7 +44,7 @@ export const InstantMeetController=(dependancies:IDependancies)=>{
             });
         }else{
                return res
-                 .status(400)
+                 .status(HttpStatusCode.BAD_REQUEST)
                  .json({
                    success: false,
                    data: null,

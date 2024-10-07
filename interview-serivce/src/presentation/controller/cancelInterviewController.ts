@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { sendCancelNotifyInform } from "../../infrastructure/services/sendCancelNotifyInform";
 
 
@@ -17,11 +18,11 @@ export const cancelInterveiwController=(dependancies:IDependancies)=>{
                 const toNotifCancelInterveiw=await sendCancelNotifyInform(response)
                 if(toNotifCancelInterveiw){
 
-                    return res.status(200).json({success:true,data:response,message:'Interview Canceled'})
+                    return res.status(HttpStatusCode.OK).json({success:true,data:response,message:'Interview Canceled'})
                 }
             }
 
-            return res.status(404).json({success:true,data:null,message:'Invalid Interviewer'})
+            return res.status(HttpStatusCode.BAD_REQUEST).json({success:true,data:null,message:'Invalid Interviewer'})
             
 
         }catch(error:any){  

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { executionServiceProvider } from "../../infrastructure/services/executionService";
 
 export const submissionController = (dependancies: IDependancies) => {
@@ -16,19 +17,19 @@ export const submissionController = (dependancies: IDependancies) => {
         response
       );
       if (response?.error) {
-        return res.status(400).json({
+        return res.status(HttpStatusCode.BAD_REQUEST).json({
           sucess: false,
           output: response.output,
           error: response.error,
         });
       }
       return res
-        .status(200)
+        .status(HttpStatusCode.OK)
         .json({ success: true, output: response.output });
     } catch (error: any) {
       console.error(`Something wrong in execution-submisioncontroller`, error);
       return res
-        .status(500)
+        .status(HttpStatusCode.INTERNAL_SERVER_ERROR)
         .json({
           sucess: false,
           error: error?.message || "An Inernal server error occured",

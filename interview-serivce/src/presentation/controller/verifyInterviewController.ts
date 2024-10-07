@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { InterviewTimeDateValid } from "../../_lib/common/verifyInterview";
 
@@ -15,10 +16,10 @@ export const verifyInterviewController=(dependancies:IDependancies)=>{
                 console.log("🚀 ~ file: verifyInterviewController.ts:15 ~ returnasync ~ isValid:", isValid)
                 if(isValid){
                     console.log(isValid)
-                    return res.status(200).json({success:true,message:'Interview is Valid'})
+                    return res.status(HttpStatusCode.CREATED).json({success:true,message:'Interview is Valid'})
                 }else{
                     return res
-                      .status(400)
+                      .status(HttpStatusCode.NOT_FOUND)
                       .json({
                         success: false,
                         messsage:
@@ -26,7 +27,7 @@ export const verifyInterviewController=(dependancies:IDependancies)=>{
                       });
                 }
             }else{
-                return res.status(404).json({success:false,message:'Not found the interview'})
+                return res.status(HttpStatusCode.NOT_FOUND).json({success:false,message:'Not found the interview'})
             }
 
         }catch(error:any){

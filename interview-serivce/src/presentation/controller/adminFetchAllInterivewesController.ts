@@ -1,4 +1,5 @@
 import { IDependancies } from "@/application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { NextFunction, Request, Response } from "express";
 
 export const AdminFetchInterivewesController=(dependancies:IDependancies)=>{
@@ -12,7 +13,7 @@ export const AdminFetchInterivewesController=(dependancies:IDependancies)=>{
              ).execute(Number(page), Number(limit));
               if (response) {
                 return res
-                  .status(200)
+                  .status(HttpStatusCode.OK)
                   .json({
                     success: true,
                     data: response,
@@ -20,7 +21,7 @@ export const AdminFetchInterivewesController=(dependancies:IDependancies)=>{
                   });
               } else {
                 return res
-                  .status(400)
+                  .status(HttpStatusCode.BAD_REQUEST)
                   .json({ success: true, data: null, message: "invalid query" });
               }
         }catch(error:any){

@@ -1,5 +1,6 @@
 import { sendInterviewNotify } from "../../infrastructure/services/sendNotify";
 import { generateMeetLink } from "../../_lib/LinkCreator/generateMeetLink";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { Request, Response, NextFunction } from "express";
 import { updateUserRole } from "../../infrastructure/services/updateUserRole ";
@@ -42,7 +43,7 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
         if (information) {
           
           return res
-            .status(201)
+            .status(HttpStatusCode.CREATED)
             .json({
               success: true,
               data: response,
@@ -53,7 +54,7 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
       }
 
       return res
-        .status(400)
+        .status(HttpStatusCode.BAD_REQUEST)
         .json({ success: false,data:null, message: "Invalid form data" });
     } catch (error: any) {
       console.error("Error in scheduling interview:", error);
