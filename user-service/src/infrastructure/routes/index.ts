@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { IDependancies } from "../../application/interface/IDependancies";
 import { controller } from "../../presentation/controller/";
+import { roleMiddlewareEnum } from "../../_lib/common/middleWare/roleMiddlWareEnum";
 import {jwtMiddleware,roleMiddleware} from 'hirehub-middleware-version'
 
 
@@ -11,14 +12,14 @@ export const routes = (dependancies: IDependancies) => {
   router.route("/getUser").get(jwtMiddleware, getUser);
   router
     .route("/get-all-interviewee")
-    .get(jwtMiddleware, roleMiddleware(['admin']), getAllInterviewee);
+    .get(jwtMiddleware, roleMiddleware([roleMiddlewareEnum.admin]), getAllInterviewee);
 
-  router.route("/profile-status-update").put(jwtMiddleware,roleMiddleware(['admin'])
+  router.route("/profile-status-update").put(jwtMiddleware,roleMiddleware([roleMiddlewareEnum.admin])
     ,blockunblockUser)
 
 
     //*Interivewer
-   router .route("/get-all-interviewer") .get(jwtMiddleware, roleMiddleware(["admin"]), getAllInterivewer);
+   router .route("/get-all-interviewer") .get(jwtMiddleware, roleMiddleware([roleMiddlewareEnum.admin]), getAllInterivewer);
 
   //*--------
   router.route("/updateImge").put(updateImg)
@@ -32,7 +33,7 @@ export const routes = (dependancies: IDependancies) => {
   router.route("/handsClapp").put(updateHandClapp)
 
   router.route("/content-request").get(getAllContentRequest)
-  router.route("/content-acceptance").put(jwtMiddleware,roleMiddleware(['admin']),ContentAcceptance)
+  router.route("/content-acceptance").put(jwtMiddleware,roleMiddleware([roleMiddlewareEnum.admin]),ContentAcceptance)
 
   //for fetchallusers-in-interivewer
  router

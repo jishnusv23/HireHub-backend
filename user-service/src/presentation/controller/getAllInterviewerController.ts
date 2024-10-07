@@ -1,4 +1,5 @@
 import { IDependancies } from "../../application/interface/IDependancies";
+import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { Request, Response, NextFunction } from "express";
 
 export const getAllInterviewer = (dependancies: IDependancies) => {
@@ -20,14 +21,14 @@ export const getAllInterviewer = (dependancies: IDependancies) => {
       //*page!!
       if (page !== undefined && isNaN(page)) {
         return res
-          .status(400)
+          .status(HttpStatusCode.BAD_REQUEST)
           .json({ success: false, message: "Invalid Page Number" });
       }
 
       //* limiit!!
       if (limit !== undefined && isNaN(limit)) {
         return res
-          .status(400)
+          .status(HttpStatusCode.BAD_REQUEST)
           .json({ success: false, message: "Invalid limit Number" });
       }
       const response = await getAllInterviewerUseCases(dependancies).execute(
@@ -38,7 +39,7 @@ export const getAllInterviewer = (dependancies: IDependancies) => {
         "🚀 ~ file: getAll.vieweeController.ts:34 ~ return ~ response:",
         response
       );
-      res.status(201).json({
+      res.status(HttpStatusCode.CREATED).json({
         success: true,
         message: "Getting All Interviewee",
         data: response,
