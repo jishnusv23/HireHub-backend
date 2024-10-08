@@ -12,7 +12,7 @@ export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
             const response=await IMeetAccessIntervieweeUseCases(dependancies).execute(uniqueId as string)
            const Emailvalid= response?.participants.some((participantEmail)=>participantEmail===email)
            if(response){
-           if (response.instantMeet) {
+           if (response.instantMeet&&response.interviewStatus!=='Completed') {
         
              if (response.meetParticipants ==4) {
                return res.status(HttpStatusCode.FORBIDDEN).json({

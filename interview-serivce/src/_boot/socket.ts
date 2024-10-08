@@ -50,19 +50,20 @@ export const socket = (server: HttpServer) => {
       console.log("user joined the room", roomId, peerId, userName);
       rooms[roomId][peerId] = { peerId, userName };
       const length = Object.keys(rooms[roomId]).length;
+      console.log("🚀 ~ file: socket.ts:53 ~ joinRoom ~ length:", length)
 
       socket.on("find-roomlength",({roomId})=>{
         
          io.to(roomId).emit("room-length", length);
        
       });
-      await updateParticipantCount(roomId,length)
       socket.join(roomId);
       socket.to(roomId).emit("user-joined", { peerId, userName });
       socket.emit("get-users", {
         roomId,
         participants: rooms[roomId],
       });
+      await updateParticipantCount(roomId,length)
 
       socket.on("disconnect", () => {
         console.log("user left the room", peerId);
@@ -163,7 +164,11 @@ export const socket = (server: HttpServer) => {
       leaveRoom({ roomId, peerId });
       socket.leave(roomId);
     });
-
+       socket.on("feedback-submitted", async ({ roomId, email }) => {
+        console.log(email,'ooooooooooooooooooooooooooooooooooooooooooo')
+        
+       io.to(roomId).emit("feedback-received", { email });
+       });
 
     socket.on("Interviewer-left", async({ roomId }) => {
       if (rooms[roomId]) {
