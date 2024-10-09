@@ -10,4 +10,4 @@ import database from "./_boot/database";
     process.exit(1)
   }
 })()
-// auth index
+// auth service index file usign iffe funcion call

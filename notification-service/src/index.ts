@@ -12,4 +12,4 @@ import database from "./_boot/database";
          process.exit(1);
     }
 })()
-// notification index 
+// notification service index usign IFFE

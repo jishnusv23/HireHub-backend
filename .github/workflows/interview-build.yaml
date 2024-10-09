@@ -4,7 +4,7 @@ on:
   push:
     branches: ['main']
     paths:
-      - "interview-service/**"
+      - "interview-serivce/**"
   workflow_dispatch:
   
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context:  ./interview-service/
+          context:  ./interview-serivce/
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/hirehub-interview:latest

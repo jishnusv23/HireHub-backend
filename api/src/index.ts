@@ -8,5 +8,4 @@ import server from "./presentation/server";
     process.exit(1);
   }
 })()
-
-// jishnu
+//api index file using iffe
