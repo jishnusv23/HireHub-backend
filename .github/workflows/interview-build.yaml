@@ -1,10 +1,10 @@
-name: Build and publish api service to Docker Hub
+name: Build and publish interview service to Docker Hub
 
 on:
   push:
     branches: ['main']
     paths:
-      - "api/**"
+      - "interview-service/**"
   workflow_dispatch:
   
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context:  ./api/
+          context:  ./interview-service/
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/hirehub-api:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/hirehub-interview:latest
