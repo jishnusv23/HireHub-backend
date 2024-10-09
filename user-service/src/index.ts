@@ -12,3 +12,5 @@ import database from "./_boot/database";
          process.exit(1);
     }
 })()
+
+// user-service index
