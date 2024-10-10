@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-controller
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+spec:
+  ingressClassName: webapprouting.kubernetes.azure.com
+  rules:
+    - host: trend-vista.shop
+      http:
+        paths:
+          - path: /api/auth
+            pathType: Prefix
+            backend:
+              service:
+                name: hirehub-auth-service
+                port:
+                  number: 4001
+          - path: /api/user
+            pathType: Prefix
+            backend:
+              service:
+                name: hirehub-user-service
+                port:
+                  number: 6001
+          - path: /api/notify
+            pathType: Prefix
+            backend:
+              service:
+                name: hirehub-notification-service
+                port:
+                  number: 5001
+          - path: /socket.io
+            pathType: Prefix
+            backend:
+              service:
+                name: hirehub-interview-service
+                port:
+                  number: 4002        
+          - path: /api/interview
+            pathType: Prefix
+            backend:
+              service:
+                name: hirehub-interview-service
+                port:
+                  number: 4002
+          - path: /api/execution
+            pathType: Prefix
+            backend:
+              service:
+                name: hirehub-execution-service
+                port:
+                  number: 3001
+          
