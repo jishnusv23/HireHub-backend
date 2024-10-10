@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hirehub-auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hirehub-auth-service
+  template:
+    metadata:
+      labels:
+        app: hirehub-auth-service
+    spec:
+      containers:
+      - image: jishnusv23/hirehub-auth:latest
+        name: hirehub-auth-service
+        envFrom:
+          - configMapRef:
+              name: auth-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hirehub-auth-service
+spec:
+  selector:
+    app: hirehub-auth-service
+  ports:
+  - protocol: TCP
+    port: 4001
+    targetPort: 4001

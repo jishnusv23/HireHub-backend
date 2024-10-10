@@ -202,6 +202,10 @@ export const socket = (server: HttpServer) => {
         );
       }
     });
+    socket.on("select-language",({language,roomId})=>{
+      console.log(language,roomId,'____________________________________________')
+      io.to(roomId).emit('setup-selected-language',language)
+    });
 
     socket.on("start-sharing", startSharing);
     socket.on("stop-sharing", stopSharing);

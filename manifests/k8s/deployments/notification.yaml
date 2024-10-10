@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hirehub-notification-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hirehub-notification-service
+  template:
+    metadata:
+      labels:
+        app: hirehub-notification-service
+    spec:
+      containers:
+      - image: jishnusv23/hirehub-notification:latest
+        name: hirehub-notification-service
+        envFrom:
+          - configMapRef:
+              name: notification-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hirehub-notification-service
+spec:
+  selector:
+    app: hirehub-notification-service
+  ports:
+  - protocol: TCP
+    port: 5001
+    targetPort: 5001

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hirehub-user-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hirehub-user-service
+  template:
+    metadata:
+      labels:
+        app: hirehub-user-service
+    spec:
+      containers:
+      - image: jishnusv23/hirehub-user:latest
+        name: hirehub-user-service
+        envFrom:
+          - configMapRef:
+              name: user-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hirehub-user-service
+spec:
+  selector:
+    app: hirehub-user-service
+  ports:
+  - protocol: TCP
+    port: 6001
+    targetPort: 6001

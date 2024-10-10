@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hirehub-execution-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hirehub-execution-service
+  template:
+    metadata:
+      labels:
+        app: hirehub-execution-service
+    spec:
+      containers:
+      - image: jishnusv23/hirehub-execution:latest
+        name: hirehub-execution-service
+        envFrom:
+          - configMapRef:
+              name: execution-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hirehub-execution-service
+spec:
+  selector:
+    app: hirehub-execution-service
+  ports:
+  - protocol: TCP
+    port: 3001
+    targetPort: 3001

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hirehub-interview-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hirehub-interview-service
+  template:
+    metadata:
+      labels:
+        app: hirehub-interview-service
+    spec:
+      containers:
+      - image: jishnusv23/hirehub-interview:latest
+        name: hirehub-interview-service
+        envFrom:
+          - configMapRef:
+              name: interview-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hirehub-interview-service
+spec:
+  selector:
+    app: hirehub-interview-service
+  ports:
+  - protocol: TCP
+    port: 4002
+    targetPort: 4002
