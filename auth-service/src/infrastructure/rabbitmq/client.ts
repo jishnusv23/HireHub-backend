@@ -39,7 +39,7 @@ class RabbitMQClient {
 
       const { queue: replyeQueueName } = await this.consumerChannel.assertQueue(
         "",
-        { exclusive: true }
+        { exclusive: false }
       );
 
       this.producer = new Producer(
