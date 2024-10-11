@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.use(cors(corsOptions));
 
 app.use("/api/execution", router);
-app.get("/test", (req: Request, res: Response) => {
+app.get("/api/execution/test", (req: Request, res: Response) => {
   res
   .status(201)
   .json({ success: true, message: "execution service working " });
