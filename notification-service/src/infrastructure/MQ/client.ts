@@ -34,7 +34,7 @@ class RabbitMQClient {
 
       const { queue: notifQueue } = await this.consumerChannel.assertQueue(
         config.queues.notifQueue,
-        { exclusive: true }
+        { exclusive: false }
       );
 
       this.producer = new Producer(this.producerChannel);
