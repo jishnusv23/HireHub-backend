@@ -3,12 +3,17 @@ kind: Ingress
 metadata:
   name: ingress-controller
   annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    appgw.ingress.kubernetes.io/use-private-ip: "false"
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    appgw.ingress.kubernetes.io/cors-enable: "true"
+    appgw.ingress.kubernetes.io/cors-allow-origins: "*"
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
+  tls:
+  - hosts:
+    - trend-vista.shop
+    secretName: tls-secret
   rules:
     - host: trend-vista.shop
       http:
@@ -55,4 +60,3 @@ spec:
                 name: hirehub-execution-service
                 port:
                   number: 3001
-          
