@@ -33,7 +33,7 @@ app.get("/api/interview/test", (req: Request, res: Response) => {
     .json({ success: true, message: "interview service working " });
 });
 
-app.use("/", routes(dependacies));
+app.use("/api/interview", routes(dependacies));
 
 app.use("*", (req: Request, res: Response) => {
   res.status(404).json({

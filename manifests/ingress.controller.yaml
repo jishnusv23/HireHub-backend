@@ -3,11 +3,10 @@ kind: Ingress
 metadata:
   name: ingress-controller
   annotations:
-    appgw.ingress.kubernetes.io/use-private-ip: "false"
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    appgw.ingress.kubernetes.io/cors-enable: "true"
-    appgw.ingress.kubernetes.io/cors-allow-origins: "*"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   tls:

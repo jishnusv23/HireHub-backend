@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
 
-app.use('/',router)
+app.use("/api/execution", router);
 app.get("/test", (req: Request, res: Response) => {
   res
   .status(201)

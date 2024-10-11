@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(helmet());
 
-app.use("/", routes(dependancies));
+app.use("/api/auth", routes(dependancies));
 
 app.use("*", (req: Request, res: Response) => {
   res.status(HttpStatusCode.NOT_FOUND).json({
