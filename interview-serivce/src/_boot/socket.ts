@@ -164,10 +164,8 @@ export const socket = (server: HttpServer) => {
       leaveRoom({ roomId, peerId });
       socket.leave(roomId);
     });
-       socket.on("feedback-submitted", async ({ roomId, email }) => {
-        console.log(email,'ooooooooooooooooooooooooooooooooooooooooooo')
-        
-       io.to(roomId).emit("feedback-received", { email });
+       socket.on("feedback-submitted", async ({ roomId, email, rating }) => {
+         io.to(roomId).emit("feedback-received", { email, rating });
        });
 
     socket.on("Interviewer-left", async({ roomId }) => {
