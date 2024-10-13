@@ -27,14 +27,14 @@ class RabbitMQClient  {
       return;
     }
     try {
-      this.connection = await connect(config.rabbitMQ.url);
+      this.connection = await connect(config.rabbitMQ.url as string);
 
       this.producerChannel = await this.connection.createChannel();
       this.consumerChannel = await this.connection.createChannel();
 
       const { queue: userQueue } = await this.consumerChannel.assertQueue(
         config.queues.userQueue,
-        { exclusive: true }
+        { exclusive: false }
       );
 
       this.producer = new Producer(this.producerChannel);

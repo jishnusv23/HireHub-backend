@@ -1,8 +1,10 @@
+import { config } from "dotenv";
+config();
 export default {
   rabbitMQ: {
     url:
       process.env.RABBITMQ_URL ||
-      "amqps://apdcxvjw:BNV_My9Ujf_uKBytlYdQAFxChX8TmE5J@ostrich.lmq.cloudamqp.com/apdcxvjw",
+      "amqps://mvvvvqcz:Xs4vPHkAD92FVZls-5Mr3rTs3IBMKfFF@goose.rmq2.cloudamqp.com/mvvvvqcz",
   },
   queues: {
     authQueue: "authQueue",
@@ -11,4 +13,3 @@ export default {
     interviewQueue: "interviewQueue",
   },
 };
-console.log(process.env.RABBITMQ_URL);

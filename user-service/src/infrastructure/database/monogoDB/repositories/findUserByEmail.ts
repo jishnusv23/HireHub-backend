@@ -5,7 +5,7 @@ export const findByEmail = async (data: string): Promise<UserEntities | null> =>
         try{
               let user = null;
 
-              console.log(data);
+              console.log(data,'kkkkkkk');
               if (data) {
                 user = await User.findOne({ email:data });
                 console.log(

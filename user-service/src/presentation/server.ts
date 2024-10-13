@@ -14,10 +14,11 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 console.log("---------------------------------")
-app.get('/',()=>{
-    console.log("hello")
-})
-app.use("/api/user", routes(dependancies));
+// app.get('/',()=>{
+//     console.log("hello")
+// })
+// app.use("/api/user", routes(dependancies));
+app.use("/", routes(dependancies));
 
 app.use("*", (req: Request, res: Response) => {
   res.status(HttpStatusCode.NOT_FOUND).json({
@@ -32,7 +33,7 @@ app.use(errorHandler)
 
 const start = () => {
   app.listen(PORTNUMBER, () => {
-    console.log(`The notfy-service is listening on port ${PORTNUMBER}`);
+    console.log(`The user-service is listening on port ${PORTNUMBER}`);
     const rabbitMQClient=RabbitMQClient.getInstance()
     rabbitMQClient.initialise()
   });
