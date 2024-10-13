@@ -17,8 +17,8 @@ console.log("---------------------------------")
 // app.get('/',()=>{
 //     console.log("hello")
 // })
-// app.use("/api/user", routes(dependancies));
-app.use("/", routes(dependancies));
+app.use("/api/user", routes(dependancies));
+// app.use("/", routes(dependancies));
 
 app.use("*", (req: Request, res: Response) => {
   res.status(HttpStatusCode.NOT_FOUND).json({
