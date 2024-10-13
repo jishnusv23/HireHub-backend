@@ -2,7 +2,7 @@ export default {
   rabbitMQ: {
     url:
       process.env.RABBITMQ_URL ||
-      "amqps://wcrweiuo:kpZSsAj3se_hC-1EhHuNLI8A5WTXFt6J@goose.rmq2.cloudamqp.com/wcrweiuo",
+      "amqps://apdcxvjw:BNV_My9Ujf_uKBytlYdQAFxChX8TmE5J@ostrich.lmq.cloudamqp.com/apdcxvjw",
   },
   queues: {
     authQueue: "authQueue",
