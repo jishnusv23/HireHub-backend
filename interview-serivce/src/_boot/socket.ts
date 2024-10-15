@@ -220,7 +220,7 @@ export const socket = (server: HttpServer) => {
            delete roomData[socket.id];
 
            
-           if (Object.keys(roomData).length === 0) {
+           if (Object.keys(roomData).length === 1) {
              delete rooms[roomId];
              delete chats[roomId];
              console.log(`Room ${roomId} deleted after last user disconnected`);
