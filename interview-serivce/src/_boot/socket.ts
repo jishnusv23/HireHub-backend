@@ -175,6 +175,9 @@ export const socket = (server: HttpServer) => {
           "meet-close",
           "The meeting has ended. The interviewer has left."
         );
+        const length = Object.keys(rooms[roomId]).length;
+
+        io.to(roomId).emit("room-length", length);
          await interview.findOneAndUpdate(
            {
              uniqueId:roomId,
