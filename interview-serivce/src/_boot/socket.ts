@@ -43,19 +43,17 @@ export const socket = (server: HttpServer) => {
       console.log("user created the room");
     };
 
-    const joinRoom = async({ roomId, peerId, userName }: IJoinRoomParams) => {
+    const joinRoom = async ({ roomId, peerId, userName }: IJoinRoomParams) => {
       if (!rooms[roomId]) rooms[roomId] = {};
       if (!chats[roomId]) chats[roomId] = [];
       socket.emit("get-messages", chats[roomId]);
       console.log("user joined the room", roomId, peerId, userName);
       rooms[roomId][peerId] = { peerId, userName };
       const length = Object.keys(rooms[roomId]).length;
-      console.log("🚀 ~ file: socket.ts:53 ~ joinRoom ~ length:", length)
+      console.log("🚀 ~ file: socket.ts:53 ~ joinRoom ~ length:", length);
 
-      socket.on("find-roomlength",({roomId})=>{
-        
-         io.to(roomId).emit("room-length", length);
-       
+      socket.on("find-roomlength", ({ roomId }) => {
+        io.to(roomId).emit("room-length", length);
       });
       socket.join(roomId);
       socket.to(roomId).emit("user-joined", { peerId, userName });
@@ -63,7 +61,7 @@ export const socket = (server: HttpServer) => {
         roomId,
         participants: rooms[roomId],
       });
-      await updateParticipantCount(roomId,length)
+      await updateParticipantCount(roomId, length);
 
       socket.on("disconnect", () => {
         console.log("user left the room", peerId);
@@ -71,22 +69,19 @@ export const socket = (server: HttpServer) => {
       });
     };
 
-    const leaveRoom = async({ peerId, roomId }: IRoomParams) => {
+    const leaveRoom = async ({ peerId, roomId }: IRoomParams) => {
       if (rooms[roomId] && rooms[roomId][peerId]) {
-        const userName = rooms[roomId][peerId].userName
+        const userName = rooms[roomId][peerId].userName;
         delete rooms[roomId][peerId];
         const length = Object.keys(rooms[roomId]).length;
-        io.to(roomId).emit("user-disconnected", peerId)
+        io.to(roomId).emit("user-disconnected", peerId);
         io.to(roomId).emit("get-users", {
           roomId,
           participants: rooms[roomId],
         });
-          io.to(roomId).emit("room-length", length);
+        io.to(roomId).emit("room-length", length);
         console.log(`User ${userName} (${peerId}) left room ${roomId}`);
-         await updateParticipantCount(roomId, length);
-
-        
-        
+        await updateParticipantCount(roomId, length);
       }
     };
 
@@ -107,15 +102,13 @@ export const socket = (server: HttpServer) => {
       }
     };
 
-
-
     const startSharing = ({ peerId, roomId }: IRoomParams) => {
       console.log({ roomId, peerId });
       socket.to(roomId).emit("user-started-sharing", peerId);
     };
 
     const stopSharing = (roomId: string) => {
-      socket.to(roomId).emit("user-stopped-sharing")
+      socket.to(roomId).emit("user-stopped-sharing");
     };
 
     const addMessage = (roomId: string, message: IMessage) => {
@@ -143,30 +136,28 @@ export const socket = (server: HttpServer) => {
       }
     };
 
+    socket.on("open-codeEditor", ({ roomId }) => {
+      console.log("Auto-open terminal event emitted for room:", roomId);
+      io.to(roomId).emit("auto-openTerminal", true);
+    });
 
-
-   socket.on("open-codeEditor", ({ roomId }) => {
-     console.log("Auto-open terminal event emitted for room:", roomId);
-     io.to(roomId).emit("auto-openTerminal", true);
-   });
-
-   socket.on("open-outputBox", ({ roomId, showOutput }) => {
-     console.log("event room:", roomId);
-     io.to(roomId).emit("outputBox-open", showOutput);
-   });
+    socket.on("open-outputBox", ({ roomId, showOutput }) => {
+      console.log("event room:", roomId);
+      io.to(roomId).emit("outputBox-open", showOutput);
+    });
 
     socket.on("create-room", createRoom);
     socket.on("join-room", joinRoom);
-    socket.on("code-change", ({roomId, content}) => {
+    socket.on("code-change", ({ roomId, content }) => {
       io.to(roomId).emit("update-code", content);
     });
     socket.on("leave-room", ({ roomId, peerId }) => {
       leaveRoom({ roomId, peerId });
       socket.leave(roomId);
     });
-       socket.on("feedback-submitted", async ({ roomId, email, rating }) => {
-         io.to(roomId).emit("feedback-received", { email, rating });
-       });
+    socket.on("feedback-submitted", async ({ roomId, email, rating }) => {
+      io.to(roomId).emit("feedback-received", { email, rating });
+    });
 
     socket.on("Interviewer-left", async ({ roomId, peerId }) => {
       if (rooms[roomId]) {
@@ -177,8 +168,8 @@ export const socket = (server: HttpServer) => {
         const length = Object.keys(rooms[roomId]).length;
 
         io.to(roomId).emit("room-length", length);
-        leaveRoom({ roomId, peerId });
-        socket.leave(roomId);
+        socket.disconnect();
+      
         await interview.findOneAndUpdate(
           {
             uniqueId: roomId,
@@ -202,9 +193,13 @@ export const socket = (server: HttpServer) => {
         );
       }
     });
-    socket.on("select-language",({language,roomId})=>{
-      console.log(language,roomId,'____________________________________________')
-      io.to(roomId).emit('setup-selected-language',language)
+    socket.on("select-language", ({ language, roomId }) => {
+      console.log(
+        language,
+        roomId,
+        "____________________________________________"
+      );
+      io.to(roomId).emit("setup-selected-language", language);
     });
 
     socket.on("start-sharing", startSharing);
@@ -213,22 +208,20 @@ export const socket = (server: HttpServer) => {
     socket.on("change-name", changeName);
 
     socket.on("disconnect", () => {
-      console.log("user disconnected",socket.id);
-       for (const [roomId, roomData] of Object.entries(rooms)) {
-         if (roomData[socket.id]) {
-           delete roomData[socket.id];
+      console.log("user disconnected", socket.id);
+      for (const [roomId, roomData] of Object.entries(rooms)) {
+        if (roomData[socket.id]) {
+          delete roomData[socket.id];
 
-           
-           if (Object.keys(roomData).length === 1) {
-             delete rooms[roomId];
-             delete chats[roomId];
-             console.log(`Room ${roomId} deleted after last user disconnected`);
-           } else {
-            
-             socket.to(roomId).emit("user-disconnected", socket.id);
-           }
-         }
-       }
+          if (Object.keys(roomData).length === 1) {
+            delete rooms[roomId];
+            delete chats[roomId];
+            console.log(`Room ${roomId} deleted after last user disconnected`);
+          } else {
+            socket.to(roomId).emit("user-disconnected", socket.id);
+          }
+        }
+      }
     });
   });
 };
