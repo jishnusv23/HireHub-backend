@@ -168,9 +168,8 @@ export const socket = (server: HttpServer) => {
          io.to(roomId).emit("feedback-received", { email, rating });
        });
 
-    socket.on("Interviewer-left", async({ roomId }) => {
+    socket.on("Interviewer-left", async ({ roomId, peerId }) => {
       if (rooms[roomId]) {
-       
         io.to(roomId).emit(
           "meet-close",
           "The meeting has ended. The interviewer has left."
@@ -178,15 +177,16 @@ export const socket = (server: HttpServer) => {
         const length = Object.keys(rooms[roomId]).length;
 
         io.to(roomId).emit("room-length", length);
-         await interview.findOneAndUpdate(
-           {
-             uniqueId:roomId,
-           },
-           { interviewStatus: "Completed" },
-           { new: true } 
-         );
+        leaveRoom({ roomId, peerId });
+        socket.leave(roomId);
+        await interview.findOneAndUpdate(
+          {
+            uniqueId: roomId,
+          },
+          { interviewStatus: "Completed" },
+          { new: true }
+        );
 
-        
         const socketsInRoom = io.sockets.adapter.rooms.get(roomId);
         if (socketsInRoom) {
           for (const socketId of socketsInRoom) {
@@ -194,7 +194,6 @@ export const socket = (server: HttpServer) => {
           }
         }
 
-        
         delete rooms[roomId];
         delete chats[roomId];
 
