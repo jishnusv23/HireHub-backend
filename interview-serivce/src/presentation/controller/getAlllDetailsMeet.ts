@@ -22,10 +22,10 @@ export const getAllMeetDetailsController = (dependacies: IDependancies) => {
         search as string
       );
 
-      console.log(
-        "🚀 ~ file: getAllMeetDetailsController.ts:13 ~ return async ~ response:",
-        response
-      );
+      // console.log(
+      //   "🚀 ~ file: getAllMeetDetailsController.ts:13 ~ return async ~ response:",
+      //   response
+      // );
       if(response){
         return res.status(HttpStatusCode.CREATED).json({success:true,data:response,message:'Fetching all data successfully'})
       }else{

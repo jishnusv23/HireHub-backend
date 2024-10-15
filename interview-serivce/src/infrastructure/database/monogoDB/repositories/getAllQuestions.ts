@@ -14,7 +14,7 @@ export const getAllQuestions = async (
       .sort({ createdAt: -1 })
       .skip(skipNo)
       .limit(limit);
-    console.log("🚀 ~ file: getAllQuestions.ts:12 ~ data:", data);
+    // console.log("🚀 ~ file: getAllQuestions.ts:12 ~ data:", data);
     return {
       data,
       totalPages: Math.ceil(totalPages / limit),

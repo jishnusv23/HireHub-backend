@@ -7,7 +7,7 @@ export const AddQuestions = async (
   try {
     console.log(data, "crating for this data");
     const saveData = await TechQuestion.create(data);
-    console.log("🚀 ~ file: AddQuestions.ts:10 ~ saveData:", saveData)
+    // console.log("🚀 ~ file: AddQuestions.ts:10 ~ saveData:", saveData)
     return saveData;
   } catch (error: any) {
     console.error("Error in AddTechQuestion:", error);

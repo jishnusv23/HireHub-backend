@@ -22,7 +22,7 @@ export const getAllMeetDetails = async (
       .sort({ createdAt: -1 })
       .skip(skipNo)
       .limit(limit);
-    console.log("🚀 ~ file: getAllMeetDetails.ts:19 ~ data:", data);
+    // console.log("🚀 ~ file: getAllMeetDetails.ts:19 ~ data:", data);
 
     return {
       data,

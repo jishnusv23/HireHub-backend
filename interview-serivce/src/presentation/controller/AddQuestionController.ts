@@ -9,7 +9,7 @@ export const AddQuestionController=(dependancies:IDependancies)=>{
         try{
             console.log(req.body,'add question geting request')
             const response=await IAddquestionUseCases(dependancies).execute(req.body)
-            console.log("🚀 ~ file: AddQuestionController.ts:11 ~ returnasync ~ response:", response)
+            // console.log("🚀 ~ file: AddQuestionController.ts:11 ~ returnasync ~ response:", response)
             if(response){
                 return res.status(HttpStatusCode.OK).json({success:true,data:response})
             }else{

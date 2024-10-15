@@ -9,7 +9,7 @@ import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
             console.log(req.user, "user token details"); 
             console.log(req.query,'geting the query data')
                 const { page, limit, userId } = req.query;
-                console.log("🚀 ~ file: getAllIQuestionForInteriviwerContorller.ts:11 ~ returnasync ~ page:", page)
+                // console.log("🚀 ~ file: getAllIQuestionForInteriviwerContorller.ts:11 ~ returnasync ~ page:", page)
 
             const response=await IGetAllQuestionUseCases(dependancies).execute(Number(page),Number(limit),userId as string)
 

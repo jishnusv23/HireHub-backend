@@ -10,10 +10,10 @@ export const verifyInterviewController=(dependancies:IDependancies)=>{
             console.log(req.body,'fetchInterview')
             const {uniqueId,userId}=req.body
             const response=await IFetchCurrentInterveiwUseCases(dependancies).execute(uniqueId,userId)
-            console.log("🚀 ~ file: verifyInterviewController.ts:11 ~ returnasync ~ response:", response)
+            // console.log("🚀 ~ file: verifyInterviewController.ts:11 ~ returnasync ~ response:", response)
             if(response){
                 const isValid=InterviewTimeDateValid(response.date,response.startTime as string)
-                console.log("🚀 ~ file: verifyInterviewController.ts:15 ~ returnasync ~ isValid:", isValid)
+                // console.log("🚀 ~ file: verifyInterviewController.ts:15 ~ returnasync ~ isValid:", isValid)
                 if(isValid){
                     console.log(isValid)
                     return res.status(HttpStatusCode.CREATED).json({success:true,message:'Interview is Valid'})

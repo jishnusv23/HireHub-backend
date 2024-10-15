@@ -14,10 +14,10 @@ export const InterivewesByIdController = (dependancies: IDependancies) => {
       const response = await IGeetAllInterivewesByIdUseCases(
         dependancies
       ).execute(id);
-      console.log(
-        "🚀 ~ file: getAllInterviewesByIdController.ts:12 ~ return ~ response:",
-        response
-      );
+      // console.log(
+      //   "🚀 ~ file: getAllInterviewesByIdController.ts:12 ~ return ~ response:",
+      //   response
+      // );
       if (!response) {
         return res
           .status(HttpStatusCode.NOT_FOUND)

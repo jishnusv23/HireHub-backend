@@ -22,7 +22,7 @@ export const InstantMeetController=(dependancies:IDependancies)=>{
                 ...otherData
                 
             }
-            console.log("🚀 ~ file: InstantMeetController.ts:17 ~ returnasync ~ interviewData:", interviewData)
+            // console.log("🚀 ~ file: InstantMeetController.ts:17 ~ returnasync ~ interviewData:", interviewData)
 
             const response=await IScheduleUseCases(dependancies).execute(interviewData)
             console.log("🚀 ~ file: InstantMeetController.ts:26 ~ returnasync ~ response:", response)

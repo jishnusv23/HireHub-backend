@@ -13,7 +13,7 @@ export const AdminFetchInterivewes = async (page: number = 1, limit: number = 5)
         .sort({ createdAt: -1 })
         .skip(skipNo)
         .limit(limit);
-      console.log("🚀 ~ file: AdminFetchInterivewes.ts:16 ~ AdminFetchInterivewes ~ data:", data)
+      // console.log("🚀 ~ file: AdminFetchInterivewes.ts:16 ~ AdminFetchInterivewes ~ data:", data)
       
 
       return {

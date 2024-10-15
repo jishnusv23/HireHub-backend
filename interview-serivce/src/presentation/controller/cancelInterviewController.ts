@@ -13,7 +13,7 @@ export const cancelInterveiwController=(dependancies:IDependancies)=>{
             const {data}=req.body
 
             const response=await ICancelInterviewUseCases(dependancies).execute(data)
-            console.log("🚀 ~ file: cancelInterviewController.ts:13 ~ returnasync ~ response:", response)
+            // console.log("🚀 ~ file: cancelInterviewController.ts:13 ~ returnasync ~ response:", response)
             if(response){
                 const toNotifCancelInterveiw=await sendCancelNotifyInform(response)
                 if(toNotifCancelInterveiw){

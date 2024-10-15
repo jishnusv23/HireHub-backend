@@ -26,7 +26,7 @@ export const SchedulInterviewController = (dependancies: IDependancies) => {
       const response = await IScheduleUseCases(dependancies).execute(
         interviewData
       )
-      console.log("ScheduleUseCases response:", response);
+      // console.log("ScheduleUseCases response:", response);
 
       if (response) {
         const information = await sendInterviewNotify(response);

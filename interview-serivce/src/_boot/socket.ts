@@ -211,7 +211,22 @@ export const socket = (server: HttpServer) => {
     socket.on("change-name", changeName);
 
     socket.on("disconnect", () => {
-      console.log("user disconnected");
+      console.log("user disconnected",socket.id);
+       for (const [roomId, roomData] of Object.entries(rooms)) {
+         if (roomData[socket.id]) {
+           delete roomData[socket.id];
+
+           
+           if (Object.keys(roomData).length === 0) {
+             delete rooms[roomId];
+             delete chats[roomId];
+             console.log(`Room ${roomId} deleted after last user disconnected`);
+           } else {
+            
+             socket.to(roomId).emit("user-disconnected", socket.id);
+           }
+         }
+       }
     });
   });
 };

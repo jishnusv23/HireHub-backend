@@ -12,10 +12,10 @@ export const submissionController = (dependancies: IDependancies) => {
         req.body?.data
       );
       const response = await executionServiceProvider(req.body);
-      console.log(
-        "🚀 ~ file: submissioController.ts:12 ~ returnasync ~ response:",
-        response
-      );
+      // console.log(
+      //   "🚀 ~ file: submissioController.ts:12 ~ returnasync ~ response:",
+      //   response
+      // );
       if (response?.error) {
         return res.status(HttpStatusCode.BAD_REQUEST).json({
           sucess: false,
