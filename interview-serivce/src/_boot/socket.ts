@@ -69,21 +69,30 @@ export const socket = (server: HttpServer) => {
       });
     };
 
-    const leaveRoom = async ({ peerId, roomId }: IRoomParams) => {
-      if (rooms[roomId] && rooms[roomId][peerId]) {
-        const userName = rooms[roomId][peerId].userName;
-        delete rooms[roomId][peerId];
-        const length = Object.keys(rooms[roomId]).length;
-        io.to(roomId).emit("user-disconnected", peerId);
-        io.to(roomId).emit("get-users", {
-          roomId,
-          participants: rooms[roomId],
-        });
-        io.to(roomId).emit("room-length", length);
-        console.log(`User ${userName} (${peerId}) left room ${roomId}`);
-        await updateParticipantCount(roomId, length);
-      }
-    };
+   const leaveRoom = async ({ peerId, roomId }: IRoomParams) => {
+     if (rooms[roomId] && rooms[roomId][peerId]) {
+       const userName = rooms[roomId][peerId].userName;
+       delete rooms[roomId][peerId];
+       const length = Object.keys(rooms[roomId]).length;
+
+       io.to(roomId).emit("user-disconnected", peerId);
+       io.to(roomId).emit("get-users", {
+         roomId,
+         participants: rooms[roomId],
+       });
+       io.to(roomId).emit("room-length", length);
+
+       console.log(`User ${userName} (${peerId}) left room ${roomId}`);
+       await updateParticipantCount(roomId, length);
+
+       
+       if (length === 0) {
+         delete rooms[roomId];
+         delete chats[roomId];
+         console.log(`Room ${roomId} deleted as it's now empty`);
+       }
+     }
+   };
 
     const updateParticipantCount = async (roomId: string, count: number) => {
       try {
@@ -165,28 +174,29 @@ export const socket = (server: HttpServer) => {
           "meet-close",
           "The meeting has ended. The interviewer has left."
         );
-        const length = Object.keys(rooms[roomId]).length;
 
-        io.to(roomId).emit("room-length", length);
-        socket.disconnect();
-      
-        await interview.findOneAndUpdate(
-          {
-            uniqueId: roomId,
-          },
-          { interviewStatus: "Completed" },
-          { new: true }
-        );
-
+        // Disconnect all users in the room
         const socketsInRoom = io.sockets.adapter.rooms.get(roomId);
         if (socketsInRoom) {
           for (const socketId of socketsInRoom) {
-            io.sockets.sockets.get(socketId)?.leave(roomId);
+            const socket = io.sockets.sockets.get(socketId);
+            if (socket) {
+              socket.leave(roomId);
+              socket.disconnect(true);
+            }
           }
         }
 
+        // Clean up the room
         delete rooms[roomId];
         delete chats[roomId];
+
+        // Update the interview status in the database
+        await interview.findOneAndUpdate(
+          { uniqueId: roomId },
+          { interviewStatus: "Completed", meetParticipants: 0 },
+          { new: true }
+        );
 
         console.log(
           `Room ${roomId} has been deleted due to interviewer leaving`
