@@ -90,6 +90,7 @@ export const socket = (server: HttpServer) => {
          delete rooms[roomId];
          delete chats[roomId];
          console.log(`Room ${roomId} deleted as it's now empty`);
+          
        }
      }
    };
@@ -219,19 +220,19 @@ export const socket = (server: HttpServer) => {
 
     socket.on("disconnect", () => {
       console.log("user disconnected", socket.id);
-      for (const [roomId, roomData] of Object.entries(rooms)) {
-        if (roomData[socket.id]) {
-          delete roomData[socket.id];
+      // for (const [roomId, roomData] of Object.entries(rooms)) {
+      //   if (roomData[socket.id]) {
+      //     delete roomData[socket.id];
 
-          if (Object.keys(roomData).length === 1) {
-            delete rooms[roomId];
-            delete chats[roomId];
-            console.log(`Room ${roomId} deleted after last user disconnected`);
-          } else {
-            socket.to(roomId).emit("user-disconnected", socket.id);
-          }
-        }
-      }
+      //     if (Object.keys(roomData).length === 1) {
+      //       delete rooms[roomId];
+      //       delete chats[roomId];
+      //       console.log(`Room ${roomId} deleted after last user disconnected`);
+      //     } else {
+      //       socket.to(roomId).emit("user-disconnected", socket.id);
+      //     }
+      //   }
+      // }
     });
   });
 };
