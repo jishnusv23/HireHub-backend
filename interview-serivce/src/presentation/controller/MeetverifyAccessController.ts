@@ -1,16 +1,21 @@
 import { NextFunction, Request, Response } from "express";
 import { HttpStatusCode } from "../../_lib/http/statusCode/HttpStatusCode ";
 import { IDependancies } from "../../application/interface/IDependancies";
+import { interview } from "../../infrastructure/database/monogoDB/models";
 
 export const MeetVerifyAccessController=(dependancies:IDependancies)=>{
     const {useCases:{IMeetAccessIntervieweeUseCases}}=dependancies
 
     return async(req:Request,res:Response,next:NextFunction)=>{
         try{
-            console.log(req.query,'meet validation')
+     
             const { uniqueId ,email}=req.query;
             const response=await IMeetAccessIntervieweeUseCases(dependancies).execute(uniqueId as string)
            const Emailvalid= response?.participants.some((participantEmail)=>participantEmail===email)
+           if(!Emailvalid&&response?.Ongoing){
+            await interview.findOneAndUpdate({uniqueId:uniqueId as string},{$push:{participants:email}},{new :true})
+           }
+          
            if(response){
            if (response.instantMeet&&response.interviewStatus!=='Completed') {
         

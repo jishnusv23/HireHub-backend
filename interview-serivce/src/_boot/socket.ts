@@ -161,7 +161,8 @@ export const socket = (server: HttpServer) => {
     socket.on("code-change", ({ roomId, content }) => {
       io.to(roomId).emit("update-code", content);
     });
-    socket.on("leave-room", ({ roomId, peerId }) => {
+    socket.on("leave-room", ({ roomId, peerId,email }) => {
+      console.log("🚀 ~ file: socket.ts:165 ~ socket.on ~ email:", email)
       leaveRoom({ roomId, peerId });
       socket.leave(roomId);
     });
