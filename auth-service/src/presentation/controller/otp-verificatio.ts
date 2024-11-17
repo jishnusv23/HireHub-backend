@@ -38,8 +38,18 @@ export const OtpVerificationController = (dependancies: IDependancies) => {
           role: result.role,
         });
 
-        res.cookie("access_token", accesstoken, { httpOnly: true });
-        res.cookie("refresh_token ", refreshtoken, { httpOnly: true });
+        res.cookie("access_token", accesstoken, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+          maxAge: 60 * 60 * 1000 ,
+        });
+        res.cookie("refresh_token ", refreshtoken, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+          maxAge: 60 * 60 * 24 * 1000 * 12,
+        });
 
         return res.status(HttpStatusCode.CREATED).json({
           success: true,

@@ -31,7 +31,9 @@ export const InstantMeetController=(dependancies:IDependancies)=>{
                   if (updateRole && updateRole.accessToken) {
            res.cookie("access_token", updateRole.accessToken, {
              httpOnly: true,
-           
+             sameSite: "none",
+             secure: true,
+             maxAge: 60 * 60 * 24 * 1000 * 12,
            });
             }
 
