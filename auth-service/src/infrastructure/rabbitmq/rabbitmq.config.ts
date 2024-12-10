@@ -4,7 +4,7 @@ export default {
   rabbitMQ: {
     url:
       process.env.RABBITMQ_URL ||
-      "amqps://mvvvvqcz:Xs4vPHkAD92FVZls-5Mr3rTs3IBMKfFF@goose.rmq2.cloudamqp.com/mvvvvqcz",
+      "amqps://wjydjslj:IMXz7hq8aQBS6KeOUwA5hGJT7LvUu_qh@dog.lmq.cloudamqp.com/wjydjslj",
   },
   queues: {
     authQueue: "authQueue",
