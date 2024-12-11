@@ -31,7 +31,7 @@ app.use("*", (req: Request, res: Response) => {
   });
 });
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 const start = () => {
   app.listen(PORT, async () => {

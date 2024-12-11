@@ -36,15 +36,23 @@ class RabbitMQClient  {
         config.queues.userQueue,
         { exclusive: false }
       );
-
+      console.log("Full RabbitMQ Connection Validation:");
+      console.log("- Connection Established: ✅");
+      console.log("- Channel Created: ✅");
+      console.log("- Test Queue Asserted: ✅");
       this.producer = new Producer(this.producerChannel);
       this.consumer = new Consumer(this.consumerChannel, userQueue);
 
       this.consumer.consumeMessages();
 
       this.isInitialised = true;
-    } catch (err) {
-      console.log("rabbit mq errror in", err);
+    } catch (error:any) {
+      console.error("Detailed RabbitMQ Connection Error:", {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+        stack: error.stack,
+      });
     }
   }
   async produce(data: any, correlationId: string, replyToQueue: string){
