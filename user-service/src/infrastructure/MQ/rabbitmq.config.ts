@@ -2,7 +2,7 @@ import { config } from "dotenv";
 config();
 export default {
   rabbitMQ: {
-    url:process.env.RABBITMQ_URL
+    url: process.env.RABBITMQ_URL,
   },
   queues: {
     authQueue: "authQueue",
@@ -11,5 +11,4 @@ export default {
     interviewQueue: "interviewQueue",
   },
 };
-
-// laoq qdbu epkk mkhq
+console.log(process.env.RABBITMQ_URL);

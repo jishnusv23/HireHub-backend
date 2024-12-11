@@ -32,8 +32,7 @@ class RabbitMQClient {
       return;
     }
     try {
-      this.connection = await connect("amqps://mxjwsdhm:tfghJGsUCXA48YkSemVt4KyTdT4LwY9y@ostrich.lmq.cloudamqp.com/mxjwsdhm");
-      console.log("🚀 ~ file: client.ts:36 ~ RabbitMQClient ~ initialize ~ this.connection:", this.connection)
+      this.connection = await connect(config.rabbitMQ.url as string);
       this.producerChannel = await this.connection.createChannel();
 
       this.consumerChannel = await this.connection.createChannel();
@@ -73,9 +72,9 @@ class RabbitMQClient {
         break;
       case "toNotif":
         toQueue = this.notifQueue;
-      // case "toInterview":
-      //   toQueue = this.interviewQueue;
-      // default:
+        // case "toInterview":
+        //   toQueue = this.interviewQueue;
+        // default:
         console.log("Unknown operation", operation);
         break;
     }

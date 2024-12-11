@@ -1,5 +1,5 @@
-import {Channel} from 'amqplib'
-import { buffer } from 'stream/consumers'
+import { Channel } from "amqplib";
+import { buffer } from "stream/consumers";
 
 export default class Producer {
   constructor(private channel: Channel) {}
@@ -10,8 +10,8 @@ export default class Producer {
     replyToQueue: string
   ) {
     this.channel.sendToQueue(replyToQueue, Buffer.from(JSON.stringify(data)), {
-      correlationId: correlationId, 
-      replyTo: replyToQueue, 
+      correlationId: correlationId,
+      replyTo: replyToQueue,
     });
   }
 }
