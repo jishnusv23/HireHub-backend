@@ -9,7 +9,7 @@ export const fetchAllContent=async(page:number=1,limit:number=8)=>{
        .sort({ createdAt: -1 })
        .skip(skipNo)
        .limit(limit);
-     console.log("🚀 ~ file: getAllInterviewee.ts:20 ~ data:", data);
+    //  console.log("🚀 ~ file: getAllInterviewee.ts:20 ~ data:", data);
      return {
        data,
        totalPages: Math.ceil(totalContents / limit),

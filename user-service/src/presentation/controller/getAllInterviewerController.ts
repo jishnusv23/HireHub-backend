@@ -35,10 +35,10 @@ export const getAllInterviewer = (dependancies: IDependancies) => {
         page,
         limit
       );
-      console.log(
-        "🚀 ~ file: getAll.vieweeController.ts:34 ~ return ~ response:",
-        response
-      );
+      // console.log(
+      //   "🚀 ~ file: getAll.vieweeController.ts:34 ~ return ~ response:",
+      //   response
+      // );
       res.status(HttpStatusCode.CREATED).json({
         success: true,
         message: "Getting All Interviewee",

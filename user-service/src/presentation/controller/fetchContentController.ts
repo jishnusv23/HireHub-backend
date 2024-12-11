@@ -33,7 +33,7 @@ export const fetchContentController=(depandancies:IDependancies)=>{
              }
 
              const response=await fetchAllContentUseCases(depandancies).execute(page ,limit)
-             console.log("🚀 ~ file: fetchContentController.ts:35 ~ returnasync ~ response:", response)
+            //  console.log("🚀 ~ file: fetchContentController.ts:35 ~ returnasync ~ response:", response)
              if(response){
                 res
         .status(HttpStatusCode.CREATED)
