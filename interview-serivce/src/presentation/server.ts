@@ -35,6 +35,7 @@ app.get("/api/interview/test", (req: Request, res: Response) => {
 
 app.use("/api/interview", routes(dependacies));
 // app.use("/", routes(dependacies));
+// console.log(first)
 
 app.use("*", (req: Request, res: Response) => {
   res.status(404).json({
