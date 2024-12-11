@@ -12,6 +12,7 @@ export default class MessageHandler{
 
             break;
           case "checkMail":
+            console.log('data',data)
             response = await findByEmail(data);
             break;
           case "verifyAcc":
